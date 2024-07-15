@@ -1,0 +1,18 @@
+.category{
+    font-weight: bold;
+    color: darkblue;
+    margin-left: 1em;
+}
+
+.dataTitle{
+    font-weight: bold;
+    color: black;
+    margin-left:3em;
+    margin-right:3em;
+}
+
+.dataContent{
+    color: black;
+    margin-left:5em;
+    margin-right:5em;
+}

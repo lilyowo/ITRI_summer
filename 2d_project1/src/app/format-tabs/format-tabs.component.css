@@ -1,0 +1,23 @@
+.format-tabs {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+  }
+  
+  .format-tab {
+    background-color: #D9D9D9;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  .format-tab:hover {
+    background-color: #B0B0B0;
+  }
+  

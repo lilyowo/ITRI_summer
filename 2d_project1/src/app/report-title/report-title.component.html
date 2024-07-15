@@ -1,0 +1,16 @@
+<div class="report-header">
+    <div class="left-section">
+      <span class="simulation-info">{{ simulationName }} {{ simulationTime }}</span>
+    </div>
+    <div class="right-section">
+      <button (click)="onExportClick()" class="header-button">Export</button>
+      <button (click)="editProject()" class="header-button">Edit</button>
+    </div>
+  </div>
+  
+  <div class="export-menu" *ngIf="showExportMenu">
+    <button (click)="exportAs('word')" class="export-option">Word格式</button>
+    <button (click)="exportAs('pdf')" class="export-option">PDF格式</button>
+    <button (click)="exportAs('excel')" class="export-option">Excel格式</button>
+  </div>
+  

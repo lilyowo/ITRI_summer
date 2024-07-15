@@ -1,0 +1,32 @@
+<div class="project-list-container">
+    <div class="header">
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button class="search-button">
+          <img src="assets/search-icon.png" alt="search">
+        </button>
+      </div>
+      <button class="new-project-button" (click)="openNewProjectDialog()">New project</button>
+    </div>
+    <div class="projects">
+      <div *ngFor="let project of projects">
+        <div class="project-item" [ngClass]="{'expanded': project.expanded}">
+          <button class="toggle-button" (click)="toggleProject(project)">
+            {{ project.expanded ? 'V' : '>' }}
+          </button>
+          <span>{{ project.name }}</span>
+          <span>{{ project.date }}</span>
+          <button class="edit-button" (click)="editProject(project)">Edit</button>
+          <button class="delete-button" (click)="deleteProject(project)">Delete</button>
+        </div>
+        <div *ngIf="project.expanded" class="simulation-list">
+          <div *ngFor="let simulation of project.simulations" class="simulation-item">
+            <span>{{ simulation.name }}</span>
+            <span>{{ simulation.date }}</span>
+            <button (click)="viewReport(simulation)">Report</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="add-button" (click)="openNewProjectDialog()">+</button>
+  </div>

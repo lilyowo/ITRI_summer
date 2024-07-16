@@ -1,0 +1,30 @@
+ <div class="orbit-container">
+  <!-- <h2>{{ orbitData?.data_title }}</h2> -->
+  <!-- <p>Read Only: {{ orbitData?.read_only ? 'Yes' : 'No' }}</p> -->
+  <!-- <p>Items Number: {{ orbitData?.items_num }}</p> -->
+  
+  <div *ngFor="let item of orbitData?.data_items" class="orbit-item">
+    <h3>軌道 {{ item.orbit_id }}</h3>
+    <div class="item-field">
+      <label>軌道傾角:</label>
+      <input type="text" [value]="item['軌道傾角']" [readonly]="orbitData?.read_only" [ngClass]="{'readonly': orbitData?.read_only}">
+    </div>
+    <div class="item-field">
+      <label>升交點黃道經度:</label>
+      <input type="text" [value]="item['升交點黃道經度']" [readonly]="orbitData?.read_only" [ngClass]="{'readonly': orbitData?.read_only}">
+    </div>
+    <div class="item-field">
+      <label>偏心率:</label>
+      <input type="text" [value]="item['偏心率']" [readonly]="orbitData?.read_only" [ngClass]="{'readonly': orbitData?.read_only}">
+    </div>
+    <div class="item-field">
+      <label>近地點幅角:</label>
+      <input type="text" [value]="item['近地點幅角']" [readonly]="orbitData?.read_only" [ngClass]="{'readonly': orbitData?.read_only}">
+    </div>
+    <div class="item-field">
+      <label>海拔高度:</label>
+      <input type="text" [value]="item['海拔高度']" [readonly]="orbitData?.read_only" [ngClass]="{'readonly': orbitData?.read_only}">
+    </div>
+    <hr>
+  </div>
+</div>

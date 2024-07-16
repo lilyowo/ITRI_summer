@@ -1,0 +1,12 @@
+<div class="rule-route-container" *ngIf="ruleRoute">
+  <div *ngFor="let key of ruleRouteKeys">
+    <label class="radio-label">
+      <input type="radio" [name]="key" [value]="key" [checked]="ruleRoute[key]" 
+             [disabled]="readOnly" (change)="onSelectionChange(key)">
+      <svg height="20" width="20">
+        <circle cx="10" cy="10" r="9.5" stroke="black" [attr.fill]="ruleRoute[key] ? 'black' : 'white'"/>
+      </svg>
+      <span class="option-text">{{ key }}</span>
+    </label>
+  </div>
+</div>

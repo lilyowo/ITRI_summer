@@ -1,0 +1,18 @@
+<div class="satellite-container">
+    <!-- <h2>{{ satelliteData?.data_title }}</h2>
+    <p>Read Only: {{ satelliteData?.read_only ? 'Yes' : 'No' }}</p>
+    <p>Items Number: {{ satelliteData?.items_num }}</p> -->
+
+    <div *ngFor="let item of satelliteData?.data_items" class="satellite-item">
+      <h3>{{ item.satellite_id }}</h3>
+      <div class="item-field">
+        <label>Mean anomaly:</label>
+        <input type="number" [value]="item['Mean anomaly']" [readonly]="satelliteData?.read_only" [ngClass]="{'readonly': satelliteData?.read_only}">
+      </div>
+      <div class="item-field">
+        <label>Mean motion:</label>
+        <input type="number" [value]="item['Mean motion']" [readonly]="satelliteData?.read_only" [ngClass]="{'readonly': satelliteData?.read_only}">
+      </div>
+      <hr>
+    </div>
+</div>

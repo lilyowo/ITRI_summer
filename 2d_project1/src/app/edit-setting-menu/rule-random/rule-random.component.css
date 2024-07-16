@@ -1,0 +1,63 @@
+.rule-random-container{
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rule-random-item{
+    margin-bottom: 20px;
+}
+
+.rule-random-item h3{
+    margin: 0 0 10px 0;
+}
+
+  .item-field {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    margin-bottom: 20px;
+  }
+  
+  .item-field input {
+    flex: 1;
+    margin-right: 20px;  /* 可調整輸入框和文字之間的間距 */
+    width: 40%;  /* 讓輸入框佔據一半寬度 */
+  }
+  
+  .item-field label {
+    flex: 0 0 auto;
+    width: 60%;  /* 讓標籤佔據一半寬度 */
+    text-align: right;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* .item-field label {
+    flex: 1;
+  }
+  
+  .item-field input {
+    flex: 2;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  } */
+  
+  .readonly {
+    background-color: #f0f0f0;  
+  }
+  
+  .editable {
+    background-color: #ffffff;
+  }
+  
+  hr {
+    border: 0;
+    border-top: 1px solid black;
+    margin: 20px 0;
+  }
+  

@@ -1,0 +1,13 @@
+<div class="rule-isl-container" *ngIf="ruleIsl">
+    <div *ngFor="let key of ruleIslKeys">
+      <label class="radio-label">
+        <input type="radio" [name]="key" [value]="key" [checked]="ruleIsl[key]" 
+               [disabled]="readOnly" (change)="onSelectionChange(key)">
+        <svg height="20" width="20">
+          <circle cx="10" cy="10" r="9.5" stroke="black" [attr.fill]="ruleIsl[key] ? 'black' : 'white'"/>
+        </svg>
+        <span class="option-text">{{ key }}</span>
+      </label>
+    </div>
+  </div>
+  

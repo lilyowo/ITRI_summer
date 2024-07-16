@@ -1,0 +1,22 @@
+<div calss="ut-container">
+  <!-- <h2>{{ utData?.data_title }}</h2> 
+  <p>Read Only: {{ utData?.read_only ? 'Yes' : 'No' }}</p>
+  <p>Items Number: {{ utData?.items_num }}</p> -->
+
+  <div *ngFor="let item of utData?.data_items" class="ut-item">
+    <h3>{{item.name}}</h3>
+    <div class="item-field">
+        <label>經度:</label>
+        <input type="text" [value]="item['經度']" [readonly]="utData?.read_only"[ngClass]="{'readonly': utData?.read_only, 'editable': !utData?.read_only}">
+    </div>
+    <div class="item-field">
+        <label>緯度:</label>
+        <input type="text" [value]="item['緯度']" [readonly]="utData?.read_only"[ngClass]="{'readonly': utData?.read_only, 'editable': !utData?.read_only}">
+    </div>
+    <div class="item-field">
+        <label>海拔高度:</label>
+        <input type="text" [value]="item['海拔高度']" [readonly]="utData?.read_only"[ngClass]="{'readonly': utData?.read_only, 'editable': !utData?.read_only}">
+    </div>
+    <hr>
+  </div>
+</div>

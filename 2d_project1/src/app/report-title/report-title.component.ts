@@ -23,9 +23,7 @@ export class ReportTitleComponent{
   }
 
 
-  editProject() {
-    this.router.navigate(['/edit']);
-  }
+  
 
   exportAs(format: string): void {
     this.export.emit(format);

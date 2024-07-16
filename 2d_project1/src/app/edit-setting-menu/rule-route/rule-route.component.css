@@ -1,0 +1,26 @@
+.rule-route-container {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .radio-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .radio-label input {
+    display: none;
+  }
+  
+  .radio-label svg {
+    margin-right: 10px;
+  }
+  
+  .option-text {
+    margin-left: 50px;
+  }
+  

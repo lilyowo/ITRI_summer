@@ -1,0 +1,24 @@
+<div class="payload-container">
+  <!-- <h2>{{ payloadData?.data_title }}</h2> 
+  <p>Read Only: {{ payloadData?.read_only ? 'Yes' : 'No' }}</p>
+  <p>Items Number: {{ payloadData?.items_num }}</p> -->
+
+  <div *ngFor="let item of payloadData?.data_items" class="payload-item">
+    <h3>CPL- {{ item.satellite_id }}</h3>
+    <div class="item-field">
+        <label>輻射夾角 +/-:</label>
+        <input type="text" [value]="item['輻射夾角 +/-']" [readonly]="payloadData?.read_only" [ngClass]="{'readonly': payloadData?.read_only}">
+    </div>
+    <div class="item-field">
+        <label>Beam夾角 +/-:</label>
+        <input type="text" [value]="item['Beam夾角 +/-']" [readonly]="payloadData?.read_only" [ngClass]="{'readonly': payloadData?.read_only}">
+    </div>
+    <div class="item-field">
+        <label>Beam數量:</label>
+        <input type="text" [value]="item['Beam數量']" [readonly]="payloadData?.read_only" [ngClass]="{'readonly': payloadData?.read_only}">
+    </div>
+    <hr>
+  </div>
+    
+
+</div>

@@ -1,0 +1,26 @@
+<div *ngFor="let category of settings | keyvalue">
+    <div class="header" [ngStyle]="{'background-color': '#021D40'}">
+      <span class="category-title">{{ category.key }}</span>
+    </div>
+    <div *ngFor="let item of category.value" class="item">
+      <div class="item-header" [ngStyle]="{'background-color': '#011126'}">
+        <span class="toggle-button" (click)="toggleOpen(category.key, item)">
+          {{ item.open ? '-' : '+' }}
+        </span>
+        <span class="item-title">{{ item.data_title }}</span>
+      </div>
+      <div *ngIf="item.open" class="item-content">
+        <div class="content" [ngStyle]="{'background-color': '#ffffff'}">
+          <ng-container *ngIf="getComponent(item.data_title)">
+            <div class="content-title">{{ item.data_title }}</div>
+            <ng-container *ngComponentOutlet="getComponent(item.data_title)"></ng-container>
+          </ng-container>
+          <ng-container *ngIf="!getComponent(item.data_title)">
+            <div class="content-title">{{ item.data_title }}</div>
+            <span class="content-text">setting content</span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  

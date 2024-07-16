@@ -1,0 +1,30 @@
+<div class="isl-container">
+    <!-- <h2>{{ islData?.data_title }}</h2>
+    <p>Read Only: {{ islData?.read_only ? 'Yes' : 'No' }}</p>
+    <p>Items Number: {{ islData?.items_num }} </p> -->
+
+    <div *ngFor="let item of islData?.data_items" class="isl-item">
+        <h3>ISL - {{ item.satellite_id }} - {{ item.ISL_id }}</h3>
+        <div class="item-field">
+            <label>衛星方位角:</label>
+            <input type="number" [value]="item['衛星方位角']" [readonly]="islData?.read_only" [ngClass]="{'readonly': islData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>衛星幅角:</label>
+            <input type="number" [value]="item['衛星幅角']" [readonly]="islData?.read_only" [ngClass]="{'readonly': islData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>旋轉方位角 +/-:</label>
+            <input type="number" [value]="item['旋轉方位角 +/-']" [readonly]="islData?.read_only" [ngClass]="{'readonly': islData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>旋轉幅角 +/-:</label>
+            <input type="number" [value]="item['旋轉幅角 +/-']" [readonly]="islData?.read_only" [ngClass]="{'readonly': islData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>有效射程:</label>
+            <input type="number" [value]="item['有效射程']" [readonly]="islData?.read_only" [ngClass]="{'readonly': islData?.read_only}">
+        </div>
+        <hr>
+    </div>
+</div>

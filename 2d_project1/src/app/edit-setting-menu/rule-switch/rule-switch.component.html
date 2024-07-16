@@ -1,0 +1,13 @@
+<div class="rule-switch-container" *ngIf="ruleSwitch">
+    <div *ngFor="let key of ruleSwitchKeys">
+      <label class="radio-label">
+        <input type="radio" [name]="key" [value]="key" [checked]="ruleSwitch[key]" 
+               [disabled]="readOnly" (change)="onSelectionChange(key)">
+        <svg height="20" width="20">
+          <circle cx="10" cy="10" r="9.5" stroke="black" [attr.fill]="ruleSwitch[key] ? 'black' : 'white'"/>
+        </svg>
+        <span class="option-text">{{ key }}</span>
+      </label>
+    </div>
+  </div>
+  

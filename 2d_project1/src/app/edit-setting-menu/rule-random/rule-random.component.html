@@ -1,0 +1,33 @@
+<div class="rule-random-container">
+    <!-- <h2>{{ ruleRandomData?.data_title }}</h2> 
+    <p>Read Only: {{ ruleRandomData?.read_only ? 'Yes' : 'No' }}</p> -->
+
+    <div *ngFor="let item of ruleRandomData?.data_items" class="rule-random-item">
+        <div class="item-field">
+            <label>亂數種子:</label>
+            <input type="text" [value]="item['亂數種子']" [readonly]="ruleRandomData?.read_only"[ngClass]="{'readonly': ruleRandomData?.read_only, 'editable': !ruleRandomData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>衛星損壞機率%:</label>
+            <input type="text" [value]="item['衛星損壞機率%']" [readonly]="ruleRandomData?.read_only"[ngClass]="{'readonly': ruleRandomData?.read_only, 'editable': !ruleRandomData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>ISL斷線機率%:</label>
+            <input type="text" [value]="item['ISL斷線機率%']" [readonly]="ruleRandomData?.read_only"[ngClass]="{'readonly': ruleRandomData?.read_only, 'editable': !ruleRandomData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>ISL損壞機率%:</label>
+            <input type="text" [value]="item['ISL損壞機率%']" [readonly]="ruleRandomData?.read_only"[ngClass]="{'readonly': ruleRandomData?.read_only, 'editable': !ruleRandomData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>通訊酬載損壞機率%:</label>
+            <input type="text" [value]="item['通訊酬載損壞機率%']" [readonly]="ruleRandomData?.read_only"[ngClass]="{'readonly': ruleRandomData?.read_only, 'editable': !ruleRandomData?.read_only}">
+        </div>
+        <div class="item-field">
+            <label>封包遺失機率%:</label>
+            <input type="text" [value]="item['封包遺失機率%']" [readonly]="ruleRandomData?.read_only"[ngClass]="{'readonly': ruleRandomData?.read_only, 'editable': !ruleRandomData?.read_only}">
+        </div>
+    </div>
+    
+  
+</div>

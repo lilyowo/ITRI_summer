@@ -1,0 +1,22 @@
+<div calss="ft-container">
+    <!-- <h2>{{ ftData?.data_title }}</h2> 
+    <p>Read Only: {{ ftData?.read_only ? 'Yes' : 'No' }}</p>
+    <p>Items Number: {{ ftData?.items_num }}</p> -->
+  
+    <div *ngFor="let item of ftData?.data_items" class="ft-item">
+      <h3>{{item.name}}</h3>
+      <div class="item-field">
+          <label>經度:</label>
+          <input type="text" [value]="item['經度']" [readonly]="ftData?.read_only"[ngClass]="{'readonly': ftData?.read_only, 'editable': !ftData?.read_only}">
+      </div>
+      <div class="item-field">
+          <label>緯度:</label>
+          <input type="text" [value]="item['緯度']" [readonly]="ftData?.read_only"[ngClass]="{'readonly': ftData?.read_only, 'editable': !ftData?.read_only}">
+      </div>
+      <div class="item-field">
+          <label>海拔高度:</label>
+          <input type="text" [value]="item['海拔高度']" [readonly]="ftData?.read_only"[ngClass]="{'readonly': ftData?.read_only, 'editable': !ftData?.read_only}">
+      </div>
+      <hr>
+    </div>
+  </div>

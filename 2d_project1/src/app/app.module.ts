@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { EditComponent } from './edit/edit.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
-import { ProjectlistComponent } from './projectlist/projectlist.component';
 import { ReportComponent } from './report/report.component';
 import { ReportTitleComponent } from './report-title/report-title.component';
 import { ReportContentComponent } from './report-content/report-content.component';
@@ -27,6 +26,11 @@ import { RuleRouteComponent } from './edit-setting-menu/rule-route/rule-route.co
 import { RuleSwitchComponent } from './edit-setting-menu/rule-switch/rule-switch.component';
 import { RuleIslComponent } from './edit-setting-menu/rule-isl/rule-isl.component';
 import { RuleRandomComponent } from './edit-setting-menu/rule-random/rule-random.component';
+import { SimuSatelliteComponent } from './edit-setting-menu/simu-satellite/simu-satellite.component';
+import { SimuFloorComponent } from './edit-setting-menu/simu-floor/simu-floor.component';
+import { SimuRouteComponent } from './edit-setting-menu/simu-route/simu-route.component';
+import { SimuSwitchComponent } from './edit-setting-menu/simu-switch/simu-switch.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 
 
@@ -37,7 +41,6 @@ import { RuleRandomComponent } from './edit-setting-menu/rule-random/rule-random
     NavBarComponent,
     LoginComponent,
     ReportComponent,
-    ProjectlistComponent,
     ReportTitleComponent,
     ReportContentComponent,
     CentralCanvasComponent,
@@ -55,7 +58,12 @@ import { RuleRandomComponent } from './edit-setting-menu/rule-random/rule-random
     RuleRouteComponent,
     RuleSwitchComponent,
     RuleIslComponent,
-    RuleRandomComponent
+    RuleRandomComponent,
+    SimuSatelliteComponent,
+    SimuFloorComponent,
+    SimuRouteComponent,
+    SimuSwitchComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,

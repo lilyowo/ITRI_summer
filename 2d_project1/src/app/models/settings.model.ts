@@ -4,16 +4,15 @@ import { ISL } from './isl.model';
 import { Payload } from './payload.model';
 import { UT } from './ut.model';
 import { FT } from './ft.model';
-import { RuleRoute } from './rule-route.model';
-import { RuleSwitch } from './rule-switch.model';
-import { RuleIsl } from './rule-isl.model';
+import { RuleItem } from './rule-item.model';
+import { SimuItem } from './simu-item.model';
 import { RuleRandom } from './rule-random.model';
 
 export interface DataGroup<T> {
-  data_title: string;
-  data_items: T[];
-  read_only: boolean;
-  items_num: number;
+  dataTitle: string;
+  dataItems: T[];
+  readOnly: boolean;
+  itemsNum: number;
 }
 
 export interface Settings {
@@ -26,10 +25,11 @@ export interface Settings {
     DataGroup<FT>
   ];
   '模擬設定': [
-    DataGroup<RuleRoute>,
-    DataGroup<RuleSwitch>,
-    DataGroup<RuleIsl>,
+    DataGroup<RuleItem>,
     DataGroup<RuleRandom>
   ];
-  '模擬項目': DataGroup<any>[];  // 根據需要更新模擬項目的結構
+  '模擬項目': [
+    DataGroup<SimuItem> 
+  ];
+  
 }

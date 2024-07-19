@@ -18,7 +18,7 @@ export class IslComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsService.getSettings().subscribe((settings: Settings) => {
-      const islGroup = settings['星網物件'].find(group => group.data_title === 'ISL');
+      const islGroup = settings['星網物件'].find(group => group.dataTitle === 'ISL');
       this.islData = islGroup as DataGroup<ISL>;
     })
   }

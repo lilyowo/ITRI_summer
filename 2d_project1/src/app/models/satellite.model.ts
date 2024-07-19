@@ -1,6 +1,8 @@
 export interface Satellite {
-    satellite_id: number;
+    satelliteId: number;
+    planeId: number;
     'Mean anomaly': number;
     'Mean motion': number;
+    mass: number;
   }
   

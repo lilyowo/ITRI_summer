@@ -1,0 +1,8 @@
+node_modules
+coverage
+coverage-it
+edge-*.tgz
+jsdoc
+package-lock.json
+/mec
+.nyc_output

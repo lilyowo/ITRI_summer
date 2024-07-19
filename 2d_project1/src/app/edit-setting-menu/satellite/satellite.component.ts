@@ -16,11 +16,8 @@ export class SatelliteComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsService.getSettings().subscribe((settings: Settings)=> {
-      const satelliteGroup = settings['星網物件'].find(group => group.data_title=== '衛星');
+      const satelliteGroup = settings['星網物件'].find(group => group.dataTitle=== '衛星');
       this.satelliteData = satelliteGroup as DataGroup<Satellite>;
-      console.log("owo!!!");
-      console.log(this.satelliteData.data_items)
-      console.log("owo!!!");
     })
   }
 

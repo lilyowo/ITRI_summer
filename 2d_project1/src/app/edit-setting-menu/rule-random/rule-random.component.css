@@ -25,14 +25,15 @@
     flex: 1;
     margin-right: 20px;  /* 可調整輸入框和文字之間的間距 */
     width: 40%;  /* 讓輸入框佔據一半寬度 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
   
   .item-field label {
     flex: 0 0 auto;
     width: 60%;  /* 讓標籤佔據一半寬度 */
-    text-align: right;
+    text-align: left;
     padding: 5px;
-    border: 1px solid #ccc;
     border-radius: 4px;
   }
   

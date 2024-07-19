@@ -1,0 +1,12 @@
+{
+    "esversion": 6,
+    "node": true,
+    "mocha": true,
+    "curly": true,
+    "eqeqeq": true,
+    "undef": true,
+    "unused": false,//Don't show defined but never used.
+    "camelcase": true,
+    "indent": 2
+    
+}

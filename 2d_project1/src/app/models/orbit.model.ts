@@ -1,5 +1,6 @@
 export interface Orbit {
-    orbit_id: number;
+    orbitId: number;
+    constellationId: number;
     軌道傾角: number;
     升交點黃道經度: number;
     偏心率: number;

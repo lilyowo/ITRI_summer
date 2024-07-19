@@ -1,22 +1,26 @@
 <div calss="ut-container">
-  <!-- <h2>{{ utData?.data_title }}</h2> 
-  <p>Read Only: {{ utData?.read_only ? 'Yes' : 'No' }}</p>
-  <p>Items Number: {{ utData?.items_num }}</p> -->
+  <!-- <h2>{{ utData?.dataTitle }}</h2> 
+  <p>Read Only: {{ utData?.readOnly ? 'Yes' : 'No' }}</p>
+  <p>Items Number: {{ utData?.itemsNum }}</p> -->
 
-  <div *ngFor="let item of utData?.data_items" class="ut-item">
-    <h3>{{item.name}}</h3>
+  <div *ngFor="let item of utData?.dataItems" class="ut-item">
+    <h3>UT - {{item.gsId}}</h3>
     <div class="item-field">
         <label>經度:</label>
-        <input type="text" [value]="item['經度']" [readonly]="utData?.read_only"[ngClass]="{'readonly': utData?.read_only, 'editable': !utData?.read_only}">
+        <input type="text" [value]="item['經度']" [readonly]="utData?.readOnly"[ngClass]="{'readonly': utData?.readOnly, 'editable': !utData?.readOnly}">
     </div>
     <div class="item-field">
         <label>緯度:</label>
-        <input type="text" [value]="item['緯度']" [readonly]="utData?.read_only"[ngClass]="{'readonly': utData?.read_only, 'editable': !utData?.read_only}">
+        <input type="text" [value]="item['緯度']" [readonly]="utData?.readOnly"[ngClass]="{'readonly': utData?.readOnly, 'editable': !utData?.readOnly}">
     </div>
     <div class="item-field">
         <label>海拔高度:</label>
-        <input type="text" [value]="item['海拔高度']" [readonly]="utData?.read_only"[ngClass]="{'readonly': utData?.read_only, 'editable': !utData?.read_only}">
+        <input type="text" [value]="item['海拔高度']" [readonly]="utData?.readOnly"[ngClass]="{'readonly': utData?.readOnly, 'editable': !utData?.readOnly}">
     </div>
+    <div class="item-field">
+      <label>Accept Elevation:</label>
+      <input type="text" [value]="item['acceptElevation']" [readonly]="utData?.readOnly"[ngClass]="{'readonly': utData?.readOnly, 'editable': !utData?.readOnly}">
+  </div>
     <hr>
   </div>
 </div>

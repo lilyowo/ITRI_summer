@@ -1,50 +1,43 @@
-import { RuleSwitch } from './../../models/rule-switch.model';
 import { Component, OnInit } from '@angular/core';
-import { RuleIsl } from 'src/app/models/rule-isl.model';
+import { RuleItem } from '../../models/rule-item.model';
 import { SettingsService } from '../../services/settings.service';
-
+import { DataGroup, Settings } from '../../models/settings.model';
 @Component({
   selector: 'app-rule-isl',
   templateUrl: './rule-isl.component.html',
   styleUrls: ['./rule-isl.component.css']
 })
 export class RuleIslComponent implements OnInit {
-  ruleIsl: RuleIsl | undefined;
-  ruleIslKeys: (keyof RuleIsl)[]=[];
-  readOnly:boolean = false;
+  dataTitle: string='ISL連線規則';
+  dataGroup: DataGroup<RuleItem> | undefined;
 
   constructor(private settingsService: SettingsService) {}
 
   ngOnInit(): void {
     this.settingsService.getSettings().subscribe(settings => {
-      const ruleIslSetting = settings['模擬設定'].find(setting => setting.data_title === 'ISL連線規則');
-      if(ruleIslSetting && this.isRuleIsl(ruleIslSetting.data_items[0])){
-        this.ruleIsl = ruleIslSetting.data_items[0];
-        this.ruleIslKeys = Object.keys(this.ruleIsl) as (keyof RuleIsl)[];
-        this.readOnly = ruleIslSetting.read_only;
+      const ruleItemGroup = settings['模擬設定'].find(group => group.dataTitle === this.dataTitle)
+      if(this.isRuleItem(ruleItemGroup)){
+        this.dataGroup = ruleItemGroup;
       }
     });
   }
-
-  isRuleIsl(item: any): item is RuleIsl {
+  isRuleItem(item: any): item is DataGroup<RuleItem>|undefined {
     return true;
-    //item && typeof item.AdaptiveRSS === 'boolean' && typeof item.ContextAware === 'boolean' && typeof item.Babel === 'boolean' && typeof item.DREAM === 'boolean' && typeof item.BATMAN === 'boolean';
   }
-
-  onSelectionChange(selectedKey: keyof RuleIsl): void {
-    if (this.ruleIsl && !this.readOnly) {
-      // Update the ruleRoute object
-      this.ruleIslKeys.forEach(key => {
-        this.ruleIsl![key] = (key === selectedKey);
-      });
-
-      // Function to update JSON (to be implemented)
-      this.updateSettings();
+  onRadioChange(item: RuleItem): void {
+    item.display = !item.display;
+    
+    if(this.dataGroup){// 遍歷所有項目並將它們的 display 設置為 false
+      this.dataGroup.dataItems.forEach((i: any) => i.display = false);
     }
+    // 將選中的項目的 display 設置為 true
+    item.display = true;
+    this.updateSettings();
   }
+
   updateSettings(): void {
-    // Implement the logic to update the JSON file with new settings
-    // This function should call a service method to update the backend or JSON file
+    // Function to update settingsItem.json
+    // (Implementation will be added later)
   }
 
 }

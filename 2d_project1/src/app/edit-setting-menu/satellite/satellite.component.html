@@ -1,17 +1,21 @@
 <div class="satellite-container">
-    <!-- <h2>{{ satelliteData?.data_title }}</h2>
-    <p>Read Only: {{ satelliteData?.read_only ? 'Yes' : 'No' }}</p>
-    <p>Items Number: {{ satelliteData?.items_num }}</p> -->
+    <!-- <h2>{{ satelliteData?.dataTitle }}</h2>
+    <p>Read Only: {{ satelliteData?.readOnly ? 'Yes' : 'No' }}</p>
+    <p>Items Number: {{ satelliteData?.itemsNum }}</p> -->
 
-    <div *ngFor="let item of satelliteData?.data_items" class="satellite-item">
-      <h3>{{ item.satellite_id }}</h3>
+    <div *ngFor="let item of satelliteData?.dataItems" class="satellite-item">
+      <h3>{{ item.satelliteId }}</h3>
       <div class="item-field">
         <label>Mean anomaly:</label>
-        <input type="number" [value]="item['Mean anomaly']" [readonly]="satelliteData?.read_only" [ngClass]="{'readonly': satelliteData?.read_only}">
+        <input type="number" [value]="item['Mean anomaly']" [readonly]="satelliteData?.readOnly" [ngClass]="{'readonly': satelliteData?.readOnly}">
       </div>
       <div class="item-field">
         <label>Mean motion:</label>
-        <input type="number" [value]="item['Mean motion']" [readonly]="satelliteData?.read_only" [ngClass]="{'readonly': satelliteData?.read_only}">
+        <input type="number" [value]="item['Mean motion']" [readonly]="satelliteData?.readOnly" [ngClass]="{'readonly': satelliteData?.readOnly}">
+      </div>
+      <div class="item-field">
+        <label>mass:</label>
+        <input type="number" [value]="item['mass']" [readonly]="satelliteData?.readOnly" [ngClass]="{'readonly': satelliteData?.readOnly}">
       </div>
       <hr>
     </div>

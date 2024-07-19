@@ -16,7 +16,7 @@ export class PayloadComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsService.getSettings().subscribe((settings: Settings) => {
-      const payloadGroup = settings['星網物件'].find(group => group.data_title === '通訊酬載');
+      const payloadGroup = settings['星網物件'].find(group => group.dataTitle === '通訊酬載');
       this.payloadData = payloadGroup as DataGroup<Payload>;  
     })
   }

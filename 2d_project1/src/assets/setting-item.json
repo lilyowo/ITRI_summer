@@ -1,0 +1,338 @@
+{
+  "星網物件": [
+    {
+      "dataTitle": "軌道",
+      "dataItems": [
+        {
+          "orbitId": 1,
+          "constellationId": 1,
+          "軌道傾角": 29.0155,
+          "升交點黃道經度": 0.0186,
+          "偏心率": 0.0000511,
+          "近地點幅角": 264.8931,
+          "海拔高度": 800
+        }
+      ],
+      "readOnly": true,
+      "itemsNum": 3
+    },
+    {
+      "dataTitle": "衛星",
+      "dataItems": [
+        {
+          "satelliteId": 101,
+          "planeId": 1,
+          "Mean anomaly": 0.0966,
+          "Mean motion": 14.2871,
+          "mass": 123
+        }
+      ],
+      "readOnly": true,
+      "itemsNum": 22
+    },
+    {
+      "dataTitle": "ISL",
+      "dataItems": [
+        {
+          "satelliteId": 101,
+          "islId": 1,
+          "connectIslId": 2,
+          "衛星方位角": 0,
+          "衛星幅角": 0,
+          "旋轉方位角 +/-": 160,
+          "旋轉幅角 +/-": 55,
+          "有效射程": 7000
+        }
+      ],
+      "readOnly": true,
+      "itemsNum": 88
+    },
+    {
+      "dataTitle": "通訊酬載",
+      "dataItems": [
+        {
+          "satelliteId": 101,
+          "cplId": 1,
+          "輻射夾角 +/-": 50.3,
+          "Beam夾角 +/-": 50.3,
+          "Beam數量": 1,
+          "bandwidth": 5
+        }
+      ],
+      "readOnly": true,
+      "itemsNum": 22
+    },
+    {
+      "dataTitle": "UT",
+      "dataItems": [
+        {
+          "gsId": 1,
+          "cellId": 1,
+          "connectedSatId": 101,
+          "經度": 120.3025,
+          "緯度": 22.63946,
+          "海拔高度": 0.192742,
+          "acceptElevation": 50
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 1
+    },
+    {
+      "dataTitle": "FT",
+      "dataItems": [
+        {
+          "gsId": 2,
+          "cellId": 1,
+          "connectedSatId": 102,
+          "經度": 121.5138,
+          "緯度": 25.04913,
+          "海拔高度": 0.192742,
+          "acceptElevation": 100
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 1
+    }
+  ],
+  "模擬設定": [
+    {
+      "dataTitle": "路由規則",
+      "dataItems": [
+        {
+          "dataTitle": "DSDV",
+          "display": true
+        },
+        {
+          "dataTitle": "OLSR",
+          "display": false
+        },
+        {
+          "dataTitle": "Babel",
+          "display": false
+        },
+        {
+          "dataTitle": "DREAM",
+          "display": false
+        },
+        {
+          "dataTitle": "BATMAN",
+          "display": false
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 5
+    },
+    {
+      "dataTitle": "換手規則",
+      "dataItems": [
+        {
+          "dataTitle": "Adaptive RSS",
+          "display": true
+        },
+        {
+          "dataTitle": "Context-Aware",
+          "display": false
+        },
+        {
+          "dataTitle": "Energy-Efficient",
+          "display": false
+        },
+        {
+          "dataTitle": "Mobility Pattern",
+          "display": false
+        },
+        {
+          "dataTitle": "Multi-Criteria",
+          "display": false
+        },
+        {
+          "dataTitle": "Network-Based",
+          "display": false
+        },
+        {
+          "dataTitle": "Predictive",
+          "display": false
+        },
+        {
+          "dataTitle": "QoS-Oriented",
+          "display": false
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 8
+    },
+    {
+      "dataTitle": "ISL連線規則",
+      "dataItems": [
+        {
+          "dataTitle": "MinMaxR",
+          "display": true
+        },
+        {
+          "dataTitle": "MinDiffAER",
+          "display": false
+        },
+        {
+          "dataTitle": "RelativePhasing",
+          "display": false
+        },
+        {
+          "dataTitle": "AlwaysMinR",
+          "display": false
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 4
+    },
+    {
+      "dataTitle": "隨機事件規則",
+      "dataItems": [
+        {
+          "亂數種子": 0,
+          "衛星損壞機率%": 0,
+          "ISL斷線機率%": 0,
+          "ISL損壞機率%": 0,
+          "通訊酬載損壞機率%": 0,
+          "封包遺失機率%": 0
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 1
+    }
+  ],
+  "模擬項目": [
+    {
+      "dataTitle": "衛星間連線",
+      "dataItems": [
+        {
+          "dataTitle": "計算指定衛星與相鄰軌道衛星的最小距離",
+          "display": true
+        },
+        {
+          "dataTitle": "計算指定衛星與相鄰軌道衛星的平均距離",
+          "display": false
+        },
+        {
+          "dataTitle": "計算指定衛星與相鄰軌道衛星的最大距離",
+          "display": false
+        },
+        {
+          "dataTitle": "計算指定衛星與相鄰軌道衛星的方位角(A)變化區間",
+          "display": false
+        },
+        {
+          "dataTitle": "計算指定衛星與相鄰軌道衛星的幅角(E)變化區間",
+          "display": false
+        },
+        {
+          "dataTitle": "計算指定衛星與相鄰軌道衛星的距離(R)變化區間",
+          "display": false
+        },
+        {
+          "dataTitle": "計算指定衛星與相鄰軌道衛星的AER標準化變化區間",
+          "display": false
+        },
+        {
+          "dataTitle": "計算指定衛星兩條intra ISL的AER隨時間的變化",
+          "display": false
+        },
+        {
+          "dataTitle": "計算指定衛星兩條intra ISL的距離隨時間的變化",
+          "display": false
+        },
+        {
+          "dataTitle": "計算指定衛星兩條inter ISL的距離隨時間的變化",
+          "display": false
+        },
+        {
+          "dataTitle": "計算造成星網中斷的ISL損壞數量比例分佈",
+          "display": false
+        },
+        {
+          "dataTitle": "計算造成星網中斷的衛星損壞數量比例分佈",
+          "display": false
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 12
+    },
+    {
+      "dataTitle": "對地輻射",
+      "dataItems": [
+        {
+          "dataTitle": "計算指定緯度範圍的輻射覆蓋時間",
+          "display": true
+        },
+        {
+          "dataTitle": "計算指定地面站可連線衛星數隨時間的變化",
+          "display": true
+        },
+        {
+          "dataTitle": "計算指定地面站可連線衛星的數量分佈",
+          "display": true
+        },
+        {
+          "dataTitle": "計算指定地面站理論訊號強度隨時間的變化",
+          "display": true
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 4
+    },
+    {
+      "dataTitle": "路由效能",
+      "dataItems": [
+        {
+          "dataTitle": "計算星網任兩衛星最大和平均hop count",
+          "display": true
+        },
+        {
+          "dataTitle": "計算星網任兩衛星最大和平均distance",
+          "display": true
+        },
+        {
+          "dataTitle": "計算星網任兩衛星路由經過的intra ISL數量分佈",
+          "display": true
+        },
+        {
+          "dataTitle": "計算星網任兩衛星路由經過的inter ISL數量分佈",
+          "display": true
+        },
+        {
+          "dataTitle": "計算星網任兩衛星路由經過的各條ISL的次數",
+          "display": true
+        },
+        {
+          "dataTitle": "計算星網的Routing Table Update控制封包數量",
+          "display": true
+        },
+        {
+          "dataTitle": "計算星網任兩衛星的packet loss變化",
+          "display": true
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 7
+    },
+    {
+      "dataTitle": "換手效能",
+      "dataItems": [
+        {
+          "dataTitle": "計算所有地面站的衛星換手次數",
+          "display": true
+        },
+        {
+          "dataTitle": "計算衛星平均服務時間",
+          "display": true
+        },
+        {
+          "dataTitle": "計算換手失敗率",
+          "display": true
+        }
+      ],
+      "readOnly": false,
+      "itemsNum": 3
+    }
+  ]
+}

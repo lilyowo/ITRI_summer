@@ -15,7 +15,7 @@ export class OrbitComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsService.getSettings().subscribe((settings: Settings) => {
-      const orbitGroup = settings['星網物件'].find(group => group.data_title === '軌道');
+      const orbitGroup = settings['星網物件'].find(group => group.dataTitle === '軌道');
       this.orbitData = orbitGroup as DataGroup<Orbit>;
     });
   }

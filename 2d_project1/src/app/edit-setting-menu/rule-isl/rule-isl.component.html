@@ -1,13 +1,17 @@
-<div class="rule-isl-container" *ngIf="ruleIsl">
-    <div *ngFor="let key of ruleIslKeys">
-      <label class="radio-label">
-        <input type="radio" [name]="key" [value]="key" [checked]="ruleIsl[key]" 
-               [disabled]="readOnly" (change)="onSelectionChange(key)">
-        <svg height="20" width="20">
-          <circle cx="10" cy="10" r="9.5" stroke="black" [attr.fill]="ruleIsl[key] ? 'black' : 'white'"/>
-        </svg>
-        <span class="option-text">{{ key }}</span>
-      </label>
-    </div>
-  </div>
-  
+<div *ngIf="dataGroup">
+  <!-- <h3>{{ dataGroup.dataTitle }}</h3> -->
+  <ul>
+      <li *ngFor="let item of dataGroup.dataItems">
+          <label [class.read-only]="dataGroup.readOnly">
+              <input
+                  type="radio"
+                  name="ruleIsl"
+                  [checked]="item.display"
+                  [disabled]="dataGroup.readOnly"
+                  (change)="onRadioChange(item)"
+              />
+              <span>{{ item.dataTitle }}</span>
+          </label>
+      </li>
+  </ul>
+</div>

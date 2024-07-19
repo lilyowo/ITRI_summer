@@ -5,20 +5,22 @@
     <div *ngFor="let item of category.value" class="item">
       <div class="item-header" [ngStyle]="{'background-color': '#011126'}">
         <span class="toggle-button" (click)="toggleOpen(category.key, item)">
+          <code>
           {{ item.open ? '-' : '+' }}
+        </code>
         </span>
-        <span class="item-title">{{ item.data_title }}</span>
+        <span class="item-title">{{ item.dataTitle }}</span>
       </div>
       <div *ngIf="item.open" class="item-content">
         <div class="content" [ngStyle]="{'background-color': '#ffffff'}">
-          <ng-container *ngIf="getComponent(item.data_title)">
-            <div class="content-title">{{ item.data_title }}</div>
-            <ng-container *ngComponentOutlet="getComponent(item.data_title)"></ng-container>
+          <ng-container *ngIf="getComponent(item.dataTitle)">
+            <div class="content-title">{{ item.dataTitle }}</div>
+            <ng-container *ngComponentOutlet="getComponent(item.dataTitle)"></ng-container>
           </ng-container>
-          <ng-container *ngIf="!getComponent(item.data_title)">
-            <div class="content-title">{{ item.data_title }}</div>
+          <ng-container *ngIf="!getComponent(item.dataTitle)">
+            <div class="content-title">{{ item.dataTitle }}</div>
             <span class="content-text">setting content</span>
-          </ng-container>
+          </ng-container>  
         </div>
       </div>
     </div>

@@ -10,9 +10,13 @@ import { RuleRouteComponent } from '../rule-route/rule-route.component';
 import { RuleSwitchComponent } from '../rule-switch/rule-switch.component';
 import { RuleIslComponent } from '../rule-isl/rule-isl.component';
 import { RuleRandomComponent } from '../rule-random/rule-random.component';
+import { SimuSatelliteComponent } from '../simu-satellite/simu-satellite.component';
+import { SimuFloorComponent } from '../simu-floor/simu-floor.component';
+import { SimuRouteComponent } from '../simu-route/simu-route.component';
+import { SimuSwitchComponent } from '../simu-switch/simu-switch.component';
 
 interface SettingItem {
-  data_title: string;
+  dataTitle: string;
   open: boolean;
   content?: string;
 }
@@ -33,7 +37,7 @@ export class SettingsMenuComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<Settings>('assets/setting_item.json').subscribe(data => {
+    this.http.get<Settings>('assets/setting-item.json').subscribe(data => {
       this.settings = data;
       // Initialize open property for each setting item
       for (const key in this.settings) {
@@ -70,9 +74,19 @@ export class SettingsMenuComponent implements OnInit {
         return RuleIslComponent;
       case '隨機事件規則':
         return RuleRandomComponent;
+      case '衛星間連線':
+        return SimuSatelliteComponent;
+      case '對地輻射':
+        return SimuFloorComponent;
+      case '路由效能':
+        return SimuRouteComponent;
+      case '換手效能':
+        return SimuSwitchComponent;
       default:
         return null;
     }
   }
+
+  
 
 }

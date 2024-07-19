@@ -16,7 +16,7 @@ export class RuleRandomComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsService.getSettings().subscribe((settings:Settings) => {
-      const ruleRandomGroup = settings['模擬設定'].find(group => group.data_title=='隨機事件規則');
+      const ruleRandomGroup = settings['模擬設定'].find(group => group.dataTitle=='隨機事件規則');
       this.ruleRandomData = ruleRandomGroup as DataGroup<RuleRandom>;
     })
   }

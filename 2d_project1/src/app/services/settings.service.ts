@@ -7,7 +7,7 @@ import { Settings } from '../models/settings.model';
   providedIn: 'root',
 })
 export class SettingsService {
-  private jsonUrl = '../assets/setting_item.json';
+  private jsonUrl = '../assets/setting-item.json';
 
   constructor(private http: HttpClient) {}
 

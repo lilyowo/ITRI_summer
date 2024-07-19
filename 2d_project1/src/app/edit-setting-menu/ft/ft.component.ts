@@ -16,8 +16,8 @@ export class FtComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsService.getSettings().subscribe((settings: Settings) => {
-      const ftGroup = settings['星網物件'].find(group => group.data_title === 'FT');
-      this.ftData = ftGroup as DataGroup<FT>;
+      const utGroup = settings['星網物件'].find(group => group.dataTitle === 'FT');
+      this.ftData = utGroup as DataGroup<FT>;
     })
   }
 

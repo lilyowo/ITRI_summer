@@ -3,7 +3,7 @@
     <h3 class="category">{{ category }}</h3>
     <div *ngFor="let item of reportData[category]">
       <div *ngIf="item.display">
-        <h4 class="dataTitle">{{ item.data_title }}</h4>
+        <h4 class="dataTitle">{{ item.dataTitle }}</h4>
         <p class="dataContent">{{ item.content }}</p>
       </div>
     </div>

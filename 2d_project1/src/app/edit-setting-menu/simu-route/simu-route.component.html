@@ -1,0 +1,17 @@
+<div *ngIf="dataGroup">
+    <!-- <h3>{{ dataGroup.dataTitle }}</h3> -->
+    <ul>
+      <li *ngFor="let item of dataGroup.dataItems">
+        <label [class.read-only]="dataGroup.readOnly">
+          <input
+            type="checkbox"
+            [checked]="item.display"
+            [disabled]="dataGroup.readOnly"
+            (change)="onCheckboxChange(item)"
+          />
+          <span>{{ item.dataTitle }}</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+  

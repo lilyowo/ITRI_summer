@@ -16,7 +16,7 @@ export class UtComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsService.getSettings().subscribe((settings: Settings) => {
-      const utGroup = settings['星網物件'].find(group => group.data_title === 'UT');
+      const utGroup = settings['星網物件'].find(group => group.dataTitle === 'UT');
       this.utData = utGroup as DataGroup<UT>;
     })
   }

@@ -1,26 +1,62 @@
-.rule-switch-container {
-    background-color: white;
-    color: black;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .radio-label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  
-  .radio-label input {
-    display: none;
-  }
-  
-  .radio-label svg {
-    margin-right: 10px;
-  }
-  
-  .option-text {
-    margin-left: 50px;
-  }
-  
+:host {
+  display: block;
+  background: #ffffff;
+  color: #000000;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+h3 {
+  margin-bottom: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+}
+
+label.read-only {
+  opacity: 0.6;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+input[type="radio"] + span::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #616161;
+  border-radius: 50%;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+input[type="radio"]:checked + span::before {
+  background: #ffffff;
+  content: "．";
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  padding-bottom: 15px;
+}

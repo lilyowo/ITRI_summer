@@ -18,7 +18,7 @@ export class ReportContentComponent implements OnInit {
   }
 
   loadReportData(): void {
-    this.http.get('/assets/report_data.json').subscribe(data => {
+    this.http.get('/assets/report-data.json').subscribe(data => {
       this.reportData = data;
     });
   }

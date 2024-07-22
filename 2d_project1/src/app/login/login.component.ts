@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { LoginHistoryService } from '../services/login-history.service';
 
 @Component({
   selector: 'app-login',
@@ -14,25 +15,38 @@ export class LoginComponent implements OnInit {
   showModal = false;
   constructor(
     private authService: AuthService,
+    private loginHistoryService: LoginHistoryService,
     private router: Router,
   ) {}
 
   login() {
     const email = this.emailInput.nativeElement.value;
     const password = this.passwordInput.nativeElement.value;
-    this.router.navigate(['/projectlist']);
-    // this.authService.login(email, password).subscribe(
-    //   (response) => {
-    //     this.authService.saveToken(response.token);
-    //     const userId = this.authService.getUserIdFromToken();
-    //     alert(`Login Success!\nUser id=${userId}`);
-    //     // this.router.navigate(['/projectlist']); // 註解掉這一行以防止自動跳轉
-    //   },
-    //   (error) => {
-    //     console.error('Login error', error);
-    //     alert('Login failed. Please check your credentials.');
-    //   },
-    // );
+    // this.router.navigate(['/projectlist']);
+    this.authService.login(email, password).subscribe(
+      (response) => {
+        this.authService.saveToken(response.token);
+        const userId = this.authService.getUserIdFromToken();
+        alert(`Login Success!\nUser id=${userId}`);
+        // this.router.navigate(['/projectlist']); // 註解掉這一行以防止自動跳轉
+
+        // 記錄登入歷史
+        if (userId) {
+          this.loginHistoryService.recordLogin(userId).subscribe(
+            () => {
+              console.log('Login history recorded successfully');
+            },
+            (error) => {
+              console.error('Error recording login history', error);
+            },
+          );
+        }
+      },
+      (error) => {
+        console.error('Login error', error);
+        alert('Login failed. Please check your credentials.');
+      },
+    );
   }
   toggleModal() {
     this.showModal = !this.showModal;

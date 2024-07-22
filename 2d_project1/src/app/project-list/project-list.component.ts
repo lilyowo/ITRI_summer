@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from '../models/project.model';  // 导入 Project 类型
 import { Simulation } from '../models/simulation.model';  // 导入 Simulation 类型
@@ -42,12 +42,19 @@ export class ProjectListComponent implements OnInit {
   ];
 
   constructor(private router: Router) { }
-
+  showCreateModal = false;
+  showDeleteModal = false;
   ngOnInit(): void {
   }
 
   openNewProjectDialog() {
-    // 打开新项目对话框的逻辑
+    this.toggleCreateModal();
+  }
+  toggleCreateModal() {
+    this.showCreateModal = !this.showCreateModal;
+  }
+  toggleDeleteModal() {
+    this.showDeleteModal = !this.showDeleteModal;
   }
 
   toggleProject(project: Project) {
@@ -59,7 +66,15 @@ export class ProjectListComponent implements OnInit {
   }
 
   deleteProject(project: Project) {
-    this.projects = this.projects.filter(p => p !== project);
+    this.toggleDeleteModal();
+    //下面這一行目前會假裝直接砍掉這個project，以後要改成按yes的話執行相應的邏輯
+    // this.projects = this.projects.filter(p => p !== project);
+  }
+  onDelete(yesDelete:boolean, project:Project):boolean{
+    if(yesDelete){
+      this.projects = this.projects.filter(p => p !== project);
+      return true;
+    }else return false;
   }
 
   viewReport(simulation: Simulation) {

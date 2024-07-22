@@ -1,22 +1,21 @@
 <div class="edit-container">
-    <div class="central-canvas">
-      <app-central-canvas [view]="currentView"></app-central-canvas>
-    </div>
-    
-    <div class="format-tabs">
-      <app-format-tabs (viewChanged)="handleViewChange($event)"></app-format-tabs>
-    </div>
-  
-    <div *ngIf="!hideLeft" class="left-tools">
-      <app-left-tools></app-left-tools>
-    </div>
-  
-    <div *ngIf="!hideProgressBar" class="progress-bar">
-      <app-progress-bar></app-progress-bar>
-    </div>
-  
-    <div *ngIf="!hideRight" class="right-settings">
-      <app-right-settings (startSimulation)="startSimulation()" (toggleRightSettings)="toggleRightSettings()"></app-right-settings>
-    </div>
+  <div class="central-canvas">
+    <app-central-canvas [view]="currentView"></app-central-canvas>
+  </div>
+
+  <div class="progress-bar-container" *ngIf="!hideProgressBar">
+    <app-progress-bar class="progress-bar"></app-progress-bar>
   </div>
   
+  <div class="format-tabs">
+    <app-format-tabs (viewChanged)="handleViewChange($event)"></app-format-tabs>
+  </div>
+
+  <div *ngIf="!hideLeft" class="left-tools">
+    <app-left-tools></app-left-tools>
+  </div>
+  
+  <div *ngIf="!hideRight" class="right-settings">
+    <app-right-settings (startSimulation)="startSimulation()" (toggleRightSettings)="toggleRightSettings()"></app-right-settings>
+  </div>
+</div>

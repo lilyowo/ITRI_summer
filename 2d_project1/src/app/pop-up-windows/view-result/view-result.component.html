@@ -1,0 +1,14 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close-button" (click)="closeModal()">&times;</span>
+      <h2 class="modal-title">View Result</h2>
+      <hr class="title-divider">
+      <div class="content-button-container">
+        <p class="modal-text">Simulation complete! View the results now?</p>
+        <div class="button-container">
+            <button class="yes-button" (click)="viewReport()">Yes</button>
+            <button class="no-button" (click)="closeModal()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>

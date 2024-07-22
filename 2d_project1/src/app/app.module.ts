@@ -31,7 +31,12 @@ import { SimuFloorComponent } from './edit-setting-menu/simu-floor/simu-floor.co
 import { SimuRouteComponent } from './edit-setting-menu/simu-route/simu-route.component';
 import { SimuSwitchComponent } from './edit-setting-menu/simu-switch/simu-switch.component';
 import { ProjectListComponent } from './project-list/project-list.component';
-
+import { FormsModule } from '@angular/forms';
+import { ForgetPasswordComponent } from './pop-up-windows/forget-password/forget-password.component';
+import { NewProjectComponent } from './pop-up-windows/new-project/new-project.component';
+import { DeleteProjectComponent } from './pop-up-windows/delete-project/delete-project.component';
+import { UploadTleComponent } from './pop-up-windows/upload-tle/upload-tle.component';
+import { ViewResultComponent } from './pop-up-windows/view-result/view-result.component';
 
 
 @NgModule({
@@ -63,12 +68,18 @@ import { ProjectListComponent } from './project-list/project-list.component';
     SimuFloorComponent,
     SimuRouteComponent,
     SimuSwitchComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    ForgetPasswordComponent,
+    NewProjectComponent,
+    DeleteProjectComponent,
+    UploadTleComponent,
+    ViewResultComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [SettingsService],
   bootstrap: [AppComponent]

@@ -1,1 +1,21 @@
-<p>progress-bar works!</p>
+<div class="progress-container">
+    <div class="progress-bar" 
+        (mousemove)="onMouseMove($event)" 
+        (mouseleave)="onMouseLeave()">
+      <div class="progress" [ngStyle]="{'width': progressWidth + '%'}"></div>
+      <div class="progress-thumb" 
+        [ngStyle]="{'left': progressWidth + '%'}"
+        (mousedown)="onDragStart($event)"></div>
+      <div class="tooltip" 
+        *ngIf="showTooltip" 
+        [ngStyle]="{'left': tooltipLeft + 'px'}">
+       {{ hoveredTime }}s / {{ totalTime }}s
+      </div>
+    </div>
+    <div class="controls">
+      <button (click)="play()">▶</button>
+      <button (click)="pause()">❚❚</button>
+    </div>
+  </div>
+  <app-view-result *ngIf="showModal" (close)="toggleModal()"></app-view-result>
+  

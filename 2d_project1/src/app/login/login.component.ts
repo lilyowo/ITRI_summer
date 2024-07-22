@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
   @ViewChild('emailInput') emailInput!: ElementRef;
   @ViewChild('passwordInput') passwordInput!: ElementRef;
-
+  showModal = false;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -20,18 +20,21 @@ export class LoginComponent implements OnInit {
   login() {
     const email = this.emailInput.nativeElement.value;
     const password = this.passwordInput.nativeElement.value;
-
-    this.authService.login(email, password).subscribe(
-      (response) => {
-        this.authService.saveToken(response.token);
-        const userId = this.authService.getUserIdFromToken();
-        alert(`Login Success!\nUser id=${userId}`);
-        // this.router.navigate(['/projectlist']); // 註解掉這一行以防止自動跳轉
-      },
-      (error) => {
-        console.error('Login error', error);
-        alert('Login failed. Please check your credentials.');
-      },
-    );
+    this.router.navigate(['/projectlist']);
+    // this.authService.login(email, password).subscribe(
+    //   (response) => {
+    //     this.authService.saveToken(response.token);
+    //     const userId = this.authService.getUserIdFromToken();
+    //     alert(`Login Success!\nUser id=${userId}`);
+    //     // this.router.navigate(['/projectlist']); // 註解掉這一行以防止自動跳轉
+    //   },
+    //   (error) => {
+    //     console.error('Login error', error);
+    //     alert('Login failed. Please check your credentials.');
+    //   },
+    // );
+  }
+  toggleModal() {
+    this.showModal = !this.showModal;
   }
 }

@@ -1,5 +1,5 @@
 <div class="left-tools">
-    <button class="tool-button" (click)="handleButtonClick('星系')">
+    <button class="tool-button" (click)="toggleModal()">
       <img src="assets/tool1.png" alt="Tool 1">
     </button>
     <button class="tool-button" (click)="handleButtonClick('軌道')">
@@ -18,4 +18,5 @@
       <img src="assets/tool6.png" alt="Tool 6">
     </button>
   </div>
+  <app-upload-tle *ngIf="showModal" (close)="toggleModal()"></app-upload-tle>
   

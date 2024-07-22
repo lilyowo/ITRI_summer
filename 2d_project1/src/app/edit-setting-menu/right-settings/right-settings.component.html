@@ -1,6 +1,8 @@
 <div>
-    <button (click)="onStartSimulation()">Start Simulation</button>
-    <button (click)="onToggleRightSettings()">Toggle Right Settings</button>
+    <button class="start-button" (click)="onStartSimulation()">
+        {{ simulationButtonText }}
+    </button>
+    <input type="number" [(ngModel)]="simulationTime" [class.readonly]="isReadonly" [readonly]="isReadonly">
+    <span>秒</span>
     <app-settings-menu></app-settings-menu>
 </div>
-  

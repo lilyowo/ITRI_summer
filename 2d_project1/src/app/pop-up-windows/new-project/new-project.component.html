@@ -1,0 +1,15 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close-button" (click)="closeModal()">&times;</span>
+      <h2 class="modal-title">New Project</h2>
+      <hr class="title-divider">
+      <div class="content-button-container">
+        <p class="modal-text">Project name:</p>
+        <input type="text" [(ngModel)]="projectTitle" class="modal-input">
+        <div class="button-container">
+            <button class="create-button" (click)="createProject()">Create</button>
+            <button class="cancel-button" (click)="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,51 @@
+.progress-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .progress-bar {
+    position: relative;
+    width: 80%;
+    height: 20px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: #2D8F7E;
+    border-radius: 10px 0 0 10px;
+  }
+  
+  .progress-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: #FAFF00;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .controls button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: -25px;
+    background-color: black;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    pointer-events: none;
+  }

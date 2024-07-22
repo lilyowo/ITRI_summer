@@ -6,9 +6,9 @@
       <label for="password">Password</label>
       <input type="password" id="password" name="password" #passwordInput>
       
-      <a href="/login" class="forget-password">Forget password?</a>
+      <a href="javascript:void(0)" class="forget-password" (click)="toggleModal()">Forget password?</a>
       
       <button class="login-button" (click)="login()">Login</button>
     </div>
   </div>
-  
+  <app-forget-password *ngIf="showModal" (close)="toggleModal()"></app-forget-password>

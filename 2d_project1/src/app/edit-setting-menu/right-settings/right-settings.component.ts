@@ -7,19 +7,18 @@ import { Component, OnInit, EventEmitter, Output  } from '@angular/core';
 })
 export class RightSettingsComponent implements OnInit {
   @Output() startSimulation = new EventEmitter<void>();
-  @Output() toggleRightSettings = new EventEmitter<void>();
-
+  isReadonly = false;
+  simulationTime:number = 0;
+  simulationButtonText: string = 'Start Simulation';
 
   constructor() { }
 
   ngOnInit(): void {
   }
   onStartSimulation() {
+    this.simulationButtonText = 'Simulating...';
     this.startSimulation.emit();
-  }
-
-  onToggleRightSettings() {
-    this.toggleRightSettings.emit();
+    this.isReadonly = true;
   }
 
 }

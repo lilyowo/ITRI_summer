@@ -1,0 +1,19 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close-button" (click)="closeModal()">&times;</span>
+      <h2 class="modal-title">Upload TLE File</h2>
+      <hr class="title-divider">
+      <div class="content-button-container">
+        <p class="modal-text">TLE檔</p>
+        <div class="file-input-container">
+            <input type="text" class="file-name-display" readonly>
+            <label for="file-upload" class="file-upload-button">瀏覽</label>
+            <input type="file" id="file-upload" class="file-input" (change)="onFileSelected($event)">
+        </div>
+        <div class="button-container">
+            <button class="upload-button" (click)="uploadTLE()">Upload</button>
+            <button class="cancel-button" (click)="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>

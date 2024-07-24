@@ -38,6 +38,7 @@
     ```
 
 - Loing History
+
   - method: Post
   - URL: `/auth/loginHistory`
   - Description: Record User login timestamp
@@ -50,12 +51,72 @@
   - response:
     ```json
     {
-       "historyId": 1, "userId": 1, "timestamp": 2024-07-22T07:28:29.951Z
+       "historyId": 1, "userId": 1, "timestamp": "2024-07-22 15:28:29.951457"
+    }
+    ```
+
+## Project
+
+- Get all projects
+
+  - method: GET
+  - URL: `/project/user/:userId`
+  - Description: use userId get all projects of this user.
+  - request:
+    ```json
+    {
+      "userId": 1
+    }
+    ```
+  - response:
+    ```json
+    {
+      "projectId" : 1,
+      "projectName": "project 1 ",
+      "lastEditTime": "2024-07-22 15:28:29.951457"
+      
+    }
+    ```
+
+- Create project
+
+  - method: PSOT
+  - URL: `/project`
+  - Description: create new project for this user.
+  - request:
+    ```json
+    {
+      "userId": 1,
+      "projectName": "Project number one"
+    }
+    ```
+  - response:
+    ```json
+    {}
+    ```
+
+## Project - Report
+
+- Get all reports
+
+  - method: GET
+  - URL: `/project/report/:projectId`
+  - Description: Get all reports by projectId.
+  - request:
+    ```json
+    {
+      "projectId": 3
+    }
+    ```
+  - response:
+    ```json
+    {
+      "reportId" : 1,
+      "reportName": "[simulation] Project 1",
+      "simuTime" : "2024-07-22 15:28:29.951457"
     }
     ```
 
 ## Project - Simulation Configuration
-
-## Project - Report
 
 ## Project - Constellation

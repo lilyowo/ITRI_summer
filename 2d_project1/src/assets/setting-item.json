@@ -24,7 +24,8 @@
           "planeId": 1,
           "Mean anomaly": 0.0966,
           "Mean motion": 14.2871,
-          "mass": 123
+          "mass": 123,
+          "satName": "S101"
         }
       ],
       "readOnly": true,

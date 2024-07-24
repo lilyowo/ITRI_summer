@@ -3,10 +3,19 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
 ## Development server
+- Clone from github, run `npm install`first. 
+- Make sure that you already install angular CLI, if not run `npm install -g @angular/cli`
+- update package.json 
+    ```json
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve --host {your IP address} --port 4200",
+    }
+    ```
+- Then run `npm start`. for a dev server. Navigate to `http://{your IP address}:4200/`. The application will automatically reload if you change any of the source files.
 
-- Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-- Clone from githum, run `npm install`first. Then you can run `npm start` or `ng serve`.
+## Link to backend
+- update your backend server IP to assets/backend-config.json.
 
 ## Code scaffolding
 

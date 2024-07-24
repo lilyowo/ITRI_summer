@@ -1,7 +1,23 @@
 ## 進入 postgreSQL Shell
 
-Run `$sudo -i -u postgres`進入 postgres 用戶。Run `$psql`進入 shell.
-Quit by `\q`, and `exit`.
+- Run `$sudo -i -u postgres`進入 postgres 用戶。 Quit by `exit`.
+- Run `$psql`進入 shell. Quit by `\q`
+
+
+## 快速建立schema
+
+- Update your host IP, postgres user name, and password in resetDB.py
+- Make sure that your computer already install python3, psycopg2
+- Run `$cd oam/database2`, `$python3 resetDB.py`
+
+## Install psycopg2
+- Run `$pip install psycopg2`, if lack of certain libraries try the following command
+```
+    $sudo apt-get update
+    $sudo apt-get install libpq-dev
+    $pip install psycopg2-binary
+    $pip install psycopg2
+```
 
 ## backslash commands
 

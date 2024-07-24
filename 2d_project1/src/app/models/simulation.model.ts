@@ -1,5 +1,5 @@
 export interface Simulation {
-    name: string;
-    date: string;
-  }
-  
+  name: string;
+  id: number;
+  date: string;
+}

@@ -2,6 +2,7 @@ CREATE TABLE "Project" (
   "projectId" serial NOT NULL,
   "userId" int NOT NULL,
   "projectName" varchar(255) NOT NULL,
+  "lastEditTime" timestamp,
   PRIMARY KEY ("projectId"), 
   CONSTRAINT "uniqueUserProject" UNIQUE ("userId", "projectName"), -- Creates a unique constraint named unique_user_project on the combination of userId and projectName. This ensures that no two rows can have the same combination of userId and projectName, thus each user can only have one project with a given name.
   FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE CASCADE ON UPDATE NO ACTION

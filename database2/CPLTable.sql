@@ -1,5 +1,5 @@
 CREATE TABLE "CPL" (
-  "colId" serial NOT NULL ,
+  "cplId" serial NOT NULL ,
   "satelliteId" int NOT NULL,
   "viewAngle" float,
   "beamAngle" float,

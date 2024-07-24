@@ -41,6 +41,10 @@ export class LoginComponent implements OnInit {
             },
           );
         }
+        // 導航到 /projectlist 並傳遞 userId 作為 queryParams
+        this.router.navigate(['/projectlist'], {
+          queryParams: { userId: userId },
+        });
       },
       (error) => {
         console.error('Login error', error);

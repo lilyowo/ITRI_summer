@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ConfigService } from './config.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://140.96.106.221:3000/auth/login';
+  private apiUrl = '';
 
-  constructor(private http: HttpClient) {}
-
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService,
+  ) {
+    this.configService.loadConfig().subscribe((config) => {
+      this.apiUrl = `http://${config.serverIp}:${config.serverPort}/auth/login`;
+    });
+  }
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { email, password });
   }

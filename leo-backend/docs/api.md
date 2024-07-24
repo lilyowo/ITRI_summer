@@ -92,7 +92,27 @@
     ```
   - response:
     ```json
-    {}
+    {
+      "message": "Project added successfully"
+    }
+    ```
+
+- Delete project
+
+  - method: DELETE
+  - URL: `/project/delete/:projectId`
+  - Description: delete the project by projectId
+  - request:
+    ```json
+    {
+      "projectId": 1
+    }
+    ```
+  - response:
+    ```json
+    {
+      "message": "Project deleted successfully"
+    }
     ```
 
 ## Project - Report

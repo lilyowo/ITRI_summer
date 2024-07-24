@@ -1,4 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-delete-project',
@@ -7,9 +10,10 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class DeleteProjectComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
-  @Output() yesDelete = new EventEmitter<boolean>();
+  @Input() projectId!: number;
+  @Input() projectName!:string;
 
-  constructor() { }
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
   }
@@ -17,10 +21,19 @@ export class DeleteProjectComponent implements OnInit {
     this.close.emit();
   }
   deleteProject(){
-    //如果這裡抓projectId不方便的話 可以return是否刪除
-    //然後把刪除的處裡邏輯寫在project list裡面
-    //如果可以抓到projectId的話，delete from Project where projectId=projectId
-    this.yesDelete.emit(true);
+    this.projectService.deleteProject(this.projectId).pipe(
+      catchError(error => {
+        if(error.status === 404){
+          console.log("error code:404  Project not found"); 
+        }return of(null);
+      })
+    ).subscribe(response => {
+      if(response){
+        console.log("delete successful! projectId = ")
+        console.log(this.projectName);
+        console.log(this.projectId);
+      }
+    });
     this.closeModal();
   }
 

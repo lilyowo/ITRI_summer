@@ -33,7 +33,7 @@ export class ProjectService {
         response.map((project) => ({
           name: project.projectName,
           id: project.projectId,
-          date: project.lastEditTime, //.toString()？https://stackoverflow.com/questions/19485353/function-to-convert-timestamp-to-human-date-in-javascript
+          date: new Date(project.lastEditTime).toLocaleString(),
           expanded: false,
           simulations: [] as Simulation[],
         })),
@@ -51,7 +51,7 @@ export class ProjectService {
         response.map((report) => ({
           name: report.reportName,
           id: report.reportId,
-          date: report.simuTime, //.toString()？ moment.js？
+          date: new Date(report.simuTime).toLocaleString(), // moment.js
         })),
       ),
     );
@@ -62,6 +62,14 @@ export class ProjectService {
       switchMap(config => {
         const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
         return this.http.post<any>(apiUrl, { userId, projectName });
+      })
+    );
+  }
+  deleteProject(projectId: number): Observable<any> {
+    return this.configService.loadConfig().pipe(
+      switchMap(config => {
+        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        return this.http.delete<any>(`${apiUrl}/delete/${projectId}`);
       })
     );
   }

@@ -6,7 +6,7 @@
           <img src="assets/search-icon.png" alt="search">
         </button>
       </div>
-      <button class="new-project-button" (click)="openNewProjectDialog()">New project</button>
+      <button class="new-project-button" (click)="toggleCreateModal()">New project</button>
     </div>
     <div class="projects">
       <div *ngFor="let project of projects">
@@ -18,7 +18,7 @@
           <span>{{ project.date }}</span>
           <button class="edit-button" (click)="editProject(project)">Edit</button>
           <button class="delete-button" (click)="deleteProject(project)">Delete</button>
-          <app-delete-project *ngIf="showDeleteModal" (close)="toggleDeleteModal()" (yesDelete)="onDelete($event, project)"></app-delete-project>
+          
         </div>
         <div *ngIf="project.expanded" class="simulation-list">
           <div *ngFor="let simulation of project.simulations" class="simulation-item">
@@ -29,6 +29,12 @@
         </div>
       </div>
     </div>
-    <button class="add-button" (click)="openNewProjectDialog()">+</button>
+    <button class="add-button" (click)="toggleCreateModal()">+</button>
   </div>
-  <app-new-project *ngIf="showCreateModal" (close)="toggleCreateModal()"></app-new-project>
+  <app-new-project [userId]="userId" *ngIf="showCreateModal" (close)="toggleCreateModal(); loadProjects(userId)"></app-new-project>
+  <app-delete-project
+  *ngIf="showDeleteModal"
+  [projectId]="selectedProjectId"
+  [projectName]="selectedProjectName"
+  (close)="toggleDeleteModal()">
+</app-delete-project>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { LoginHistoryService } from '../services/login-history.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private loginHistoryService: LoginHistoryService,
     private router: Router,
+    private userService: UserService
   ) {}
 
   login() {
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
 
         // 記錄登入歷史
         if (userId) {
+          this.userService.setUserId(userId);
           this.loginHistoryService.recordLogin(userId).subscribe(
             () => {
               console.log('Login history recorded successfully');

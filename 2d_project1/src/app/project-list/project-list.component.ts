@@ -11,36 +11,6 @@ import { ProjectService } from '../services/project.service';
 })
 export class ProjectListComponent implements OnInit {
   projects: Project[] = [];
-  //這個資料以後會從後端取得
-  // projects: Project[] = [
-  //   {
-  //     name: 'project 1',
-  //     date: '2024.07.11 04:57:00',
-  //     expanded: false,
-  //     simulations: [
-  //       { name: '[Simulation] project 1', date: '2024.07.11 04:57:00' },
-  //       // 添加更多模拟数据...
-  //     ]
-  //   },
-  //   {
-  //     name: 'project 2',
-  //     date: '2024.07.11 04:57:00',
-  //     expanded: false,
-  //     simulations: [
-  //       { name: '[Simulation] project 2', date: '2024.07.11 04:57:00' },
-  //       // 添加更多模拟数据...
-  //     ]
-  //   },
-  //   {
-  //     name: 'project 3',
-  //     date: '2024.07.11 04:57:00',
-  //     expanded: false,
-  //     simulations: [
-  //       { name: '[Simulation] project 3', date: '2024.07.11 04:57:00' },
-  //       // 添加更多模拟数据...
-  //     ]
-  //   }
-  // ];
 
   constructor(
     private router: Router,
@@ -50,6 +20,9 @@ export class ProjectListComponent implements OnInit {
   showCreateModal = false;
   showDeleteModal = false;
   userId!: number;
+  selectedProjectId: number=-1;
+  selectedProjectName: string='';
+
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.userId = params['userId'];
@@ -76,19 +49,9 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
-  // createProject(userId: string, projectName: string): void {
-  //   this.projectService.addProject(userId, projectName).subscribe(response => {
-  //     // 這裡可以處理成功創建項目的邏輯，例如重新加載項目列表
-  //     this.loadProjects(userId);
-  //   });
-  // }
-
-  openNewProjectDialog() {
-    this.toggleCreateModal();
-  }
   toggleCreateModal() {
-    //也許要加上後端Insert之類的邏輯
     this.showCreateModal = !this.showCreateModal;
+    this.loadProjects(this.userId);
   }
 
   toggleProject(project: Project) {
@@ -103,19 +66,17 @@ export class ProjectListComponent implements OnInit {
   }
 
   deleteProject(project: Project) {
+    this.selectedProjectId = project.id;
+    this.selectedProjectName = project.name;
     this.toggleDeleteModal();
-    //下面這一行目前會假裝直接砍掉這個project，以後要改成按yes的話執行相應的邏輯
+    //下面這一行會假裝在前端砍掉這個project
     // this.projects = this.projects.filter(p => p !== project);
   }
   toggleDeleteModal() {
     this.showDeleteModal = !this.showDeleteModal;
+    this.loadProjects(this.userId);
   }
-  onDelete(yesDelete: boolean, project: Project): boolean {
-    if (yesDelete) {
-      this.projects = this.projects.filter((p) => p !== project);
-      return true;
-    } else return false;
-  }
+
 
   viewReport(simulation: Simulation) {
     this.router.navigate(['/report']);

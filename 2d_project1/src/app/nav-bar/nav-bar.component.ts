@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,9 +9,11 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
   pageTitle: string ='';
-  constructor(private router: Router) {}
+  userId: number = -1;
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
+    this.userId = this.userService.getUserId();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.updatePageTitle(this.router.url);
@@ -34,6 +37,12 @@ export class NavBarComponent implements OnInit {
     } else {
       this.pageTitle = '';
     }
+  }
+
+  navigateToProjectList(): void {
+    this.router.navigate(['/projectlist'], {
+      queryParams: { userId: this.userId },
+    });
   }
 
 }

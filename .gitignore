@@ -1,0 +1,81 @@
+# Compiled output
+dist/
+tmp/
+out-tsc/
+build/
+
+# Dependencies
+node_modules/
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+.vscode/
+*.code-workspace
+
+# Angular specific
+.angular/
+.angular-cache/
+
+# Leaflet specific
+node_modules/leaflet/dist/
+
+# Misc
+.DS_Store
+Thumbs.db
+npm-debug.log
+yarn-error.log
+package-lock.json
+coverage/
+lib-cov/
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.swp
+*.tgz
+*.mdf
+*.sdm
+*.swo
+*.swn
+
+# Local environment settings
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Windows specific files
+*.bat
+*.cmd
+*.com
+*.dll
+*.exe
+*.msi
+*.pdb
+*.sys
+*.ps1
+
+# macOS specific files
+*.dmg
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+.vol
+.DS_Store
+
+# TypeScript specific
+*.tsbuildinfo

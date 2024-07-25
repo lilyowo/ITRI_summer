@@ -37,6 +37,7 @@ import { NewProjectComponent } from './pop-up-windows/new-project/new-project.co
 import { DeleteProjectComponent } from './pop-up-windows/delete-project/delete-project.component';
 import { UploadTleComponent } from './pop-up-windows/upload-tle/upload-tle.component';
 import { ViewResultComponent } from './pop-up-windows/view-result/view-result.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { ViewResultComponent } from './pop-up-windows/view-result/view-result.co
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    LeafletModule
   ],
   providers: [SettingsService],
   bootstrap: [AppComponent]

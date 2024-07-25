@@ -1,0 +1,107 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.3025,
+          22.63946,
+          0.192742
+        ]
+      },
+      "properties": {
+        "gsId": 1,
+        "cellId": 1,
+        "connectedSatId": 101,
+        "acceptElevation": 50
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5645,
+          25.0374,
+          0
+        ]
+      },
+      "properties": {
+        "gsId": 2,
+        "cellId": 1,
+        "connectedSatId": 102,
+        "acceptElevation": 50
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.5645,
+          35.0374,
+          0
+        ]
+      },
+      "properties": {
+        "gsId": 3,
+        "cellId": 1,
+        "connectedSatId": 103,
+        "acceptElevation": 50
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.2845,
+          31.0374,
+          0
+        ]
+      },
+      "properties": {
+        "gsId": 4,
+        "cellId": 1,
+        "connectedSatId": 104,
+        "acceptElevation": 50
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.5645,
+          39.0374,
+          0
+        ]
+      },
+      "properties": {
+        "gsId": 5,
+        "cellId": 1,
+        "connectedSatId": 105,
+        "acceptElevation": 50
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.5645,
+          13.0374,
+          0
+        ]
+      },
+      "properties": {
+        "gsId": 6,
+        "cellId": 1,
+        "connectedSatId": 106,
+        "acceptElevation": 50
+      }
+    }  
+  ]
+}

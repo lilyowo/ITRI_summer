@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, Input} from '@angular/core';
 import * as L from 'leaflet';
+import { MarkerService } from '../services/marker.service';
 
 @Component({
   selector: 'app-central-canvas',
@@ -14,7 +15,9 @@ export class CentralCanvasComponent implements AfterViewInit {
   private initMap(): void {
     this.map = L.map('map', {
       center: [ 39.8282, -98.5795 ],
-      zoom: 3
+      // center: [ 25.0374, 121.5645 ],
+      zoom: 3,
+      worldCopyJump: true // 環繞地圖
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -25,13 +28,10 @@ export class CentralCanvasComponent implements AfterViewInit {
 
     tiles.addTo(this.map);
   }
-  constructor() { }
+  constructor(private markerService: MarkerService) { }
 
   ngAfterViewInit(): void {
     this.initMap();
+    this.markerService.makeCapitalMarkers(this.map);
   }
-  
-
-  
-
 }

@@ -38,6 +38,8 @@ import { DeleteProjectComponent } from './pop-up-windows/delete-project/delete-p
 import { UploadTleComponent } from './pop-up-windows/upload-tle/upload-tle.component';
 import { ViewResultComponent } from './pop-up-windows/view-result/view-result.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { MarkerService } from './services/marker.service';
+import { PopUpService } from './services/popup.service'
 
 
 @NgModule({
@@ -83,7 +85,11 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     FormsModule,
     LeafletModule
   ],
-  providers: [SettingsService],
+  providers: [
+    SettingsService,
+    MarkerService,
+    PopUpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -51,7 +51,9 @@
   - response:
     ```json
     {
-       "historyId": 1, "userId": 1, "timestamp": "2024-07-22 15:28:29.951457"
+      "historyId": 1,
+      "userId": 1,
+      "timestamp": "2024-07-22 15:28:29.951457"
     }
     ```
 
@@ -71,10 +73,9 @@
   - response:
     ```json
     {
-      "projectId" : 1,
+      "projectId": 1,
       "projectName": "project 1 ",
       "lastEditTime": "2024-07-22 15:28:29.951457"
-      
     }
     ```
 
@@ -115,6 +116,27 @@
     }
     ```
 
+- Search project
+
+  - method: GET
+  - URL: `/project/search/user/:userId`
+  - Description: search projects by its name prefix
+  - request:
+    ```json
+    {
+      "userId": 1,
+      "query": "Project"
+    }
+    ```
+  - response:
+    ```json
+    {
+      "projectId": 1,
+      "projectName": "project 1 ",
+      "lastEditTime": "2024-07-22 15:28:29.951457"
+    }
+    ```
+
 ## Project - Report
 
 - Get all reports
@@ -131,9 +153,9 @@
   - response:
     ```json
     {
-      "reportId" : 1,
+      "reportId": 1,
       "reportName": "[simulation] Project 1",
-      "simuTime" : "2024-07-22 15:28:29.951457"
+      "simuTime": "2024-07-22 15:28:29.951457"
     }
     ```
 

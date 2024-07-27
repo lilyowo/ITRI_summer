@@ -3,19 +3,19 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
 ## Development server
-- Clone from github, run `npm install`first. 
+
+- Clone from github, run `npm install`first.
 - Make sure that you already install angular CLI, if not run `npm install -g @angular/cli`
-- update package.json 
-    ```json
-    "scripts": {
-        "ng": "ng",
-        "start": "ng serve --host {your IP address} --port 4200",
-    }
-    ```
+- update .env
+  ```
+    Host = {Your frontend IP address}
+    Port = {Your frontend port}
+  ```
 - Then run `npm start`. for a dev server. Navigate to `http://{your IP address}:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Link to backend
-- update your backend server IP to assets/backend-config.json.
+
+- update your backend server IP to src/config/backend-config.json.
 
 ## Code scaffolding
 
@@ -36,3 +36,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Solve some problems...
+
+#### Solve high vulnerabilities
+
+1. modify package.lock.json webpack-dev-middleware version to
+   ` "webpack-dev-middleware": "5.3.4"`
+2. Run npm install
+
+#### Solve package number limit
+
+當噴出一大坨文件數量限制的error，用以下command解決。
+`$echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`

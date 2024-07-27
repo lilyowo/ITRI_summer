@@ -64,3 +64,28 @@ exports.deleteProjectById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.searchProjects = async (req, res) => {
+  const { userId } = req.params;
+  const { query } = req.query;
+  try {
+    let result;
+    if (query) {
+      result = await pool.query(
+        `SELECT * FROM "Project" WHERE "userId" = $1 AND LOWER("projectName") LIKE LOWER($2)`,
+        [userId, `%${query}%`]
+      );
+    } else {
+      result = await pool.query('SELECT * FROM "Project" WHERE "userId" = $1', [
+        userId,
+      ]);
+    }
+    if (result.rows.length === 0) {
+      res.status(200).json(result.rows);
+    } else {
+      res.status(200).json(result.rows);
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

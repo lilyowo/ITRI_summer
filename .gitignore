@@ -31,7 +31,7 @@ node_modules/leaflet/dist/
 Thumbs.db
 npm-debug.log
 yarn-error.log
-package-lock.json
+# package-lock.json
 coverage/
 lib-cov/
 *.seed
@@ -49,7 +49,7 @@ lib-cov/
 *.swn
 
 # Local environment settings
-.env
+# .env
 .env.local
 .env.development.local
 .env.test.local

@@ -20,8 +20,9 @@ export class ProjectListComponent implements OnInit {
   showCreateModal = false;
   showDeleteModal = false;
   userId!: number;
-  selectedProjectId: number=-1;
-  selectedProjectName: string='';
+  selectedProjectId: number = -1;
+  selectedProjectName: string = '';
+  searchQuery: string = '';
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -49,9 +50,27 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
+  searchProjects(): void {
+    this.projectService
+      .searchProjects(this.userId, this.searchQuery)
+      .subscribe((projects) => {
+        if (projects.length === 0) {
+          this.projects = [];
+          alert(`No project named "${this.searchQuery}"`);
+          this.loadProjects(this.userId);
+        } else {
+          this.projects = projects;
+          this.loadReportsForProjects();
+        }
+      });
+  }
+
   toggleCreateModal() {
     this.showCreateModal = !this.showCreateModal;
-    this.loadProjects(this.userId);
+    (async () => { //wait a secont then reload
+      await new Promise( resolve => setTimeout(resolve, 1000) );
+      this.loadProjects(this.userId);
+    })();
   }
 
   toggleProject(project: Project) {
@@ -69,14 +88,18 @@ export class ProjectListComponent implements OnInit {
     this.selectedProjectId = project.id;
     this.selectedProjectName = project.name;
     this.toggleDeleteModal();
+    this.loadProjects(this.userId);
     //下面這一行會假裝在前端砍掉這個project
     // this.projects = this.projects.filter(p => p !== project);
   }
   toggleDeleteModal() {
     this.showDeleteModal = !this.showDeleteModal;
-    this.loadProjects(this.userId);
+    (async () => { //wait a secont then reload
+      await new Promise( resolve => setTimeout(resolve, 1000) );
+      this.loadProjects(this.userId);
+    })();
+    
   }
-
 
   viewReport(simulation: Simulation) {
     this.router.navigate(['/report']);

@@ -1,0 +1,6 @@
+<div *ngIf="charts">
+    <div *ngFor="let chart of charts" class="chart-container">
+      <h3>{{ chart.description }}</h3>
+      <img [src]="getImage(chart.image)" alt="Chart Image">
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.chart-container {
+    margin-bottom: 20px;
+  }
+  
+  .chart-container img {
+    width: 100%;
+    height: auto;
+    max-width: 600px; /* You can adjust this max-width as needed */
+    display: block;
+    margin: 0 auto;
+  }
+  

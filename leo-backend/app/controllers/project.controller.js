@@ -28,7 +28,8 @@ exports.getReportsByProjectId = async (req, res) => {
 
 exports.addProject = async (req, res) => {
   const { userId, projectName } = req.body;
-  const currentTime = new Date().toISOString();
+  const currentTime = new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Taipei' });
+
   try {
     const checkDuplicate = await pool.query(
       'SELECT 1 FROM "Project" WHERE "userId" = $1 AND "projectName" = $2',

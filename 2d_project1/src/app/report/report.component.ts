@@ -6,8 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent implements OnInit {
-  simulationName: string = 'project1';
-  simulationTime: string = '2024.07.11 16:04:00';
+  
   data = {
     isInterSatelliteLink: true,
     isGroundRadiation: true,

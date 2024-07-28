@@ -158,6 +158,45 @@
       "simuTime": "2024-07-22 15:28:29.951457"
     }
     ```
+## Chart
+- Get all charts
+
+  - method: GET
+  - URL: `/chart`
+  - Description: Get all charts by reportId.
+  - request:
+    ```json
+    {
+      "reportId": 3
+    }
+    ```
+  - response:
+    ```json
+    {
+      "chartId": 1,
+      "reportId":3,
+      "description": "Example description...",
+      "image": "'image'::bytea"
+    }
+    ```
+- Get report title
+
+  - method: GET
+  - URL: `/chart/report/:reportId`
+  - Description: Get report title by reportId.
+  - request:
+    ```json
+    {
+      "reportId": 3
+    }
+    ```
+  - response:
+    ```json
+    {
+      "reportName": "[simulation] Project 1",
+      "simuTime": "2024-07-22 15:28:29.951457"
+    }
+    ```
 
 ## Project - Simulation Configuration
 

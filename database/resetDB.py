@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 import os
+import subprocess
 
 # Database connection parameters
 db_params = {
@@ -31,7 +32,8 @@ sql_scripts = [
     'InsertUser.sql',
     'InsertLoginHistory.sql',
     'InsertProject.sql',
-    'InsertReport.sql'
+    'InsertReport.sql',
+    'InsertChart.sql'
 ]
 
 def execute_sql_script(conn, script_path):
@@ -106,6 +108,16 @@ def main():
     cursor.close()
     conn.close()
     print("Database and tables recreated successfully")
+
+    # Execute external Python script
+    script_path = './test-blob/testInsertBlob.py'
+    try:
+        result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+        print("External script executed successfully")
+        print(result.stdout)
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing script {script_path}")
+        print(e.stderr)
 
 if __name__ == "__main__":
     main()

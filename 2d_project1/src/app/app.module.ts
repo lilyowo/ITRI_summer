@@ -39,7 +39,9 @@ import { UploadTleComponent } from './pop-up-windows/upload-tle/upload-tle.compo
 import { ViewResultComponent } from './pop-up-windows/view-result/view-result.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MarkerService } from './services/marker.service';
-import { PopUpService } from './services/popup.service'
+import { PopUpService } from './services/popup.service';
+import { TestComponent } from './test/test.component';
+import { ReportInfoComponent } from './report-info/report-info.component'
 
 
 @NgModule({
@@ -76,7 +78,9 @@ import { PopUpService } from './services/popup.service'
     NewProjectComponent,
     DeleteProjectComponent,
     UploadTleComponent,
-    ViewResultComponent
+    ViewResultComponent,
+    TestComponent,
+    ReportInfoComponent
   ],
   imports: [
     BrowserModule,

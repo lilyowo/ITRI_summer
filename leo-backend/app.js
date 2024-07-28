@@ -6,6 +6,8 @@ const os = require('os');
 const constellationRoutes = require("./app/routes/constellation");
 const authRoutes = require("./app/routes/authRoutes");
 const projectRoutes = require("./app/routes/project.routes");
+const chartRoutes = require("./app/routes/chart.routes");
+const exportRoutes = require("./app/routes/export.routes");
 const app = express();
 
 
@@ -22,6 +24,8 @@ const serverPort = config.serverPort;
 app.use("/constellation", constellationRoutes);
 app.use("/auth", authRoutes);
 app.use("/project", projectRoutes);
+app.use('/chart', chartRoutes);
+app.use('/export', exportRoutes);
 
 // 獲取所有本地IP地址
 function getLocalIPs() {

@@ -1,8 +1,10 @@
+<div id="reportComponent">
 <app-report-title
-  [simulationName]="simulationName"
-  [simulationTime]="simulationTime"
   (export)="onExport($event)"
   (edit)="onEdit()"
 ></app-report-title>
 
-<app-report-content ></app-report-content>
+<!-- <app-report-content ></app-report-content> -->
+ <!-- <app-test></app-test> -->
+<app-report-info></app-report-info>
+</div>

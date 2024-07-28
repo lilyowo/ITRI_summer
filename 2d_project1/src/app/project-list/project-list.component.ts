@@ -102,6 +102,6 @@ export class ProjectListComponent implements OnInit {
   }
 
   viewReport(simulation: Simulation) {
-    this.router.navigate(['/report']);
+    this.router.navigate(['/report'], { queryParams: { reportId: simulation.id } });
   }
 }

@@ -15,7 +15,7 @@ import { RightSettingsComponent } from './edit-setting-menu/right-settings/right
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { FormatTabsComponent } from './format-tabs/format-tabs.component';
 import { SettingsMenuComponent } from './edit-setting-menu/settings-menu/settings-menu.component';
-import { SettingsService } from './services/settings.service';
+
 import { OrbitComponent } from './edit-setting-menu/orbit/orbit.component';
 import { SatelliteComponent } from './edit-setting-menu/satellite/satellite.component';
 import { IslComponent } from './edit-setting-menu/isl/isl.component';
@@ -39,10 +39,13 @@ import { UploadTleComponent } from './pop-up-windows/upload-tle/upload-tle.compo
 import { ViewResultComponent } from './pop-up-windows/view-result/view-result.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MarkerService } from './services/marker.service';
-import { PopUpService } from './services/popup.service';
+import { PopUpGroundStationService } from './services/popupGroundStation.service';
+import { PopUpSatelliteService } from './services/popupSatellite.service';
 import { TestComponent } from './test/test.component';
-import { ReportInfoComponent } from './report-info/report-info.component'
-
+import { ReportInfoComponent } from './report-info/report-info.component';
+import { Map2dComponent } from './maps/map2d/map2d.component';
+import { Map3dComponent } from './maps/map3d/map3d.component';
+import { MapTreeComponent } from './maps/map-tree/map-tree.component';
 
 @NgModule({
   declarations: [
@@ -80,20 +83,19 @@ import { ReportInfoComponent } from './report-info/report-info.component'
     UploadTleComponent,
     ViewResultComponent,
     TestComponent,
-    ReportInfoComponent
+    ReportInfoComponent,
+    Map2dComponent,
+    Map3dComponent,
+    MapTreeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    LeafletModule
+    LeafletModule,
   ],
-  providers: [
-    SettingsService,
-    MarkerService,
-    PopUpService
-  ],
-  bootstrap: [AppComponent]
+  providers: [MarkerService, PopUpGroundStationService, PopUpSatelliteService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

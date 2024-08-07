@@ -8,9 +8,9 @@
 ## Link Database
 
 - Update your database hostIP, username and password .etc
-  to `leo-backend/app/config/database.js`
+  to `leo-backend/app/config/config.json`
 
 ## Link frontend
 
 - Write your IP address where backend run
-  to `2d_project1/src/config/backend-config.json.`
+  to `2d_project1/src/config/config.json.`

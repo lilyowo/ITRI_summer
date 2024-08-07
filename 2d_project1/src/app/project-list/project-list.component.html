@@ -12,8 +12,12 @@
   </div>
   <div class="projects">
     <div *ngFor="let project of projects">
-      <div class="project-item" [ngClass]="{ expanded: project.expanded }">
-        <button class="toggle-button" (click)="toggleProject(project)">
+      <div
+        class="project-item"
+        [ngClass]="{ expanded: project.expanded }"
+        (click)="toggleProject(project)"
+      >
+        <button class="toggle-button">
           {{ project.expanded ? '▽' : '▷' }}
         </button>
         <span>{{ project.name }}</span>

@@ -1,22 +1,28 @@
-import { Component, OnInit} from '@angular/core';
-import { Orbit } from '../../models/orbit.model';
-import { SettingsService } from '../../services/settings.service';
-import { DataGroup, Settings } from '../../models/settings.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-orbit',
   templateUrl: './orbit.component.html',
-  styleUrls: ['./orbit.component.css']
+  styleUrls: ['./orbit.component.css'],
 })
 export class OrbitComponent implements OnInit {
-  orbitData: DataGroup<Orbit> | undefined;
+  orbitData: any[] = [];
+  @Input() projectId!: number;
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.settingsService.getSettings().subscribe((settings: Settings) => {
-      const orbitGroup = settings['星網物件'].find(group => group.dataTitle === '軌道');
-      this.orbitData = orbitGroup as DataGroup<Orbit>;
-    });
+    this.loadData();
+  }
+  loadData(): void {
+    this.projectService.getPlanesByProjectId(this.projectId).subscribe(
+      (data) => {
+        this.orbitData = data;
+      },
+      (error) => {
+        console.error('Error loading Plane data:', error);
+      },
+    );
   }
 }

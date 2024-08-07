@@ -1,8 +1,17 @@
-<div>
-    <button class="start-button" (click)="onStartSimulation()">
-        {{ simulationButtonText }}
-    </button>
-    <input type="number" [(ngModel)]="simulationTime" [class.readonly]="isReadonly" [readonly]="isReadonly">
-    <span>秒</span>
-    <app-settings-menu></app-settings-menu>
+<div class="right-settings">
+  <button class="start-button" (click)="onStartSimulation()">
+    {{ simulationButtonText }}
+  </button>
+  <input
+    type="number"
+    [(ngModel)]="simulationTime"
+    [class.readonly]="isReadonly"
+    [readonly]="isReadonly"
+  />
+  <span>秒</span>
+  <app-settings-menu
+    [projectId]="projectId"
+    [readOnly]="isReadonly"
+    (dataUpdated)="handleDataUpdated()"
+  ></app-settings-menu>
 </div>

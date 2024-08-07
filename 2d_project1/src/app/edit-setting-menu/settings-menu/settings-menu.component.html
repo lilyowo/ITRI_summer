@@ -1,28 +1,278 @@
-<div *ngFor="let category of settings | keyvalue">
-    <div class="header" [ngStyle]="{'background-color': '#021D40'}">
-      <span class="category-title">{{ category.key }}</span>
+<div class="settings-menu">
+  <!-- 星網物件 -->
+  <div class="category">
+    <div class="header" style="background-color: #021d40">
+      <span class="category-title">星網物件</span>
     </div>
-    <div *ngFor="let item of category.value" class="item">
-      <div class="item-header" [ngStyle]="{'background-color': '#011126'}">
-        <span class="toggle-button" (click)="toggleOpen(category.key, item)">
-          <code>
-          {{ item.open ? '-' : '+' }}
-        </code>
+
+    <!-- 軌道 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('orbit')">
+          <code>{{ isOpen['orbit'] ? '-' : '+' }}</code>
         </span>
-        <span class="item-title">{{ item.dataTitle }}</span>
+        <span class="item-title">軌道</span>
       </div>
-      <div *ngIf="item.open" class="item-content">
-        <div class="content" [ngStyle]="{'background-color': '#ffffff'}">
-          <ng-container *ngIf="getComponent(item.dataTitle)">
-            <div class="content-title">{{ item.dataTitle }}</div>
-            <ng-container *ngComponentOutlet="getComponent(item.dataTitle)"></ng-container>
-          </ng-container>
-          <ng-container *ngIf="!getComponent(item.dataTitle)">
-            <div class="content-title">{{ item.dataTitle }}</div>
-            <span class="content-text">setting content</span>
-          </ng-container>  
+      <div *ngIf="isOpen['orbit']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">軌道</div>
+          <app-orbit [projectId]="projectId"></app-orbit>
+        </div>
+      </div>
+    </div>
+
+    <!-- 衛星 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('satellite')">
+          <code>{{ isOpen['satellite'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">衛星</span>
+      </div>
+      <div *ngIf="isOpen['satellite']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">衛星</div>
+          <app-satellite [projectId]="projectId"></app-satellite>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISL -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('isl')">
+          <code>{{ isOpen['isl'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">ISL</span>
+      </div>
+      <div *ngIf="isOpen['isl']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">ISL</div>
+          <app-isl [projectId]="projectId"></app-isl>
+        </div>
+      </div>
+    </div>
+
+    <!-- 通訊酬載 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('payload')">
+          <code>{{ isOpen['payload'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">通訊酬載</span>
+      </div>
+      <div *ngIf="isOpen['payload']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">通訊酬載</div>
+          <app-payload [projectId]="projectId"></app-payload>
+        </div>
+      </div>
+    </div>
+
+    <!-- UT -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('ut')">
+          <code>{{ isOpen['ut'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">UT</span>
+      </div>
+      <div *ngIf="isOpen['ut']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">UT</div>
+          <app-ut
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+            (dataUpdated)="handleDataUpdated()"
+          ></app-ut>
+        </div>
+      </div>
+    </div>
+
+    <!-- FT -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('ft')">
+          <code>{{ isOpen['ft'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">FT</span>
+      </div>
+      <div *ngIf="isOpen['ft']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">FT</div>
+          <app-ft
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+            (dataUpdated)="handleDataUpdated()"
+          ></app-ft>
         </div>
       </div>
     </div>
   </div>
-  
+
+  <!-- 模擬設定 -->
+  <div class="category">
+    <div class="header" style="background-color: #021d40">
+      <span class="category-title">模擬設定</span>
+    </div>
+
+    <!-- 路由規則 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('ruleRoute')">
+          <code>{{ isOpen['ruleRoute'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">路由規則</span>
+      </div>
+      <div *ngIf="isOpen['ruleRoute']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">路由規則</div>
+          <app-rule-route
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+          ></app-rule-route>
+        </div>
+      </div>
+    </div>
+
+    <!-- 換手規則 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('ruleSwitch')">
+          <code>{{ isOpen['ruleSwitch'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">換手規則</span>
+      </div>
+      <div *ngIf="isOpen['ruleSwitch']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">換手規則</div>
+          <app-rule-switch
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+          ></app-rule-switch>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISL連線規則 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('ruleIsl')">
+          <code>{{ isOpen['ruleIsl'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">ISL連線規則</span>
+      </div>
+      <div *ngIf="isOpen['ruleIsl']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">ISL連線規則</div>
+          <app-rule-isl
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+          ></app-rule-isl>
+        </div>
+      </div>
+    </div>
+
+    <!-- 隨機事件規則 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('ruleRandom')">
+          <code>{{ isOpen['ruleRandom'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">隨機事件規則</span>
+      </div>
+      <div *ngIf="isOpen['ruleRandom']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">隨機事件規則</div>
+          <app-rule-random
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+          ></app-rule-random>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模擬項目 -->
+  <div class="category">
+    <div class="header" style="background-color: #021d40">
+      <span class="category-title">模擬項目</span>
+    </div>
+
+    <!-- 衛星間連線 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('simuSatellite')">
+          <code>{{ isOpen['simuSatellite'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">衛星間連線</span>
+      </div>
+      <div *ngIf="isOpen['simuSatellite']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">衛星間連線</div>
+          <app-simu-satellite
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+          ></app-simu-satellite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 對地輻射 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('simuFloor')">
+          <code>{{ isOpen['simuFloor'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">對地輻射</span>
+      </div>
+      <div *ngIf="isOpen['simuFloor']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">對地輻射</div>
+          <app-simu-floor
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+          ></app-simu-floor>
+        </div>
+      </div>
+    </div>
+
+    <!-- 路由效能 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('simuRoute')">
+          <code>{{ isOpen['simuRoute'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">路由效能</span>
+      </div>
+      <div *ngIf="isOpen['simuRoute']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">路由效能</div>
+          <app-simu-route
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+          ></app-simu-route>
+        </div>
+      </div>
+    </div>
+
+    <!-- 換手效能 -->
+    <div class="item">
+      <div class="item-header" style="background-color: #011126">
+        <span class="toggle-button" (click)="toggleOpen('simuSwitch')">
+          <code>{{ isOpen['simuSwitch'] ? '-' : '+' }}</code>
+        </span>
+        <span class="item-title">換手效能</span>
+      </div>
+      <div *ngIf="isOpen['simuSwitch']" class="item-content">
+        <div class="content" style="background-color: #ffffff">
+          <div class="content-title">換手效能</div>
+          <app-simu-switch
+            [projectId]="projectId"
+            [readOnly]="readOnly"
+          ></app-simu-switch>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

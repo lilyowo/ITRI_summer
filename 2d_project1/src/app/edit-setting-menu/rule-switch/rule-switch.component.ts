@@ -1,45 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-import { RuleItem } from '../../models/rule-item.model';
-import { SettingsService } from '../../services/settings.service';
-import { DataGroup, Settings } from '../../models/settings.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-rule-switch',
   templateUrl: './rule-switch.component.html',
-  styleUrls: ['./rule-switch.component.css']
+  styleUrls: ['./rule-switch.component.css'],
 })
 export class RuleSwitchComponent implements OnInit {
-  dataTitle: string='換手規則';
-  dataGroup: DataGroup<RuleItem> | undefined;
-
-  constructor(private settingsService: SettingsService) {}
+  dataTitle: string = '換手規則';
+  ruleSwitchs: any[] = [];
+  @Input() projectId!: number;
+  @Input() readOnly!: boolean;
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.settingsService.getSettings().subscribe(settings => {
-      const ruleItemGroup = settings['模擬設定'].find(group => group.dataTitle === this.dataTitle)
-      if(this.isRuleItem(ruleItemGroup)){
-        this.dataGroup = ruleItemGroup;
-      }
-    });
+    this.projectService.getSimuSettingsByProjectId(this.projectId).subscribe(
+      (simuSettings) => {
+        const ruleItemGroup = simuSettings[this.dataTitle];
+        if (ruleItemGroup) {
+          this.ruleSwitchs = ruleItemGroup;
+        }
+      },
+      (error) => {
+        console.error('Error fetching simulation settings:', error);
+      },
+    );
   }
-  isRuleItem(item: any): item is DataGroup<RuleItem>|undefined {
-    return true;
-  }
-  onRadioChange(item: RuleItem): void {
-    item.display = !item.display;
-    
-    if(this.dataGroup){// 遍歷所有項目並將它們的 display 設置為 false
-      this.dataGroup.dataItems.forEach((i: any) => i.display = false);
-    }
-    // 將選中的項目的 display 設置為 true
+
+  onRadioChange(item: any): void {
+    this.ruleSwitchs.forEach((i: any) => (i.display = false));
     item.display = true;
     this.updateSettings();
   }
 
   updateSettings(): void {
-    // Function to update settingsItem.json
-    // (Implementation will be added later)
+    this.projectService.getSimuSettingsByProjectId(this.projectId).subscribe(
+      (simuSettings) => {
+        simuSettings[this.dataTitle] = this.ruleSwitchs;
+        this.projectService
+          .updateSimuSettingsByProjectId(this.projectId, simuSettings)
+          .subscribe(
+            (response) => {
+              console.log(
+                'Simulation settings updated successfully:',
+                response,
+              );
+            },
+            (error) => {
+              console.error('Error updating simulation settings:', error);
+            },
+          );
+      },
+      (error) => {
+        console.error('Error fetching simulation settings:', error);
+      },
+    );
   }
-  
-
 }

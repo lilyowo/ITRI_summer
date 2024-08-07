@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index:1;
+  z-index: 1;
 }
 
 .left-tools {
@@ -19,7 +19,7 @@
   top: 0;
   bottom: 0;
   width: 10%;
-  z-index:20;
+  z-index: 30;
 }
 
 .right-settings {
@@ -29,15 +29,15 @@
   bottom: 0;
   width: 25%;
   max-height: 100vh; /* 限制高度 */
-  overflow-y: auto;  /* 允許垂直滾動 */
-  z-index:20;
+  overflow-y: auto; /* 允許垂直滾動 */
+  z-index: 20;
 }
 
 .progress-bar-container {
   position: relative;
   width: calc(100% - 35%); /* 避免被 right-settings 擋住 */
   margin-left: 12.5%; /* 避免被 left-tools 擋住 */
-  z-index:20;
+  z-index: 30;
 }
 
 .progress-bar {
@@ -49,5 +49,5 @@
   bottom: 0;
   left: 12.5%;
   right: 0;
-  z-index:20;
+  z-index: 20;
 }

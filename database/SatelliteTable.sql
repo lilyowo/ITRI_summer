@@ -1,6 +1,9 @@
 CREATE TABLE "Satellite" (
   "satelliteId" serial NOT NULL,
   "planeId" int NOT NULL,
+  "latitude" float,
+  "longitude" float,
+  "altitude" float,
   "meanAnomaly" float,
   "meanMotion" float,
   "mass" float,

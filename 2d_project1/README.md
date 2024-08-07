@@ -6,16 +6,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - Clone from github, run `npm install`first.
 - Make sure that you already install angular CLI, if not run `npm install -g @angular/cli`
-- update .env
-  ```
-    Host = {Your frontend IP address}
-    Port = {Your frontend port}
-  ```
-- Then run `npm start`. for a dev server. Navigate to `http://{your IP address}:4200/`. The application will automatically reload if you change any of the source files.
+- update src/config/config.json
 
-## Link to backend
+  ```json
+  {
+    "serverIp": "your backend server IP",
+    "serverPort": "your backend port",
+    "frontendHost": "your frontend server IP",
+    "frontendPort": "your frontend port"
+  }
+  ```
 
-- update your backend server IP to src/config/backend-config.json.
+- Then run `npm start`. for a dev server. Navigate to `http://{your frontend server IP}:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 

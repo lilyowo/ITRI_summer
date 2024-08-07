@@ -1,5 +1,4 @@
 const pool = require("../config/database");
-
 exports.getProjectsByUserId = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -13,22 +12,11 @@ exports.getProjectsByUserId = async (req, res) => {
   }
 };
 
-exports.getReportsByProjectId = async (req, res) => {
-  const { projectId } = req.params;
-  try {
-    const result = await pool.query(
-      'SELECT "reportId", "reportName", "simuTime" FROM "Report" WHERE "projectId" = $1',
-      [projectId]
-    );
-    res.status(200).json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
 exports.addProject = async (req, res) => {
   const { userId, projectName } = req.body;
-  const currentTime = new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Taipei' });
+  const currentTime = new Date().toLocaleString("sv-SE", {
+    timeZone: "Asia/Taipei",
+  });
 
   try {
     const checkDuplicate = await pool.query(

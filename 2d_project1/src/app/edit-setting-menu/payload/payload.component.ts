@@ -1,24 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { Payload } from '../../models/payload.model';
-import { SettingsService } from '../../services/settings.service';
-import { DataGroup, Settings } from '../../models/settings.model';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-payload',
   templateUrl: './payload.component.html',
-  styleUrls: ['./payload.component.css']
+  styleUrls: ['./payload.component.css'],
 })
 export class PayloadComponent implements OnInit {
-  payloadData: DataGroup<Payload> | undefined;
+  payloadData: any[] = [];
+  @Input() projectId!: number;
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.settingsService.getSettings().subscribe((settings: Settings) => {
-      const payloadGroup = settings['星網物件'].find(group => group.dataTitle === '通訊酬載');
-      this.payloadData = payloadGroup as DataGroup<Payload>;  
-    })
+    this.loadData();
   }
-
+  loadData(): void {
+    this.projectService.getCplByProjectId(this.projectId).subscribe(
+      (data) => {
+        this.payloadData = data;
+      },
+      (error) => {
+        console.error('Error loading Plane data:', error);
+      },
+    );
+  }
 }

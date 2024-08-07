@@ -1,30 +1,51 @@
 <div class="isl-container">
-    <!-- <h2>{{ islData?.dataTitle }}</h2>
-    <p>Read Only: {{ islData?.readOnly ? 'Yes' : 'No' }}</p>
-    <p>Items Number: {{ islData?.itemsNum }} </p> -->
-
-    <div *ngFor="let item of islData?.dataItems" class="isl-item">
-        <h3>ISL - {{ item.satelliteId }} - {{ item.islId }}</h3>
-        <div class="item-field">
-            <label>衛星方位角:</label>
-            <input type="number" [value]="item['衛星方位角']" [readonly]="islData?.readOnly" [ngClass]="{'readonly': islData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>衛星幅角:</label>
-            <input type="number" [value]="item['衛星幅角']" [readonly]="islData?.readOnly" [ngClass]="{'readonly': islData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>旋轉方位角 +/-:</label>
-            <input type="number" [value]="item['旋轉方位角 +/-']" [readonly]="islData?.readOnly" [ngClass]="{'readonly': islData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>旋轉幅角 +/-:</label>
-            <input type="number" [value]="item['旋轉幅角 +/-']" [readonly]="islData?.readOnly" [ngClass]="{'readonly': islData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>有效射程:</label>
-            <input type="number" [value]="item['有效射程']" [readonly]="islData?.readOnly" [ngClass]="{'readonly': islData?.readOnly}">
-        </div>
-        <hr>
+  <div *ngFor="let item of islData" class="isl-item">
+    <h3>ISL - {{ item.satelliteId }} - {{ item.islId }}</h3>
+    <div class="item-field">
+      <label>衛星方位角:</label>
+      <input
+        type="number"
+        [value]="item.satAzimuth"
+        readonly
+        class="readonly"
+      />
     </div>
+    <div class="item-field">
+      <label>衛星幅角:</label>
+      <input
+        type="number"
+        [value]="item.satElevation"
+        readonly
+        class="readonly"
+      />
+    </div>
+    <div class="item-field">
+      <label>旋轉方位角 +/-:</label>
+      <input
+        type="number"
+        [value]="item.lazerAzimuth"
+        readonly
+        class="readonly"
+      />
+    </div>
+    <div class="item-field">
+      <label>旋轉幅角 +/-:</label>
+      <input
+        type="number"
+        [value]="item.lazerElevation"
+        readonly
+        class="readonly"
+      />
+    </div>
+    <div class="item-field">
+      <label>有效射程:</label>
+      <input
+        type="number"
+        [value]="item.lazerRange"
+        readonly
+        class="readonly"
+      />
+    </div>
+    <hr />
+  </div>
 </div>

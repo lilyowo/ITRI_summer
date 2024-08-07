@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node start.js",
+    "update-config": "node update-angular-config.js",
+    "start": "npm run update-config && ng serve",
     "start2": "ng serve --host 140.96.106.221 --port 4200",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -32,6 +33,7 @@
     "leaflet": "^1.9.4",
     "pdfkit": "^0.15.0",
     "rxjs": "~7.5.0",
+    "satellite.js": "^5.0.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

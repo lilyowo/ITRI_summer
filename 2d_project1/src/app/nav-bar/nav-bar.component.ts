@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,9 +11,11 @@ import { UserService } from '../services/user.service';
 export class NavBarComponent implements OnInit {
   pageTitle: string = '';
   userId: number = -1;
+  recentReport: any = null;
   constructor(
     private router: Router,
     private userService: UserService,
+    private messageService: MessageService,
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +29,10 @@ export class NavBarComponent implements OnInit {
       //此自動執行，for第一次生成nav-bar時用到宣告值的bug
       this.updatePageTitle(this.router.url);
     }, 500);
+
+    if (this.userId !== -1) {
+      this.loadRecentReport(this.userId);
+    }
   }
 
   updatePageTitle(url: string): void {
@@ -47,5 +54,25 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/projectlist'], {
       queryParams: { userId: this.userId },
     });
+  }
+
+  loadRecentReport(userId: number): void {
+    this.messageService.getRecentReport(userId).subscribe(
+      (report) => {
+        this.recentReport = report;
+      },
+      (error) => {
+        console.error('Error loading recent report:', error);
+      },
+    );
+  }
+
+  navigateToReport(reportId: number): void {
+    this.router.navigate(['/report'], { queryParams: { reportId } });
+  }
+
+  logout(): void {
+    this.userService.clearUserId();
+    this.router.navigate(['/login']);
   }
 }

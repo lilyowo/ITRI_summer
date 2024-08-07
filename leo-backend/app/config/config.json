@@ -1,4 +1,9 @@
 {
-    "serverIp": "140.96.106.221",
-    "serverPort": 3000
+  "serverIp": "140.96.106.221",
+  "serverPort": 3000,
+  "user": "Hamster",
+  "host": "localhost",
+  "database": "StarDB",
+  "password": "hpassword",
+  "port": 5432
 }

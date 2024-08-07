@@ -1,17 +1,16 @@
-<div *ngIf="dataGroup">
-  <!-- <h3>{{ dataGroup.dataTitle }}</h3> -->
+<div *ngIf="ruleSwitchs">
   <ul>
-      <li *ngFor="let item of dataGroup.dataItems">
-          <label [class.read-only]="dataGroup.readOnly">
-              <input
-                  type="radio"
-                  name="ruleRoute"
-                  [checked]="item.display"
-                  [disabled]="dataGroup.readOnly"
-                  (change)="onRadioChange(item)"
-              />
-              <span>{{ item.dataTitle }}</span>
-          </label>
-      </li>
+    <li *ngFor="let item of ruleSwitchs">
+      <label [class.read-only]="readOnly">
+        <input
+          type="radio"
+          name="ruleSwitch"
+          [checked]="item.display"
+          [disabled]="readOnly"
+          (change)="onRadioChange(item)"
+        />
+        <span>{{ item.dataTitle }}</span>
+      </label>
+    </li>
   </ul>
 </div>

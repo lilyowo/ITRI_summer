@@ -1,35 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { SettingsService } from '../../services/settings.service';
-import { DataGroup, Settings } from '../../models/settings.model';
-import { SimuItem } from '../../models/simu-item.model';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-simu-switch',
   templateUrl: './simu-switch.component.html',
-  styleUrls: ['./simu-switch.component.css']
+  styleUrls: ['./simu-switch.component.css'],
 })
 export class SimuSwitchComponent implements OnInit {
+  dataTitle: string = '換手效能';
+  dataGroup: any[] = [];
+  @Input() projectId!: number;
+  @Input() readOnly!: boolean;
 
-  dataTitle: string='換手效能';
-  dataGroup: DataGroup<SimuItem> |undefined;
-
-  constructor(private settingsService: SettingsService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.settingsService.getSettings().subscribe(settings => {
-      this.dataGroup = settings['模擬項目'].find(group => group.dataTitle === this.dataTitle);
-    });
+    this.projectService.getSimuItemsByProjectId(this.projectId).subscribe(
+      (simuItems) => {
+        const ruleItemGroup = simuItems[this.dataTitle];
+        if (ruleItemGroup) {
+          this.dataGroup = ruleItemGroup;
+        }
+      },
+      (error) => {
+        console.error('Error fetching simulation items:', error);
+      },
+    );
   }
-  onCheckboxChange(item: SimuItem): void {
+  onCheckboxChange(item: any): void {
     item.display = !item.display;
     this.updateSettings();
   }
 
   updateSettings(): void {
-    // Function to update settingsItem.json
-    // (Implementation will be added later)
-  }OnInit(): void {
+    this.projectService.getSimuItemsByProjectId(this.projectId).subscribe(
+      (simuItems) => {
+        simuItems[this.dataTitle] = this.dataGroup;
+        this.projectService
+          .updateSimuItemsByProjectId(this.projectId, simuItems)
+          .subscribe(
+            (response) => {
+              console.log('Simulation items updated successfully:', response);
+            },
+            (error) => {
+              console.error('Error updating simulation items:', error);
+            },
+          );
+      },
+      (error) => {
+        console.error('Error fetching simulation items:', error);
+      },
+    );
   }
-
 }

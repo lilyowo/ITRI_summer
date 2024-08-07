@@ -1,22 +1,29 @@
 <div class="left-tools">
-    <button class="tool-button" (click)="toggleModal()">
-      <img src="assets/tool1.png" alt="Tool 1">
-    </button>
-    <button class="tool-button" (click)="handleButtonClick('軌道')">
-      <img src="assets/tool2.png" alt="Tool 2">
-    </button>
-    <button class="tool-button" (click)="handleButtonClick('衛星')">
-      <img src="assets/tool3.png" alt="Tool 3">
-    </button>
-    <button class="tool-button" (click)="handleButtonClick('ISL')">
-      <img src="assets/tool4.png" alt="Tool 4">
-    </button>
-    <button class="tool-button" (click)="handleButtonClick('FT')">
-      <img src="assets/tool5.png" alt="Tool 5">
-    </button>
-    <button class="tool-button" (click)="handleButtonClick('UT')">
-      <img src="assets/tool6.png" alt="Tool 6">
-    </button>
-  </div>
-  <app-upload-tle *ngIf="showModal" (close)="toggleModal()"></app-upload-tle>
-  
+  <button class="tool-button" (click)="toggleModal()">
+    <img src="assets/tool1.png" alt="Tool 1" />
+  </button>
+  <button class="tool-button" (click)="handleButtonClick('軌道')">
+    <img src="assets/tool2.png" alt="Tool 2" />
+  </button>
+  <button class="tool-button" (click)="handleButtonClick('衛星')">
+    <img src="assets/tool3.png" alt="Tool 3" />
+  </button>
+  <button class="tool-button" (click)="handleButtonClick('ISL')">
+    <img src="assets/tool4.png" alt="Tool 4" />
+  </button>
+  <button
+    class="tool-button"
+    draggable="true"
+    (dragstart)="onFTDragStart($event)"
+  >
+    <img src="assets/tool5.png" alt="Tool 5" />
+  </button>
+  <button
+    class="tool-button"
+    draggable="true"
+    (dragstart)="onUTDragStart($event)"
+  >
+    <img src="assets/tool6.png" alt="Tool 6" />
+  </button>
+</div>
+<app-upload-tle *ngIf="showModal" (close)="toggleModal()"></app-upload-tle>

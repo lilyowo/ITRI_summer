@@ -2,15 +2,11 @@ import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 import os
 import subprocess
+import json
 
-# Database connection parameters
-db_params = {
-    'user': "Hamster",
-    'host': 'localhost',
-    'password': 'hpassword',
-    'port': 5432,
-    'database': "StarDB"
-}
+# Load database connection parameters from config.json
+with open('./config/config.json', 'r') as f:
+    db_params = json.load(f)
 
 # SQL scripts paths
 sql_scripts_path = './'
@@ -33,7 +29,17 @@ sql_scripts = [
     'InsertLoginHistory.sql',
     'InsertProject.sql',
     'InsertReport.sql',
-    'InsertChart.sql'
+    'InsertChart.sql',
+    'InsertConstellation.sql',
+    'InsertPlane.sql',
+    'InsertCell.sql',
+    'InsertGroundStation.sql',
+    'InsertSatellite.sql',
+    'InsertISL.sql',
+    'InsertCPL.sql',
+    'InsertBeam.sql',
+    'InsertSimulationConf.sql'
+
 ]
 
 def execute_sql_script(conn, script_path):

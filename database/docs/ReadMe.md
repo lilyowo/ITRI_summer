@@ -6,9 +6,9 @@
 
 ## 快速建立schema
 
-- Update your host IP, postgres user name, and password in resetDB.py
+- Update your host IP, postgres user name, and password in config/config.json
 - Make sure that your computer already install python3, psycopg2
-- Run `$cd oam/database2`, `$python3 resetDB.py`
+- Run `$cd oam/database2`, `$python resetDB.py`
 
 ## Install psycopg2
 

@@ -1,37 +1,53 @@
-import { Component, AfterViewInit, Input} from '@angular/core';
-import * as L from 'leaflet';
-import { MarkerService } from '../services/marker.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import { Map2dComponent } from '../maps/map2d/map2d.component';
 
 @Component({
   selector: 'app-central-canvas',
   templateUrl: './central-canvas.component.html',
-  styleUrls: ['./central-canvas.component.css']
+  styleUrls: ['./central-canvas.component.css'],
 })
-export class CentralCanvasComponent implements AfterViewInit {
-  
-  @Input() view: string='2D View';
-  private map!:L.Map;
-
-  private initMap(): void {
-    this.map = L.map('map', {
-      center: [ 39.8282, -98.5795 ],
-      // center: [ 25.0374, 121.5645 ],
-      zoom: 3,
-      worldCopyJump: true // 環繞地圖
-    });
-
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-
-    tiles.addTo(this.map);
+export class CentralCanvasComponent implements OnInit, OnChanges {
+  @Input() view: string = '2D View';
+  @Input() projectId!: number;
+  @ViewChild('map2d') map2dComponent!: Map2dComponent;
+  constructor() {}
+  currentView: 'map2d' | 'map3d' | 'map-tree' = 'map2d';
+  ngOnInit(): void {
+    this.updateView();
   }
-  constructor(private markerService: MarkerService) { }
 
-  ngAfterViewInit(): void {
-    this.initMap();
-    this.markerService.makeCapitalMarkers(this.map);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['view']) {
+      this.updateView();
+    }
+  }
+  private updateView() {
+    switch (this.view.toLowerCase()) {
+      case '2d view':
+        this.currentView = 'map2d';
+        break;
+      case '3d view':
+        this.currentView = 'map3d';
+        break;
+      case 'tree view':
+        this.currentView = 'map-tree';
+        break;
+      default:
+        this.currentView = 'map2d';
+    }
+  }
+  handleDataUpdated(): void {
+    setTimeout(() => {
+      if (this.map2dComponent) {
+        this.map2dComponent.reloadMap();
+      }
+    }, 1000);
   }
 }

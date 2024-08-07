@@ -1,24 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { Satellite } from '../../models/satellite.model';
-import { SettingsService } from '../../services/settings.service';
-import { DataGroup, Settings } from '../../models/settings.model';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-satellite',
   templateUrl: './satellite.component.html',
-  styleUrls: ['./satellite.component.css']
+  styleUrls: ['./satellite.component.css'],
 })
 export class SatelliteComponent implements OnInit {
-  satelliteData: DataGroup<Satellite> | undefined;
+  satelliteData: any[] = [];
+  @Input() projectId!: number;
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.settingsService.getSettings().subscribe((settings: Settings)=> {
-      const satelliteGroup = settings['星網物件'].find(group => group.dataTitle=== '衛星');
-      this.satelliteData = satelliteGroup as DataGroup<Satellite>;
-    })
+    this.loadData();
   }
-
+  loadData(): void {
+    this.projectService.getSatellitesByProjectId(this.projectId).subscribe(
+      (data) => {
+        this.satelliteData = data;
+      },
+      (error) => {
+        console.error('Error loading Satelllite data:', error);
+      },
+    );
+  }
 }

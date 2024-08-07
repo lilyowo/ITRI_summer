@@ -1,26 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { ISL } from '../../models/isl.model';
-import { SettingsService } from '../../services/settings.service';
-import { DataGroup, Settings } from '../../models/settings.model';
-
-
-
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-isl',
   templateUrl: './isl.component.html',
-  styleUrls: ['./isl.component.css']
+  styleUrls: ['./isl.component.css'],
 })
 export class IslComponent implements OnInit {
-  islData: DataGroup<ISL> | undefined;
+  islData: any[] = [];
+  @Input() projectId!: number;
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.settingsService.getSettings().subscribe((settings: Settings) => {
-      const islGroup = settings['星網物件'].find(group => group.dataTitle === 'ISL');
-      this.islData = islGroup as DataGroup<ISL>;
-    })
+    this.loadData();
   }
-
+  loadData(): void {
+    this.projectService.getIslByProjectId(this.projectId).subscribe(
+      (data) => {
+        this.islData = data;
+      },
+      (error) => {
+        console.error('Error loading Plane data:', error);
+      },
+    );
+  }
 }

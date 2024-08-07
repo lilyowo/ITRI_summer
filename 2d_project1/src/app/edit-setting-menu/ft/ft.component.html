@@ -1,26 +1,46 @@
-<div calss="ft-container">
-    <!-- <h2>{{ utData?.dataTitle }}</h2> 
-    <p>Read Only: {{ utData?.readOnly ? 'Yes' : 'No' }}</p>
-    <p>Items Number: {{ utData?.itemsNum }}</p> -->
-  
-    <div *ngFor="let item of ftData?.dataItems" class="ft-item">
-      <h3>FT - {{item.gsId}}</h3>
-      <div class="item-field">
-          <label>經度:</label>
-          <input type="text" [value]="item['經度']" [readonly]="ftData?.readOnly"[ngClass]="{'readonly': ftData?.readOnly, 'editable': !ftData?.readOnly}">
-      </div>
-      <div class="item-field">
-          <label>緯度:</label>
-          <input type="text" [value]="item['緯度']" [readonly]="ftData?.readOnly"[ngClass]="{'readonly': ftData?.readOnly, 'editable': !ftData?.readOnly}">
-      </div>
-      <div class="item-field">
-          <label>海拔高度:</label>
-          <input type="text" [value]="item['海拔高度']" [readonly]="ftData?.readOnly"[ngClass]="{'readonly': ftData?.readOnly, 'editable': !ftData?.readOnly}">
-      </div>
-      <div class="item-field">
-        <label>Accept Elevation:</label>
-        <input type="text" [value]="item['acceptElevation']" [readonly]="ftData?.readOnly"[ngClass]="{'readonly': ftData?.readOnly, 'editable': !ftData?.readOnly}">
+<div class="ft-container">
+  <div *ngFor="let item of ftData" class="ft-item">
+    <h3>UT - {{ item.gsId }}</h3>
+    <div class="item-field">
+      <label>經度:</label>
+      <input
+        type="text"
+        [value]="item.longitude"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateGroundStation(item.gsId, 'longitude', $event)"
+      />
     </div>
-      <hr>
+    <div class="item-field">
+      <label>緯度:</label>
+      <input
+        type="text"
+        [value]="item.latitude"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateGroundStation(item.gsId, 'latitude', $event)"
+      />
     </div>
+    <div class="item-field">
+      <label>海拔高度:</label>
+      <input
+        type="text"
+        [value]="item.altitude"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateGroundStation(item.gsId, 'altitude', $event)"
+      />
+    </div>
+    <div class="item-field">
+      <label>Accept Elevation:</label>
+      <input
+        type="text"
+        [value]="item.acceptElevation"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateGroundStation(item.gsId, 'acceptElevation', $event)"
+      />
+    </div>
+    <hr />
   </div>
+</div>

@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private userId: number =-1;
+  private storageKey = 'userId';
 
   setUserId(id: number): void {
-    this.userId = id;
+    localStorage.setItem(this.storageKey, id.toString());
   }
 
-  getUserId(): number  {
-    return this.userId;
+  getUserId(): number {
+    const storedId = localStorage.getItem(this.storageKey);
+    return storedId ? parseInt(storedId, 10) : -1;
+  }
+
+  clearUserId(): void {
+    localStorage.removeItem(this.storageKey);
   }
 }

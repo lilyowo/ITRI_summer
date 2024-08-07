@@ -67,8 +67,9 @@ export class ProjectListComponent implements OnInit {
 
   toggleCreateModal() {
     this.showCreateModal = !this.showCreateModal;
-    (async () => { //wait a secont then reload
-      await new Promise( resolve => setTimeout(resolve, 1000) );
+    (async () => {
+      //wait a secont then reload
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       this.loadProjects(this.userId);
     })();
   }
@@ -80,8 +81,12 @@ export class ProjectListComponent implements OnInit {
 
   editProject(project: Project) {
     //這裡之後要加上後端API傳projectId跳轉
+    this.selectedProjectId = project.id;
+    this.selectedProjectName = project.name;
     //還要更新Project的lastEditTime
-    this.router.navigate(['/edit']);
+    this.router.navigate(['/edit'], {
+      queryParams: { projectId: this.selectedProjectId },
+    });
   }
 
   deleteProject(project: Project) {
@@ -94,14 +99,16 @@ export class ProjectListComponent implements OnInit {
   }
   toggleDeleteModal() {
     this.showDeleteModal = !this.showDeleteModal;
-    (async () => { //wait a secont then reload
-      await new Promise( resolve => setTimeout(resolve, 1000) );
+    (async () => {
+      //wait a secont then reload
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       this.loadProjects(this.userId);
     })();
-    
   }
 
   viewReport(simulation: Simulation) {
-    this.router.navigate(['/report'], { queryParams: { reportId: simulation.id } });
+    this.router.navigate(['/report'], {
+      queryParams: { reportId: simulation.id },
+    });
   }
 }

@@ -2,7 +2,7 @@ INSERT INTO "Report" ("projectId",  "reportName", "simuTime")
 VALUES
 (1, '[Simulation] Project1-1', '2024-07-22 15:28:29.951457'),
 (4, '[Simulation] Project1-1', '2024-07-22 15:28:29.951457'),
-(7, '[Simulation] Project1-1', '2024-07-22 15:28:29.951457'),-- user 3 report 3
+(7, '[Simulation] Project1-1 Test Report', '2024-07-29 15:28:29.951457'),-- user 3 report 3
 (1, '[Simulation] Project1-2', '2024-07-22 15:28:29.951457'),
 (4, '[Simulation] Project1-2', '2024-07-22 15:28:29.951457'),
 (7, '[Simulation] Project1-2', '2024-07-22 15:28:29.951457'),-- user 3 report 6

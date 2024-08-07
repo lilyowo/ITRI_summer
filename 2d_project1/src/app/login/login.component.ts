@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private loginHistoryService: LoginHistoryService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
   ) {}
 
   login() {
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       (response) => {
         this.authService.saveToken(response.token);
         const userId = this.authService.getUserIdFromToken();
-        alert(`Login Success!\nUser id=${userId}`);
+        // alert(`Login Success!\nUser id=${userId}`);
         // this.router.navigate(['/projectlist']); // 註解掉這一行以防止自動跳轉
 
         // 記錄登入歷史

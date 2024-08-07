@@ -1,0 +1,7 @@
+{
+  "user": "Hamster",
+  "host": "localhost",
+  "password": "hpassword",
+  "port": 5432,
+  "database": "StarDB"
+}

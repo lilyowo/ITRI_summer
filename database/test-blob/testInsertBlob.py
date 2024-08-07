@@ -1,14 +1,10 @@
 import os
 import psycopg2
+import json
 
-# 資料庫連接資訊
-db_config = {
-    'user': "Hamster",
-    'host': 'localhost',
-    'password': 'hpassword',
-    'port': 5432,
-    'database': "StarDB"
-}
+# Load database connection parameters from config.json
+with open('./config/config.json', 'r') as f:
+    db_config = json.load(f)
 
 def convert_to_blob(file_path):
     with open(file_path, 'rb') as file:

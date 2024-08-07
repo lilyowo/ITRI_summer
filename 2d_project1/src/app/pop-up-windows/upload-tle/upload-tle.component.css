@@ -1,118 +1,120 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    position: relative;
-    width: 300px;
-    text-align: center;
-  }
-  .content-button-container{
-    background-color: white;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 1.5em;
-  }
-  
-  .modal-title {
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-  
-  .title-divider {
-    border: none;
-    border-top: 1px solid #e0e0e0;
-    margin: 10px 0;
-  }
-  
-  .modal-text {
-    white-space: pre-line;
-    margin-bottom: 10px;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .modal-input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-  }
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 300px;
+  text-align: center;
+  z-index: 1001;
+}
+.content-button-container {
+  background-color: white;
+}
 
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .upload-button {
-    background: linear-gradient(to right, #5D89B1, #605FB1);
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 10px 20px;
-    width: 130px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .upload-button:hover {
-    box-shadow: 0 0 10px rgba(93, 137, 177, 0.5);
-  }
-  .cancel-button {
-    background: linear-gradient(to right, #B15D7B, #921D1D);
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 10px 0;
-    width: 130px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .cancel-button:hover {
-    box-shadow: 0 0 10px rgba(93, 137, 177, 0.5);
-  }
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.5em;
+}
 
-  .file-input-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .file-name-display {
-    flex-grow: 1;
-    padding: 5px;
-    border: 1px solid black;
-    background-color: white;
-    color: black;
-  }
-  
-  .file-upload-button {
-    padding: 5px 10px;
-    margin-left: 5px;
-    background: linear-gradient(to right, #737373, #1E1E1E);
-    color: white;
-    border: none;
-    border-radius: 15px 15px 15px 15px;
-    cursor: pointer;
-  }
-  
-  .file-input {
-    display: none;
-  }
+.modal-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.title-divider {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 10px 0;
+}
+
+.modal-text {
+  white-space: pre-line;
+  margin-bottom: 10px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upload-button {
+  background: linear-gradient(to right, #5d89b1, #605fb1);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  width: 130px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: box-shadow 0.3s ease;
+}
+
+.upload-button:hover {
+  box-shadow: 0 0 10px rgba(93, 137, 177, 0.5);
+}
+.cancel-button {
+  background: linear-gradient(to right, #b15d7b, #921d1d);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 0;
+  width: 130px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: box-shadow 0.3s ease;
+}
+
+.cancel-button:hover {
+  box-shadow: 0 0 10px rgba(93, 137, 177, 0.5);
+}
+
+.file-input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.file-name-display {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+}
+
+.file-upload-button {
+  padding: 5px 10px;
+  margin-left: 5px;
+  background: linear-gradient(to right, #737373, #1e1e1e);
+  color: white;
+  border: none;
+  border-radius: 15px 15px 15px 15px;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}

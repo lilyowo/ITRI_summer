@@ -12,7 +12,7 @@ interface BackendConfig {
   providedIn: 'root',
 })
 export class ConfigService {
-  private configUrl = '../../config/backend-config.json';
+  private configUrl = '../../config/config.json';
   private config: BackendConfig | undefined;
 
   constructor(private http: HttpClient) {}

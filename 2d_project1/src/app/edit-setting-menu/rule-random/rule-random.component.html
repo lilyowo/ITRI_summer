@@ -1,33 +1,64 @@
 <div class="rule-random-container">
-    <h2>{{ ruleRandomData?.dataTitle }}</h2> 
-    <p>Read Only: {{ ruleRandomData?.readOnly ? 'Yes' : 'No' }}</p>
-
-    <div *ngFor="let item of ruleRandomData?.dataItems" class="rule-random-item">
-        <div class="item-field">
-            <label>亂數種子:</label>
-            <input type="text" [value]="item['亂數種子']" [readonly]="ruleRandomData?.readOnly"[ngClass]="{'readonly': ruleRandomData?.readOnly, 'editable': !ruleRandomData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>衛星損壞機率%:</label>
-            <input type="text" [value]="item['衛星損壞機率%']" [readonly]="ruleRandomData?.readOnly"[ngClass]="{'readonly': ruleRandomData?.readOnly, 'editable': !ruleRandomData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>ISL斷線機率%:</label>
-            <input type="text" [value]="item['ISL斷線機率%']" [readonly]="ruleRandomData?.readOnly"[ngClass]="{'readonly': ruleRandomData?.readOnly, 'editable': !ruleRandomData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>ISL損壞機率%:</label>
-            <input type="text" [value]="item['ISL損壞機率%']" [readonly]="ruleRandomData?.readOnly"[ngClass]="{'readonly': ruleRandomData?.readOnly, 'editable': !ruleRandomData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>通訊酬載損壞機率%:</label>
-            <input type="text" [value]="item['通訊酬載損壞機率%']" [readonly]="ruleRandomData?.readOnly"[ngClass]="{'readonly': ruleRandomData?.readOnly, 'editable': !ruleRandomData?.readOnly}">
-        </div>
-        <div class="item-field">
-            <label>封包遺失機率%:</label>
-            <input type="text" [value]="item['封包遺失機率%']" [readonly]="ruleRandomData?.readOnly"[ngClass]="{'readonly': ruleRandomData?.readOnly, 'editable': !ruleRandomData?.readOnly}">
-        </div>
+  <div *ngFor="let item of ruleRandoms" class="rule-random-item">
+    <div class="item-field">
+      <label>亂數種子:</label>
+      <input
+        type="text"
+        [value]="item.randomSeed"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateSettings('randomSeed', item, $event)"
+      />
     </div>
-    
-  
+    <div class="item-field">
+      <label>衛星損壞機率%:</label>
+      <input
+        type="text"
+        [value]="item.satLossRate"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateSettings('satLossRate', item, $event)"
+      />
+    </div>
+    <div class="item-field">
+      <label>ISL斷線機率%:</label>
+      <input
+        type="text"
+        [value]="item.ISLDisconnectRate"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateSettings('ISLDisconnectRate', item, $event)"
+      />
+    </div>
+    <div class="item-field">
+      <label>ISL損壞機率%:</label>
+      <input
+        type="text"
+        [value]="item.ISLLossRate"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateSettings('ISLLossRate', item, $event)"
+      />
+    </div>
+    <div class="item-field">
+      <label>通訊酬載損壞機率%:</label>
+      <input
+        type="text"
+        [value]="item.CPLLossRate"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateSettings('CPLLossRate', item, $event)"
+      />
+    </div>
+    <div class="item-field">
+      <label>封包遺失機率%:</label>
+      <input
+        type="text"
+        [value]="item.PacketLossRate"
+        [readonly]="this.readOnly"
+        [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
+        (blur)="updateSettings('PacketLossRate', item, $event)"
+      />
+    </div>
+  </div>
 </div>

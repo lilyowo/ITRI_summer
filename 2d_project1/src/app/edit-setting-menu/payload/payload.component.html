@@ -1,24 +1,22 @@
 <div class="payload-container">
-  <!-- <h2>{{ payloadData?.dataTitle }}</h2> 
-  <p>Read Only: {{ payloadData?.readOnly ? 'Yes' : 'No' }}</p>
-  <p>Items Number: {{ payloadData?.itemsNum }}</p> -->
-
-  <div *ngFor="let item of payloadData?.dataItems" class="payload-item">
+  <div *ngFor="let item of payloadData" class="payload-item">
     <h3>CPL- {{ item.satelliteId }}</h3>
     <div class="item-field">
-        <label>輻射夾角 +/-:</label>
-        <input type="text" [value]="item['輻射夾角 +/-']" [readonly]="payloadData?.readOnly" [ngClass]="{'readonly': payloadData?.readOnly}">
+      <label>輻射夾角 +/-:</label>
+      <input type="text" [value]="item.viewAngle" readonly class="readonly" />
     </div>
     <div class="item-field">
-        <label>Beam夾角 +/-:</label>
-        <input type="text" [value]="item['Beam夾角 +/-']" [readonly]="payloadData?.readOnly" [ngClass]="{'readonly': payloadData?.readOnly}">
+      <label>Beam夾角 +/-:</label>
+      <input type="text" [value]="item.beamAngle" readonly class="readonly" />
     </div>
     <div class="item-field">
-        <label>Beam數量:</label>
-        <input type="text" [value]="item['Beam數量']" [readonly]="payloadData?.readOnly" [ngClass]="{'readonly': payloadData?.readOnly}">
+      <label>Beam數量:</label>
+      <input type="text" [value]="item.beamCount" readonly class="readonly" />
     </div>
-    <hr>
+    <div class="item-field">
+      <label>Bandwidth:</label>
+      <input type="text" [value]="item.bandwidth" readonly class="readonly" />
+    </div>
+    <hr />
   </div>
-    
-
 </div>

@@ -1,24 +1,66 @@
-import { Component, OnInit } from '@angular/core';
-import { RuleRandom } from 'src/app/models/rule-random.model';
-import { SettingsService } from '../../services/settings.service';
-import { DataGroup, Settings } from '../../models/settings.model';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-rule-random',
   templateUrl: './rule-random.component.html',
-  styleUrls: ['./rule-random.component.css']
+  styleUrls: ['./rule-random.component.css'],
 })
 export class RuleRandomComponent implements OnInit {
-  ruleRandomData: DataGroup<RuleRandom> | undefined;
+  dataTitle: string = '隨機事件規則';
+  ruleRandoms: any[] = [];
+  @Input() projectId!: number;
+  @Input() readOnly!: boolean;
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.settingsService.getSettings().subscribe((settings:Settings) => {
-      const ruleRandomGroup = settings['模擬設定'].find(group => group.dataTitle=='隨機事件規則');
-      this.ruleRandomData = ruleRandomGroup as DataGroup<RuleRandom>;
-    })
+    this.projectService.getSimuSettingsByProjectId(this.projectId).subscribe(
+      (simuSettings) => {
+        const ruleItemGroup = simuSettings[this.dataTitle];
+        if (ruleItemGroup) {
+          this.ruleRandoms = ruleItemGroup;
+        }
+      },
+      (error) => {
+        console.error('Error fetching simulation settings:', error);
+      },
+    );
   }
 
+  updateSettings(field: string, item: any, event: Event): void {
+    if (this.readOnly) return;
+
+    const inputElement = event.target as HTMLInputElement;
+    const updatedValue = parseFloat(inputElement.value);
+
+    if (isNaN(updatedValue)) {
+      console.error('Value must be a number:', inputElement.value);
+      return;
+    }
+
+    item[field] = updatedValue;
+
+    this.projectService.getSimuSettingsByProjectId(this.projectId).subscribe(
+      (simuSettings) => {
+        simuSettings[this.dataTitle] = this.ruleRandoms;
+        this.projectService
+          .updateSimuSettingsByProjectId(this.projectId, simuSettings)
+          .subscribe(
+            (response) => {
+              console.log(
+                'Simulation settings updated successfully:',
+                response,
+              );
+            },
+            (error) => {
+              console.error('Error updating simulation settings:', error);
+            },
+          );
+      },
+      (error) => {
+        console.error('Error fetching current simulation settings:', error);
+      },
+    );
+  }
 }

@@ -13,9 +13,8 @@ export class LoginHistoryService {
     private configService: ConfigService,
   ) {
     this.configService.loadConfig().subscribe((config) => {
-      this.apiUrl = `http://${config.serverIp}:${config.serverPort}/auth/loginHistory`;
+      this.apiUrl = `http://${config.backendIp}:${config.backendPort}/auth/loginHistory`;
     });
-    
   }
 
   recordLogin(userId: number): Observable<any> {

@@ -5,10 +5,9 @@ import { ConfigService } from './config.service';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChartService {
-
   private apiUrl = 'http://localhost:3000/chart';
 
   constructor(
@@ -16,16 +15,14 @@ export class ChartService {
     private configService: ConfigService,
   ) {
     this.configService.loadConfig().subscribe((config) => {
-      this.apiUrl = `http://${config.serverIp}:${config.serverPort}/chart`;
+      this.apiUrl = `http://${config.backendIp}:${config.backendPort}/chart`;
     });
-    
   }
 
   getCharts(): Observable<any[]> {
-    
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/chart`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/chart`;
         return this.http.get<any[]>(apiUrl);
       }),
     );
@@ -33,7 +30,7 @@ export class ChartService {
   getChartsByReportId(reportId: number): Observable<any[]> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/chart`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/chart`;
         return this.http.get<any[]>(`${apiUrl}/${reportId}`);
       }),
     );
@@ -42,7 +39,7 @@ export class ChartService {
   getReportTitleByReportId(reportId: number): Observable<any[]> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/chart`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/chart`;
         return this.http.get<any[]>(`${apiUrl}/report/${reportId}`);
       }),
     );

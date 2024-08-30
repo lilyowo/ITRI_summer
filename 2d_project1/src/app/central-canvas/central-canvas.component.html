@@ -1,5 +1,11 @@
 <div [ngSwitch]="currentView">
-  <app-map2d #map2d *ngSwitchCase="'map2d'" [projectId]="projectId"></app-map2d>
+  <app-map2d
+    #map2d
+    *ngSwitchCase="'map2d'"
+    [projectId]="projectId"
+    (uploadStart)="onUploadStart()"
+    (uploadEnd)="onUploadEnd()"
+  ></app-map2d>
   <app-map3d *ngSwitchCase="'map3d'"></app-map3d>
   <app-map-tree *ngSwitchCase="'map-tree'"></app-map-tree>
 </div>

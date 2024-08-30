@@ -8,7 +8,9 @@
     ```json
     {
       "apiId": "getConstellation",
-      "tleString": "..."
+      "param": {
+        "tleString": "..."
+      }
     }
     ```
   - response:
@@ -16,205 +18,277 @@
     {
       "apiId": "getConstellation",
       "result": {
-        "constellationId": 1,
-        "constellationName": "example constellation"
-      },
+        "Planes": [
+            {
+                "planeId": 1,
+                "inclination": 29.0155,
+                "raan": 0.0186,
+                "eccentricity": 0.000511,
+                "arg_pe": 264.8931,
+                "altitude": 800.0,
+                "Satellites": [
+                  {
+                    "satelliteId":1,
+                    "latitude": -0.0048443,
+                    "longitude": -40.4956,
+                    "altitude": 800.0,
+                    "meanAnomaly": 0.0,
+                    "meanMotion": 0.0
+                },...
+              ]
+            },
+            {
+                "planeId": 2,
+                .....
+            }
+        ]
+    },
       "error": "Failed message"
     }
     ```
 
-- Get Plane
-  - method: getPlane
-  - Description: Get Plane by TLE.
+- Set ISL config
+
+  - method: setIslConfig
+  - Description: Make isl connect info with default isl connection algorithm and tle string
   - request:
     ```json
     {
-      "apiId": "getPlane",
-      "tleString": "...",
-      "constellationId": 1
-    }
-    ```
-  - response:
-    ```json
-    {
-      "apiId": "getPlane",
-      "result":[
-        {
-          "planeId": 1,
-          "inclination": 2.5,
-          "raan":2.5,
-          "eccentricity":1.5,
-          "arg_pe":0.5,
-          "altitude":3.0
-        },{
-          "planeId":2,...
+      "apiId": "setIslConfig",
+      "param": {
+        "islConfig": {
+          "satAzimuth": 1,
+          "satElevation": 2,
+          "laserAzimuth": 3,
+          "laserElevation": 4,
+          "laserRange": 5
         }
-      ],
-      "error": "Failed message"
-    }
-    ```
-- Get Satellite
-  - method: getSatellite
-  - Description: Get Satellite by TLE.
-  - request:
-    ```json
-    {
-      "apiId": "getSatellite",
-      "tleString": "...",
-      "constellationId": 1,
-      "planeId": 1
+      }
     }
     ```
   - response:
     ```json
     {
-      "apiId": "getSatellite",
-      "result":[
-        {
-          "satName": "example satellite",
-          "latitude":121.234,
-          "longitude":22.345,
-          "altitude":20.3,
-          "meanAnommaly": 1.5,
-          "meanMotion": 2.5,
-          "mass":2.5,
-          "ISL":[//一個衛星應該四個ISL對吧
-            {
-              "islId":1,
-              "satAzimuth":0.5,
-              "satElevation":0.3,
-              "lazerAzimuth":0.2,
-              "lazerElevation":0.1,
-              "lazerRange":0.5
-            },{"islId":2~4}
-          ],
-          "CPL":{//一個衛星應該一個CPL對吧
-            "viewAngle": 0.5,
-            "beamAngle":0.4,
-            "beamCount":0.3,
-            "bandwidth":0.2,
-            "Beam":[//如果一個CPL多個Beam的話
-              {
-                "beamId":1,
-                "bandwidth":0.1
-              }
-            ]
-          }
-        },{
-          "satelliteId":2,...
-        }
-      ],
-      "error": "Failed message"
-    }
-    ```
-- Get ISL connection
-  - method: getIslConnection
-  - Description: Get ISL connection by TLE.
-  - request:
-    ```json
-    {
-      "apiId": "getIslConnection",
-      "tleString": "...",
-      "constellationId": 1
-    }
-    ```
-  - response:
-    ```json
-    {
-      "apiId": "getIslConnection",
+      "apiId": "setIslConfig",
       "result": [
-        [
-          [2, 5, 3],
-          [1, 4, 2]
-        ],
-        [
-          [3, 6, 1],
-          [4, 2, 3]
-        ] //[planeId, satellliteId, islId]
-      ],
-      "error": "Failed message"
+        [101,102],
+        [102,103],...
+      ]
     }
     ```
+
+- Add Ground Station
+
+  - method: setGroundStation
+  - Description: set Ground Station (type: 0 for UT, 1 for FT)
+  - request:
+    ```json
+    {
+      "apiId": "addGroundStation",
+      "param": {
+        "latitude": -0.0048443,
+        "longitude": -40.4956,
+        "type": 1,
+        "gsId": 8
+      }
+    }
+    ```
+  - response: groundStationId: -1 for failure
+    ```json
+    {
+      "apiId": "addGroundStation",
+      "result": {
+        "groundStationId": 8
+      }
+    }
+    ```
+
+- Delete Ground Station
+
+  - method: setGroundStation
+  - Description: set Ground Station (type: 0 for UT, 1 for FT)
+  - request:
+    ```json
+    {
+      "apiId": "deleteGroundStation",
+      "param": {
+        "gsId": 1
+      }
+    }
+    ```
+  - response:
+    ```json
+    {
+      "apiId": "deleteGroundStation",
+      "result": {
+        "message": "Delete ground station"
+      }
+    }
+    ```
+
+- Modify Ground Station
+  - method: setGroundStation
+  - Description: set Ground Station (type: 0 for UT, 1 for FT). In addition to gsId and type, which are always transmitted, the rest, such as latitude, come from the modified field and value, so they may be different in each time.
+  - request:
+    ```json
+    {
+      "apiId": "modifyGroundStation",
+      "param": {
+        "gsId": 1,
+        "latitude": -0.0048443,
+        "type": 0
+      }
+    }
+    ```
+  - response:
+    ```json
+    {
+      "apiId": "modifyGroundStation",
+      "result": {
+        "message": "Modify ground station"
+      }
+    }
+    ```
+- Set CPL config
+
+  - method: setCplConfig
+  - Description: Send CPL settings to server
+  - request:
+    ```json
+    {
+      "apiId": "setCplConfig",
+      "param": {
+        "cplSettings": {
+          "viewAngle": 45,
+          "beamAngle": 90,
+          "beamCount": 1,
+          "bandwidth": 1450,
+          "beamBandwidth": 3000
+        }
+      }
+    }
+    ```
+  - response:
+    ```json
+    {
+      "message": "set cpl config"
+    }
+    ```
+
+- Set Simulation Config
+
+  - method: setSimConfig
+  - Description: Send Simulation configuration to server
+  - request:
+
+  ```json
+  {
+    "apiId": "setSimConfig",
+    "param":{
+      "simSettings":{
+        "handoverStrategy": "Adaptive RSS",
+        "routingStrategy": "DSDV",
+        "islMethod": "MinMaxR",
+        "randomEvent": {
+          "randomSeed": 1234,
+          "satBreak": 0.0001,
+          "islBreak": 0.0001,
+          "cplBreak": 0.0001,
+          "packetLoss": 0.0001,
+        }
+      },
+      "simuItems"{
+        "constellation": ["minDistance", "avgDistance", "maxDistance", "angel", "elavation", "range", "aer", "intraIslAer", "intraIslDistance", "interIslDistance", "islBreakDistribution", "satBreakDistributin" ],
+        "ground": ["coverage", "connectedSatTime", "connectedSatCount", "connectedSatSignal"],
+        "routing": ["hopCount", "distance", "intraIslDistribution", "interIslDistribution", "islDistribution", "rtuCount", "packetLoss"],
+        "handover": ["handoverCount", "AverageSatServiceTime", "HandoverFailCount"],
+      }
+    }
+  }
+  ```
+
+  - response:
+
+  ```json
+  {
+    "message": "set simulation config"
+  }
+  ```
 
 ## Simulation result
 
-- Get Result Satellite Position
-  - method: getResultSatellite
-  - Description: Get Result satellite position by TLE, GroundStationData and simulation time.
+- Get Satellite Info
+
+  - method: makeSimulationResult
+  - Description: use simulation time, settings, items to make simulation result. The result include satellites' positions and connections with time and report information.
   - request:
-    ```json
-    {
-      "apiId": "getResultSatellite",
-      "tleString": "...",
-      "groundStation"[
-        {
-          "gsId":1,
-          "cellId":1,
-          "type":0, //0 for ut 1 for ft
-          "latitude": 121.123,
-          "longitude":23.456,
-          "altitude":30.5,
-          "acceptElevation":20.5
-        },...
-      ]:,
-      "simulationTime": 6000
+
+  ```json
+  {
+    "apiId": "makeSimulationResult",
+    "param": {
+      "simuTime": 6000
     }
-    ```
+  }
+  ```
+
+- Make Simulation Result
+
+  - method: makeSimulationResult
+  - Description: use simulation time, settings, items to make simulation result. The result include satellites' positions and connections with time and report information.
+  - request:
+
+  ```json
+  {
+    "apiId": "makeSimulationResult",
+    "param": {
+      "simuTime": 60
+    }
+  }
+  ```
+
   - response:
-    ```json
-    {
-      "apiId": "getResultSatellite",
-      "result":[
+
+  ```json
+  {
+    "simulationResult":{
+      "simulationInfo":[
         {
-          "time": 1,
-          "position":[
-            {
-              "satId":1,
-              "pos":[121.234, 25.456, 3000]
-            },{
-              "satId":2,
-              "pos":[121.234, 25.456, 3000]
-            },...
-          ]
+            "time":1,
+            "satellitesPos":[
+                {
+                    "satelliteId":1,
+                    "latitude": 121.123,
+                    "longitude":23.456,
+                    "altitude":30.5
+                },
+                {
+                    "satelliteId":2,
+                    "latitude": 121.123,
+                    "longitude":23.456,
+                    "altitude":30.5
+                }
+            ],
+            "islConnect":[[1,2],[2,3]], //sat id - sat id
+            "cplConnect":[[1,2],[2,3]], //sat id - ground station id
         },{
-          "time":2,...
-        },...,{"time":6000,...}
+            "time":2,
+            "satellitesPos":[],
+            "islConnect":[],
+            "cplConnect":[]
+        }
+
       ],
-      "error": "Failed message"
-    }
-    ```
-- Get Result description and image
-  - method: getResultChart
-  - Description: Get Result description and image by TLE, GroundStationData and simulation time.
-  - request:
-    ```json
-    {
-      "apiId": "getResultChart",
-      "tleString": "...",
-      "groundStation"[
+      "reportInfo":[
         {
-          "gsId":1,
-          "cellId":1,
-          "type":0, //0 for ut 1 for ft
-          "latitude": 121.123,
-          "longitude":23.456,
-          "altitude":30.5,
-          "acceptElevation":20.5
-        },...
-      ]:,
-      "simulationTime": 6000
+            "dataTitle":"計算指定衛星與相鄰軌道衛星的最小距離",
+            "description": "這個描述留給 +title+ 的資料來使用",
+            "data":{
+              "header":["throughput", "latency", "hop", "distance", "loss", "rx_buffer", "tx_buffer"],
+              "content":[[0.000914962, 59.0556, 6.00462, 17695.7, 0.0814261, 4500, 0],...]
+            }
+        },
+      ]
     }
-    ```
-  - response:
-    ```json
-    {
-      "apiId": "getResultChart",
-      "result": [
-        {
-          "description": "衛星編號 216 的最小距離為 460.297 km，是 22 個衛星中最小者；衛星編號 205 的最小距離為 13010.4 km，是 22 個衛星中最大者。",
-          "image": "'image'::bytea"
-        } //....
-      ],
-      "error": "Failed message"
-    }
-    ```
+  }
+  ```

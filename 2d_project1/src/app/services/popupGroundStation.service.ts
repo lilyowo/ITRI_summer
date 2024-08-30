@@ -10,7 +10,7 @@ export class PopUpGroundStationService {
     return (
       `` +
       `<div>Ground Station ID: ${data.gsId}</div>` +
-      `<div>Connected Satellite ID: ${data.connectedSatId}</div>` +
+      // `<div>Connected Satellite ID: ${data.connectedSatId}</div>` +
       `<div>Accept Elevation: ${data.acceptElevation}</div>`
     );
   } //To add more detail, see project.service.ts->getFormattedGroundStations->properties

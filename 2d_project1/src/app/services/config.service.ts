@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 interface BackendConfig {
-  serverIp: string;
-  serverPort: number;
+  backendIp: string;
+  backendPort: number;
 }
 
 @Injectable({

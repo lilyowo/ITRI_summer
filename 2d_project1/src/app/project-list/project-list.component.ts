@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Project } from '../models/project.model'; // 导入 Project 类型
 import { Simulation } from '../models/simulation.model'; // 导入 Simulation 类型
 import { ProjectService } from '../services/project.service';
+import { SimulationService } from '../services/simulation.service';
 
 @Component({
   selector: 'app-project-list',
@@ -16,6 +17,7 @@ export class ProjectListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
+    private simulationService: SimulationService,
   ) {}
   showCreateModal = false;
   showDeleteModal = false;
@@ -83,6 +85,8 @@ export class ProjectListComponent implements OnInit {
     //這裡之後要加上後端API傳projectId跳轉
     this.selectedProjectId = project.id;
     this.selectedProjectName = project.name;
+    //為了nav-bar標題顯示正確
+    this.simulationService.setStartedSimulation(false);
     //還要更新Project的lastEditTime
     this.router.navigate(['/edit'], {
       queryParams: { projectId: this.selectedProjectId },

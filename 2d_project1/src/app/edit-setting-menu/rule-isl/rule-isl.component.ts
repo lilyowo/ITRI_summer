@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
+
 @Component({
   selector: 'app-rule-isl',
   templateUrl: './rule-isl.component.html',

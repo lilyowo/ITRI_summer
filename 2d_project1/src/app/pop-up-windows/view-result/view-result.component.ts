@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./view-result.component.css'],
 })
 export class ViewResultComponent implements OnInit {
+  @Input() reportId!: number;
   @Output() close = new EventEmitter<void>();
 
   constructor(private router: Router) {}
@@ -20,7 +21,9 @@ export class ViewResultComponent implements OnInit {
     //在report頁面傳給後端取得chart table內容
     //跳轉到report
     this.closeModal();
-    const reportId = 3;
-    this.router.navigate(['/report'], { queryParams: { reportId } });
+    this.router.navigate(['/report'], {
+      queryParams: { reportId: this.reportId },
+    });
+    // alert('New report ID: ' + this.reportId);
   }
 }

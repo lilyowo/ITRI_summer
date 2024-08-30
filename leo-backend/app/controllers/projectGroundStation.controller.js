@@ -110,13 +110,29 @@ exports.insertGroundStation = async (req, res) => {
     }
 
     // 插入新的 GroundStation
-    await pool.query(
+    const result = await pool.query(
       `INSERT INTO "GroundStation" ("cellId", "connectedSatId", "type", "latitude", "longitude", "altitude", "acceptElevation")
-       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "gsId"`,
       [cellId, null, type, latitude, longitude, 0.0, 0.0]
     );
+    const gsId = result.rows[0].gsId;
+    res
+      .status(201)
+      .json({ message: "GroundStation inserted successfully", gsId: gsId });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.error(err);
+  }
+};
 
-    res.status(201).json({ message: "GroundStation inserted successfully" });
+exports.deleteGroundStation = async (req, res) => {
+  const { gsId, type } = req.params;
+
+  try {
+    const query = `DELETE FROM "GroundStation" WHERE "gsId" = $1 AND "type" = $2`;
+    await pool.query(query, [gsId, type]);
+
+    res.status(200).json({ message: "GroundStation deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

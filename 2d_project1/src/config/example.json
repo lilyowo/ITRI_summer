@@ -1,0 +1,6 @@
+{
+  "backendIp": "140.96.106.221",
+  "backendPort": 3000,
+  "frontendHost": "140.96.106.221",
+  "frontendPort": 4200
+}

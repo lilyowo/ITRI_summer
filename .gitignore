@@ -1,81 +1,39 @@
-# Compiled output
-dist/
-tmp/
-out-tsc/
-build/
+build*
+.vscode/
 
-# Dependencies
+# 依賴包
 node_modules/
 
-# IDEs and editors
-.idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-*.sublime-project
+# 環境變數
+.env
+
+# 日誌
+logs
+*.log
+npm-debug.log*
+
+# 執行時產生的檔案
+dist/
+build/
+
+# IDE和編輯器的設定檔
 .vscode/
-*.code-workspace
+.idea/
+*.swp
+*.swo
 
-# Angular specific
-.angular/
-.angular-cache/
-
-# Leaflet specific
-node_modules/leaflet/dist/
-
-# Misc
+# 作業系統生成的檔案
 .DS_Store
 Thumbs.db
-npm-debug.log
-yarn-error.log
+
+# npm包鎖定檔案
 # package-lock.json
+
+# 測試覆蓋率報告
 coverage/
-lib-cov/
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.swp
-*.tgz
-*.mdf
-*.sdm
-*.swo
-*.swn
 
-# Local environment settings
-# .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# 暫存檔案
+tmp/
+temp/
 
-# Windows specific files
-*.bat
-*.cmd
-*.com
-*.dll
-*.exe
-*.msi
-*.pdb
-*.sys
-*.ps1
-
-# macOS specific files
-*.dmg
-.AppleDouble
-.LSOverride
-Icon?
-._*
-.Spotlight-V100
-.Trashes
-.vol
-.DS_Store
-
-# TypeScript specific
-*.tsbuildinfo
+config.json

@@ -12,6 +12,8 @@
   <app-settings-menu
     [projectId]="projectId"
     [readOnly]="isReadonly"
+    (uploadStart)="onUploadStart()"
+    (uploadEnd)="onUploadEnd()"
     (dataUpdated)="handleDataUpdated()"
   ></app-settings-menu>
 </div>

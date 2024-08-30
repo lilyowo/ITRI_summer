@@ -83,6 +83,8 @@
           <app-ut
             [projectId]="projectId"
             [readOnly]="readOnly"
+            (uploadStart)="onUploadStart()"
+            (uploadEnd)="onUploadEnd()"
             (dataUpdated)="handleDataUpdated()"
           ></app-ut>
         </div>
@@ -103,6 +105,8 @@
           <app-ft
             [projectId]="projectId"
             [readOnly]="readOnly"
+            (uploadStart)="onUploadStart()"
+            (uploadEnd)="onUploadEnd()"
             (dataUpdated)="handleDataUpdated()"
           ></app-ft>
         </div>

@@ -10,8 +10,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
   ```json
   {
-    "serverIp": "your backend server IP",
-    "serverPort": "your backend port",
+    "backendIp": "your backend server IP",
+    "backendPort": "your backend port",
     "frontendHost": "your frontend server IP",
     "frontendPort": "your frontend port"
   }

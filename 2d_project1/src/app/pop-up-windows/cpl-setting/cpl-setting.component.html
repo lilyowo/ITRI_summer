@@ -1,0 +1,102 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close-button" (click)="closeModal()">&times;</span>
+    <h2 class="modal-title">通訊酬載 CPL Setting</h2>
+    <hr class="title-divider" />
+    <div class="content-button-container">
+      <div class="input-section">
+        <div class="input-section-left">
+          <h3 class="input-title">Access Link</h3>
+          <div class="input-group">
+            <label for="AccessViewAngle">Access<br />輻射夾角</label>
+            <input
+              id="AccessViewAngle"
+              type="number"
+              [(ngModel)]="AccessViewAngle"
+              class="modal-input"
+            />
+          </div>
+          <div class="input-group">
+            <label for="AccessBeamAngle">Access<br />Beam夾角</label>
+            <input
+              id="AccessBeamAngle"
+              type="number"
+              [(ngModel)]="AccessBeamAngle"
+              class="modal-input"
+            />
+          </div>
+          <div class="input-group">
+            <label for="AccessBeamCount">Access<br />Beam數量</label>
+            <input
+              id="AccessBeamCount"
+              type="number"
+              [(ngModel)]="AccessBeamCount"
+              class="modal-input"
+              step="1"
+            />
+          </div>
+          <div class="input-group">
+            <label for="AccessBeamBandwidth">Access<br />Beam bandwidth</label>
+            <input
+              id="AccessBeamBandwidth"
+              type="number"
+              [(ngModel)]="AccessBeamBandwidth"
+              class="modal-input"
+            />
+          </div>
+        </div>
+        <div class="input-section-right">
+          <h3 class="input-title">Feeder Link</h3>
+          <div class="input-group">
+            <label for="FeederViewAngle">Feeder<br />輻射夾角</label>
+            <input
+              id="FeederViewAngle"
+              type="number"
+              [(ngModel)]="FeederViewAngle"
+              class="modal-input"
+            />
+          </div>
+          <div class="input-group">
+            <label for="FeederBeamAngle">Feeder<br />Beam夾角</label>
+            <input
+              id="FeederBeamAngle"
+              type="number"
+              [(ngModel)]="FeederBeamAngle"
+              class="modal-input"
+            />
+          </div>
+          <div class="input-group">
+            <label for="FeederBeamCount">Feeder<br />Beam數量</label>
+            <input
+              id="FeederBeamCount"
+              type="number"
+              [(ngModel)]="FeederBeamCount"
+              class="modal-input"
+              step="1"
+            />
+          </div>
+          <div class="input-group">
+            <label for="FeederBeamBandwidth">Feeder<br />Beam bandwidth</label>
+            <input
+              id="FeederBeamBandwidth"
+              type="number"
+              [(ngModel)]="FeederBeamBandwidth"
+              class="modal-input"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-container">
+        <select class="dropdown">
+          <option value="apply-all">Apply All</option>
+          <option value="apply-on-plane">Apply on plane...</option>
+        </select>
+      </div>
+      <p>Default ISL connecting algorithm：MinMaxR</p>
+      <div class="button-container">
+        <button class="create-button" (click)="cplSetting()">Set</button>
+        <button class="cancel-button" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

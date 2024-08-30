@@ -24,7 +24,8 @@
     "json2csv": "^6.0.0-alpha.2",
     "jsonwebtoken": "^9.0.2",
     "pdfkit": "^0.15.0",
-    "pg": "^8.12.0"
+    "pg": "^8.12.0",
+    "zeromq": "github:zeromq/zeromq.js"
   },
   "devDependencies": {
     "eslint": "^9.7.0",

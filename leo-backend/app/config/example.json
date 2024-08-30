@@ -1,0 +1,10 @@
+{
+  "backendIp": "0.0.0.0",
+  "backendPort": 3000,
+  "user": "Hamster",
+  "host": "localhost",
+  "database": "SatelliteDB",
+  "password": "hpassword",
+  "port": 5432,
+  "zmqBrokerUrl": "tcp://localhost:5559"
+}

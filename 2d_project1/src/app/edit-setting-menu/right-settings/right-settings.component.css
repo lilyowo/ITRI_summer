@@ -33,4 +33,5 @@ input {
 }
 .right-settings {
   z-index: 20;
+  overflow-y: auto; /* 启用垂直滚动条 */
 }

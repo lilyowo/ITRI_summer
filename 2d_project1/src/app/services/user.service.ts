@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +18,13 @@ export class UserService {
 
   clearUserId(): void {
     localStorage.removeItem(this.storageKey);
+  }
+
+  private updateNavBar = new Subject<void>();
+
+  updateNavBar$ = this.updateNavBar.asObservable();
+
+  triggerNavBarUpdate() {
+    this.updateNavBar.next();
   }
 }

@@ -2,11 +2,13 @@ CREATE TABLE "ISL" (
   "islId" serial NOT NULL,
   "satelliteId" int NOT NULL,
   "connectIslId" int, -- can be null
+  "serverSatId" int,
+  "serverIslId" int,
   "satAzimuth" float, --decimal(10,2)?
   "satElevation" float,
-  "lazerAzimuth" float,
-  "lazerElevation" float,
-  "lazerRange" float,
+  "laserAzimuth" float,
+  "laserElevation" float,
+  "laserRange" float,
   PRIMARY KEY ("islId"),
   FOREIGN KEY ("satelliteId") REFERENCES "Satellite"("satelliteId") ON DELETE CASCADE ON UPDATE NO ACTION,
   FOREIGN KEY ("connectIslId") REFERENCES "ISL"("islId") ON DELETE SET NULL ON UPDATE NO ACTION -- Assuming ISL can be connected to other ISLs

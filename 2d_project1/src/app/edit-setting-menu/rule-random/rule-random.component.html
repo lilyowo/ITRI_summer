@@ -3,61 +3,72 @@
     <div class="item-field">
       <label>亂數種子:</label>
       <input
-        type="text"
+        type="number"
         [value]="item.randomSeed"
         [readonly]="this.readOnly"
         [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
         (blur)="updateSettings('randomSeed', item, $event)"
+        pattern="\d*"
       />
     </div>
     <div class="item-field">
       <label>衛星損壞機率%:</label>
       <input
-        type="text"
+        type="number"
         [value]="item.satLossRate"
         [readonly]="this.readOnly"
         [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
         (blur)="updateSettings('satLossRate', item, $event)"
+        min="0"
+        max="100"
       />
     </div>
     <div class="item-field">
       <label>ISL斷線機率%:</label>
       <input
-        type="text"
+        type="number"
         [value]="item.ISLDisconnectRate"
         [readonly]="this.readOnly"
         [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
         (blur)="updateSettings('ISLDisconnectRate', item, $event)"
+        min="0"
+        max="100"
       />
     </div>
     <div class="item-field">
       <label>ISL損壞機率%:</label>
       <input
-        type="text"
+        type="number"
         [value]="item.ISLLossRate"
         [readonly]="this.readOnly"
         [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
         (blur)="updateSettings('ISLLossRate', item, $event)"
+        min="0"
+        max="100"
       />
     </div>
     <div class="item-field">
       <label>通訊酬載損壞機率%:</label>
       <input
-        type="text"
+        type="number"
         [value]="item.CPLLossRate"
         [readonly]="this.readOnly"
         [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
         (blur)="updateSettings('CPLLossRate', item, $event)"
+        min="0"
+        max="100"
       />
     </div>
     <div class="item-field">
       <label>封包遺失機率%:</label>
       <input
-        type="text"
+        type="number"
         [value]="item.PacketLossRate"
         [readonly]="this.readOnly"
         [ngClass]="{ readonly: this.readOnly, editable: !this.readOnly }"
         (blur)="updateSettings('PacketLossRate', item, $event)"
+        min="0"
+        max="100"
       />
     </div>
   </div>

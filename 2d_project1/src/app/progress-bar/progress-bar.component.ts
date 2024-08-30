@@ -1,12 +1,22 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  HostListener,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
-  styleUrls: ['./progress-bar.component.css']
+  styleUrls: ['./progress-bar.component.css'],
 })
 export class ProgressBarComponent implements OnInit, OnDestroy {
-  totalTime: number = 100; // 6000 seconds
+  @Input() totalTime: number = 100;
+  @Input() reportId: number = 1;
+  @Output() timeChanged = new EventEmitter<number>();
   currentTime: number = 0;
   intervalId: any;
   progressWidth: number = 0;
@@ -15,18 +25,21 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
   tooltipLeft: number = 0;
   hoveredTime: number = 0;
   showModal = false;
+  isPlayClicked = false;
+  isPauseClicked = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.updateProgressWidth();
   }
-
   ngOnDestroy() {
     this.clearInterval();
   }
 
   play() {
+    this.isPlayClicked = true;
+    this.isPauseClicked = false;
     this.clearInterval();
     this.intervalId = setInterval(() => {
       if (this.currentTime < this.totalTime) {
@@ -35,7 +48,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
       } else {
         this.pause();
       }
-      if(this.currentTime == this.totalTime){
+      if (this.currentTime == this.totalTime) {
         this.showModal = true;
       }
     }, 1000); // 1 second interval
@@ -45,6 +58,8 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
   }
 
   pause() {
+    this.isPauseClicked = true;
+    this.isPlayClicked = false;
     this.clearInterval();
   }
 
@@ -57,6 +72,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
 
   updateProgressWidth() {
     this.progressWidth = (this.currentTime / this.totalTime) * 100;
+    this.timeChanged.emit(this.currentTime);
   }
 
   onDragStart(event: MouseEvent) {
@@ -81,7 +97,9 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
   }
 
   updateProgressByMouseEvent(event: MouseEvent) {
-    const progressBar: HTMLElement = (event.target as HTMLElement).closest('.progress-bar') as HTMLElement;
+    const progressBar: HTMLElement = (event.target as HTMLElement).closest(
+      '.progress-bar',
+    ) as HTMLElement;
     if (progressBar) {
       const rect = progressBar.getBoundingClientRect();
       const offsetX = event.clientX - rect.left;
@@ -93,7 +111,9 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
   }
 
   onMouseMove(event: MouseEvent) {
-    const progressBar: HTMLElement = (event.target as HTMLElement).closest('.progress-bar') as HTMLElement;
+    const progressBar: HTMLElement = (event.target as HTMLElement).closest(
+      '.progress-bar',
+    ) as HTMLElement;
     if (progressBar) {
       const rect = progressBar.getBoundingClientRect();
       const offsetX = event.clientX - rect.left;

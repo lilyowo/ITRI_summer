@@ -2,20 +2,81 @@
   <div *ngFor="let item of payloadData" class="payload-item">
     <h3>CPL- {{ item.satelliteId }}</h3>
     <div class="item-field">
-      <label>輻射夾角 +/-:</label>
-      <input type="text" [value]="item.viewAngle" readonly class="readonly" />
+      <label>Access<br />輻射夾角 +/-:</label>
+      <input
+        type="text"
+        [value]="item.AccessViewAngle"
+        readonly
+        class="readonly"
+      />
     </div>
     <div class="item-field">
-      <label>Beam夾角 +/-:</label>
-      <input type="text" [value]="item.beamAngle" readonly class="readonly" />
+      <label>Access<br />Beam夾角 +/-:</label>
+      <input
+        type="text"
+        [value]="item.AccessBeamAngle"
+        readonly
+        class="readonly"
+      />
     </div>
     <div class="item-field">
-      <label>Beam數量:</label>
-      <input type="text" [value]="item.beamCount" readonly class="readonly" />
+      <label>Access<br />Beam數量:</label>
+      <input
+        type="text"
+        [value]="item.AccessBeamCount"
+        readonly
+        class="readonly"
+      />
     </div>
     <div class="item-field">
-      <label>Bandwidth:</label>
-      <input type="text" [value]="item.bandwidth" readonly class="readonly" />
+      <label>Access<br />Beam Bandwidth:</label>
+      <input
+        type="text"
+        [value]="
+          item.AccessBeamCount ? item.AccessBandwidth / item.AccessBeamCount : 0
+        "
+        readonly
+        class="readonly"
+      />
+    </div>
+    <hr class="dashed-line" />
+    <div class="item-field">
+      <label>Feeder<br />輻射夾角 +/-:</label>
+      <input
+        type="text"
+        [value]="item.FeederViewAngle"
+        readonly
+        class="readonly"
+      />
+    </div>
+    <div class="item-field">
+      <label>Feeder<br />Beam夾角 +/-:</label>
+      <input
+        type="text"
+        [value]="item.FeederBeamAngle"
+        readonly
+        class="readonly"
+      />
+    </div>
+    <div class="item-field">
+      <label>Feeder<br />Beam數量:</label>
+      <input
+        type="text"
+        [value]="item.FeederBeamCount"
+        readonly
+        class="readonly"
+      />
+    </div>
+    <div class="item-field">
+      <label>Feeder<br />Beam Bandwidth:</label>
+      <input
+        type="text"
+        [value]="
+          item.FeederBeamCount ? item.FeederBandwidth / item.FeederBeamCount : 0
+        "
+        readonly
+        class="readonly"
+      />
     </div>
     <hr />
   </div>

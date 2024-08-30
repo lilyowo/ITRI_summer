@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
-
 @Component({
   selector: 'app-rule-switch',
   templateUrl: './rule-switch.component.html',

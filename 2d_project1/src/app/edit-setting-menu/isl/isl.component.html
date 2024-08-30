@@ -1,6 +1,6 @@
 <div class="isl-container">
   <div *ngFor="let item of islData" class="isl-item">
-    <h3>ISL - {{ item.satelliteId }} - {{ item.islId }}</h3>
+    <h3>ISL - {{ item.serverSatId }} - {{ item.serverIslId }}</h3>
     <div class="item-field">
       <label>衛星方位角:</label>
       <input
@@ -23,7 +23,7 @@
       <label>旋轉方位角 +/-:</label>
       <input
         type="number"
-        [value]="item.lazerAzimuth"
+        [value]="item.laserAzimuth"
         readonly
         class="readonly"
       />
@@ -32,7 +32,7 @@
       <label>旋轉幅角 +/-:</label>
       <input
         type="number"
-        [value]="item.lazerElevation"
+        [value]="item.laserElevation"
         readonly
         class="readonly"
       />
@@ -41,7 +41,7 @@
       <label>有效射程:</label>
       <input
         type="number"
-        [value]="item.lazerRange"
+        [value]="item.laserRange"
         readonly
         class="readonly"
       />

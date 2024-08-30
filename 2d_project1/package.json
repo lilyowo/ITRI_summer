@@ -31,9 +31,11 @@
     "json2csv": "^6.0.0-alpha.2",
     "jspdf": "^2.5.1",
     "leaflet": "^1.9.4",
+    "leaflet.sync": "^0.2.4",
     "pdfkit": "^0.15.0",
     "rxjs": "~7.5.0",
     "satellite.js": "^5.0.0",
+    "semver": "^7.5.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

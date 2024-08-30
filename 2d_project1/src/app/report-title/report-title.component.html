@@ -2,16 +2,26 @@
   <div class="left-section">
     <!-- <span class="simulation-info">{{ simulationName }} {{ simulationTime }}</span> -->
     <div *ngFor="let title of reportTitle" class="simulation-info">
-      <span>{{ title.reportName }} {{ title.simuTime | date:'yyyy/MM/dd HH:mm:ss' }}</span>
+      <span
+        >{{ title.reportName }}
+        {{ title.simuTime | date: 'yyyy/MM/dd HH:mm:ss' }}</span
+      >
     </div>
   </div>
   <div class="right-section">
     <button (click)="onExportClick()" class="header-button">Export</button>
+    <button (click)="toggleHelpModal()" class="help-button">?</button>
   </div>
 </div>
-
+<!-- <button (click)="exportSettingsAsCsv()" class="download-settings-button">
+  Download settings
+</button> -->
 <div class="export-menu" *ngIf="showExportMenu">
   <button (click)="exportAs('word')" class="export-option">Word格式</button>
   <button (click)="exportAs('pdf')" class="export-option">PDF格式</button>
   <button (click)="exportAs('excel')" class="export-option">Excel格式</button>
 </div>
+<app-export-help
+  *ngIf="showHelpModal"
+  (close)="toggleHelpModal()"
+></app-export-help>

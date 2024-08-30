@@ -15,13 +15,13 @@ export class MessageService {
     private configService: ConfigService,
   ) {
     this.configService.loadConfig().subscribe((config) => {
-      this.apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+      this.apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
     });
   }
   getRecentReport(userId: number): Observable<any[]> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any[]>(`${apiUrl}/recent/${userId}`);
       }),
     );

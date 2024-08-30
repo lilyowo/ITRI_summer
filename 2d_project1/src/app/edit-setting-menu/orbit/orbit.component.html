@@ -1,6 +1,6 @@
 <div class="orbit-container">
   <div *ngFor="let item of orbitData" class="orbit-item">
-    <h3>軌道 {{ item.planeId }}</h3>
+    <h3>軌道 {{ item.serverPlaneId }}</h3>
     <div class="item-field">
       <label>軌道傾角:</label>
       <input type="text" [value]="item.inclination" readonly class="readonly" />

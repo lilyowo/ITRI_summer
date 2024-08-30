@@ -1,6 +1,19 @@
 <div *ngIf="charts">
-    <div *ngFor="let chart of charts" class="chart-container">
-      <h3>{{ chart.description }}</h3>
-      <img [src]="getImage(chart.image)" alt="Chart Image">
-    </div>
+  <div *ngFor="let chart of charts" class="chart-container">
+    <h3>{{ chart.dataTitle }}</h3>
+    <p>{{ chart.description }}</p>
+    <!-- <img [src]="getImage(chart.image)" alt="Chart Image"> -->
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th *ngFor="let header of chart.data.header">{{ header }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of chart.data.content">
+          <td *ngFor="let cell of row">{{ cell }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

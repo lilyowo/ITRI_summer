@@ -1,18 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PopUpGroundStationService } from './popupGroundStation.service';
 import { ProjectService } from './project.service';
+import { TaskService } from './task.service';
 import * as L from 'leaflet';
-import * as satellite from 'satellite.js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MarkerService {
+  deleteStart = new EventEmitter<void>();
+  deleteEnd = new EventEmitter<void>();
   constructor(
     private http: HttpClient,
     private popupService: PopUpGroundStationService,
     private projectService: ProjectService,
+    private taskService: TaskService,
   ) {}
 
   makeGroundStationMarkers(map: L.Map, projectId: number): void {
@@ -20,13 +23,21 @@ export class MarkerService {
     this.projectService.getFormattedGroundStations(projectId).subscribe(
       (groundStationData) => {
         // 處理 UT 數據
-        this.processGroundStations(groundStationData.ut, map, markers, 'green');
+        this.processGroundStations(
+          groundStationData.ut,
+          map,
+          markers,
+          'green',
+          0,
+        );
         // 處理 FT 數據
-        this.processGroundStations(groundStationData.ft, map, markers, 'blue');
-
-        // 如果需要，可以在這裡調整地圖範圍
-        // const bounds = L.featureGroup(markers).getBounds();
-        // map.fitBounds(bounds);
+        this.processGroundStations(
+          groundStationData.ft,
+          map,
+          markers,
+          'blue',
+          1,
+        );
       },
       (error) => {
         console.error('Error fetching ground station data:', error);
@@ -39,73 +50,73 @@ export class MarkerService {
     map: L.Map,
     markers: L.CircleMarker[],
     color: string,
+    type: number,
   ): void {
     for (const feature of data.features) {
       const lon = feature.geometry.coordinates[0];
       const lat = feature.geometry.coordinates[1];
+
+      // 原始位置的 marker
       const circle = L.circleMarker([lat, lon], {
         radius: 5,
         color: color,
+        pane: 'gsPane',
       }).addTo(map);
       circle.bindPopup(
         this.popupService.makeGroundStationPopup(feature.properties),
+        { pane: 'popupPane' },
       );
-      // circle;
+      this.addDeleteContextMenu(circle, feature, map, type);
       markers.push(circle);
+
+      // 镜像位置的 marker
+      const lonMirror = lon < 0 ? lon + 360 : lon - 360;
+      const circleMirror = L.circleMarker([lat, lonMirror], {
+        radius: 5,
+        color: color,
+        pane: 'gsPane',
+      }).addTo(map);
+      circleMirror.bindPopup(
+        this.popupService.makeGroundStationPopup(feature.properties),
+        { pane: 'popupPane' },
+      );
+      this.addDeleteContextMenu(circleMirror, feature, map, type);
+      markers.push(circleMirror);
     }
   }
 
-  makePlaneMarkers(map: L.Map, projectId: number): void {
-    this.projectService
-      .getPlanesByProjectId(projectId)
-      .subscribe((planes: any) => {
-        planes.forEach((plane: any) => {
-          const points = this.calculateOrbitPoints(plane);
-          const latlngs = points.map((point) => [point.lat, point.lng]);
-          const polyline = L.polyline(latlngs, {
-            color: 'lightgray',
-            weight: 1,
-          }).addTo(map);
-        });
-      });
-  }
-
-  calculateOrbitPoints(plane: any): any[] {
-    const { inclination, raan, eccentricity, arg_pe, altitude } = plane;
-    const points = [];
-
-    // 創建一個更準確的TLE
-    const epochYear = new Date().getUTCFullYear().toString().substr(-2);
-    const epochDay = (Date.now() / (1000 * 60 * 60 * 24)) % 365.25;
-    const meanMotion =
-      (Math.sqrt(398600.4418 / Math.pow(altitude + 6378.137, 3)) * 86400) /
-      (2 * Math.PI);
-
-    const tle1 = `1 00000U 00000A   ${epochYear}${epochDay.toFixed(8).padStart(12, '0')}  .00000000  00000-0  00000-0 0  9999`;
-    const tle2 = `2 00000 ${inclination.toFixed(4).padStart(8, ' ')} ${raan.toFixed(4).padStart(8, ' ')} ${eccentricity.toFixed(7).slice(2).padStart(7, '0')} ${arg_pe.toFixed(4).padStart(8, ' ')} 000.0000 ${meanMotion.toFixed(8).padStart(11, ' ')}`;
-
-    const satrec = satellite.twoline2satrec(tle1, tle2);
-
-    for (let i = 0; i < 1440; i += 10) {
-      const time = new Date();
-      time.setMinutes(time.getMinutes() + i);
-      const positionAndVelocity = satellite.propagate(satrec, time);
-      if (positionAndVelocity.position) {
-        const gmst = satellite.gstime(time);
-        if (
-          positionAndVelocity.position &&
-          typeof positionAndVelocity.position !== 'boolean'
-        ) {
-          const positionGd = satellite.eciToGeodetic(
-            positionAndVelocity.position,
-            gmst,
+  // 分离出来的删除功能，便于代码重用
+  private addDeleteContextMenu(
+    circle: L.CircleMarker,
+    feature: any,
+    map: L.Map,
+    type: number,
+  ): void {
+    circle.on('contextmenu', (e) => {
+      if (confirm('Are you sure you want to delete this marker?')) {
+        this.deleteStart.emit();
+        this.projectService
+          .deleteGroundStation(feature.properties.gsId, type)
+          .subscribe(
+            (response) => {
+              console.log('Ground station deleted successfully', response);
+              map.removeLayer(circle);
+            },
+            (error) => {
+              console.error('Error deleting ground station', error);
+            },
           );
-          const longitude = satellite.degreesLong(positionGd.longitude);
-          const latitude = satellite.degreesLat(positionGd.latitude);
-          points.push({ lat: latitude, lng: longitude });
-        }
+        this.taskService.deleteGroundStation(feature.properties.gsId).subscribe(
+          () => {
+            console.log('GroundStation deleted.');
+            this.deleteEnd.emit();
+          },
+          (error) => {
+            console.error('Error deleting GroundStation:', error);
+            this.deleteEnd.emit();
+          },
+        );
       }
-    }
-    return points;
+    });
   }
 }

@@ -1,6 +1,7 @@
 CREATE TABLE "Plane" (
   "planeId" serial NOT NULL ,
   "constellationId" int NOT NULL,
+  "serverPlaneId" int,
   "inclination" float,
   "raan" float,
   "eccentricity" float,

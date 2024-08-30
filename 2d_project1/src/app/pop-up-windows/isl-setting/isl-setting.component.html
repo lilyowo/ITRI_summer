@@ -1,0 +1,96 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close-button" (click)="closeModal()">&times;</span>
+    <h2 class="modal-title">ISL Setting</h2>
+    <hr class="title-divider" />
+    <div class="content-button-container">
+      <div class="input-section">
+        <div class="input-section-item">
+          <label for="azimuth">ISL1-<br />方位角 </label>
+          <input
+            id="azimuth"
+            type="number"
+            [(ngModel)]="satAzimuth1"
+            class="modal-input"
+          />
+        </div>
+        <div class="input-section-item">
+          <label for="azimuth">ISL2-<br />方位角 </label>
+          <input
+            id="azimuth"
+            type="number"
+            [(ngModel)]="satAzimuth2"
+            class="modal-input"
+          />
+        </div>
+      </div>
+      <div class="input-section">
+        <div class="input-section-item">
+          <label for="azimuth">ISL3-<br />方位角 </label>
+          <input
+            id="azimuth"
+            type="number"
+            [(ngModel)]="satAzimuth3"
+            class="modal-input"
+          />
+        </div>
+        <div class="input-section-item">
+          <label for="azimuth">ISL4-<br />方位角 </label>
+          <input
+            id="azimuth"
+            type="number"
+            [(ngModel)]="satAzimuth4"
+            class="modal-input"
+          />
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="elevation">衛星幅角 </label>
+        <input
+          id="elevation"
+          type="number"
+          [(ngModel)]="satElevation"
+          class="modal-input"
+        />
+      </div>
+      <div class="input-group">
+        <label for="rotation-azimuth">旋轉方位角 </label>
+        <input
+          id="rotation-azimuth"
+          type="number"
+          [(ngModel)]="laserAzimuth"
+          class="modal-input"
+        />
+      </div>
+      <div class="input-group">
+        <label for="rotation-elevation">旋轉幅角 </label>
+        <input
+          id="rotation-elevation"
+          type="number"
+          [(ngModel)]="laserElevation"
+          class="modal-input"
+        />
+      </div>
+      <div class="input-group">
+        <label for="range">有效射程 </label>
+        <input
+          id="range"
+          type="number"
+          [(ngModel)]="laserRange"
+          class="modal-input"
+        />
+      </div>
+      <div class="dropdown-container">
+        <select class="dropdown">
+          <option value="apply-all">Apply All</option>
+          <option value="apply-on-plane">Apply on plane...</option>
+        </select>
+      </div>
+      <p>Default ISL connecting algorithm：MinMaxR</p>
+      <div class="button-container">
+        <button class="create-button" (click)="islSetting()">Set</button>
+        <button class="cancel-button" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

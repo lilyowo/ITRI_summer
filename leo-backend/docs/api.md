@@ -137,6 +137,27 @@
     }
     ```
 
+- Update Last Update Time
+
+  - method: PUT
+  - URL: `/project/updateLastEdit/:projectId`
+  - Description: update project's lastEditTime by project, when start edit a project.
+  - request:
+
+  ```json
+  {
+    "projectId": 7
+  }
+  ```
+
+  - response:
+
+  ```json
+  {
+    "message": "Project updated successfully"
+  }
+  ```
+
 ## Project - Report
 
 - Get all reports
@@ -631,9 +652,9 @@
       "connectIslId": 1,
       "satAzimuth": 0.0,
       "satElevation": 0.0,
-      "lazerAzimuth": 160,
-      "lazerElevation": 55,
-      "lazerRange": 7000
+      "laserAzimuth": 160,
+      "laserElevation": 55,
+      "laserRange": 7000
     }
     ```
 
@@ -657,6 +678,57 @@
       "beamAngle": 0.0186,
       "beamCount": 0.000511,
       "bandwidth": 264.8931
+    }
+    ```
+
+- Update ISL Settings
+
+  - method: PUT
+  - URL: `/project/islSettings/:projectId`
+  - Description: Update all ISLs values by projectId
+  - request parameter:
+    ```json
+    {
+      "projectId": 3
+    }
+    ```
+  - request body: satAzimuth, satElevation, laserAzimuth, laserElevation, laserRange
+  - response:
+    ```json
+    {
+      "message": "ISL records updated successfully."
+    }
+    ```
+
+- Update CPL Settings
+
+  - method: PUT
+  - URL: `/project/cplSettings/:projectId`
+  - Description: Update all CPL and its Beam values by projectId
+  - request parameter:
+    ```json
+    {
+      "projectId": 3
+    }
+    ```
+  - request body:
+
+  ```json
+  {
+    "cplSettings": {
+      "viewAngle": 45,
+      "beamAngle": 90,
+      "beamCount": 1,
+      "bandwidth": 1450,
+      "beamBandwidth": 3000
+    }
+  }
+  ```
+
+  - response:
+    ```json
+    {
+      "message": "CPL and Beam records updated successfully."
     }
     ```
 
@@ -728,6 +800,28 @@
     }
     ```
 
+- Delete ground stations
+
+  - method: DELETE
+  - URL: `/project/groundStations/:gsId/:type`
+  - description: delete a ground station by its id and type. type 0 UT, type 1 FT.
+  - request
+
+  ```json
+  {
+    "gsId": 1,
+    "type": 0
+  }
+  ```
+
+  - response
+
+  ```json
+  {
+    "message": "GroundStation deleted successfully"
+  }
+  ```
+
 ## Chart
 
 - Get all charts
@@ -747,7 +841,11 @@
       "chartId": 1,
       "reportId": 3,
       "description": "Example description...",
-      "image": "'image'::bytea"
+      "image": "'image'::bytea",
+      "data":{
+        "header":["throughput", "latency", "hop", "distance", "loss", "rx_buffer", "tx_buffer"],
+        "content":[[0.000914962, 59.0556, 6.00462, 17695.7, 0.0814261, 4500, 0],...]
+      }
     }
     ```
 
@@ -771,7 +869,7 @@
     ```
 
 - Export chart
-- method: GET
+  - method: GET
   - URL: `/chart/:reportId/:format`
   - Description: Get all chart by reportId, then make pdf or docx or csv file, download it.
   - request:
@@ -786,4 +884,228 @@
     HTTP/1.1 200 OK
     Content-Disposition: attachment; filename="example.txt"
     Content-Type: text/plain
+  ```
+
+## Task
+
+- Process TLE
+
+  - method: POST
+  - URL:`/server/tle/:projectId`
+  - Description: Send TLE string to App Server then Receive Constellation data, finally store to DB
+  - request:
+
+  ```json
+  {
+    "projectId": 7
+  }
+  ```
+
+  - request body: tleString
+  - response:
+
+  ```json
+  {
+    "message": "Data inserted successfully"
+  }
+  ```
+
+- Set ISL Config
+
+  - method: POST
+  - URL:`/server/isl/:projectId`
+  - Description: Send ISL values and TLE string to App Server then Receive ISL data, finally store ISL connectIslId to DB
+  - request:
+
+  ```json
+  {
+    "projectId": 7
+  }
+  ```
+
+  - request body: satAzimuth, satElevation, laserAzimuth, laserElevation, laserRange
+  - response:
+
+  ```json
+  {
+    "message": "ISL connect successful!"
+  }
+  ```
+
+- add Ground Station
+
+  - method: POST
+  - URL:`/server/addGroundStation/:projectId`
+  - Description: Send add ground station info to App Server.
+  - request:
+
+  ```json
+  {
+    "projectId": 7
+  }
+  ```
+
+  - request body:
+
+  ```json
+  {
+    "gsInfo": {
+      "gsId": 1,
+      "latitude": 25,
+      "longitude": 120,
+      "type": 0
+    }
+  }
+  ```
+
+  - response:
+
+  ```json
+  {
+    "message": "Add ground station id = ${id}",
+    "gsId": 1
+  }
+  ```
+
+- modify Ground Station
+
+  - method: POST
+  - URL:`/server/modifyGroundStation/:projectId`
+  - Description: Send modify ground station info to App Server.
+  - request:
+
+  ```json
+  {
+    "projectId": 7
+  }
+  ```
+
+  - request body:
+
+  ```json
+  {
+    "gsInfo": {
+      "gsId": 1,
+      "latitude": 25,
+      "longitude": 120,
+      "type": 0
+    }
+  }
+  ```
+
+  - response:
+
+  ```json
+  {
+    "message": "modify ground station"
+  }
+  ```
+
+- delete Ground Station
+
+  - method: POST
+  - URL:`/server/deleteGroundStation/:projectId`
+  - Description: Send modify ground station info to App Server.
+  - request:
+
+  ```json
+  {
+    "gsId": 7
+  }
+  ```
+
+  - request body:{}
+
+  - response:
+
+  ```json
+  {
+    "message": "delete ground station"
+  }
+  ```
+
+- Set CPL Config
+
+  - method: POST
+  - URL:`/server/setCplConfig/:projectId`
+  - Description: Send CPL Setting info to App Server.
+  - request:
+
+  ```json
+  {
+    "projectId": 7
+  }
+  ```
+
+  - request body:
+
+  ```json
+  {
+    "cplSettings": {
+      "viewAngle": 45,
+      "beamAngle": 90,
+      "beamCount": 1,
+      "bandwidth": 1450,
+      "beamBandwidth": 3000
+    }
+  }
+  ```
+
+  - response:
+
+  ```json
+  {
+    "message": "dseting cpl config"
+  }
+  ```
+
+- Set Simulation Config
+
+  - method:POST
+  - URL: `/server/setSimuConfig/:projectId`
+  - description: Send simulation settings and simulation items to app server.
+  - request:
+
+  ```json
+  {
+    "projectId": 7
+  }
+  ```
+
+  - response
+
+  ```json
+  {
+    "message": "seting simu config"
+  }
+  ```
+
+- Get Simulation Result
+
+  - method: POST
+  - URL: `/server/makeSimulationResult/:projectId`
+  - Description: Send simulation time to app server then get simulation result. Store report info to DB Chart table, return report ID and simulation info.
+  - request:
+
+  ```json
+  {
+    "projectId": 7
+  }
+  ```
+
+  - request body
+
+  ```json
+  {
+    "simuTime": 1000
+  }
+  ```
+
+  - result:
+
+  ```json
+  {
+    "simulationInfo": {},
+    "reportId": 1
+  }
   ```

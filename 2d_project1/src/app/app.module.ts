@@ -41,11 +41,13 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MarkerService } from './services/marker.service';
 import { PopUpGroundStationService } from './services/popupGroundStation.service';
 import { PopUpSatelliteService } from './services/popupSatellite.service';
-import { TestComponent } from './test/test.component';
 import { ReportInfoComponent } from './report-info/report-info.component';
 import { Map2dComponent } from './maps/map2d/map2d.component';
 import { Map3dComponent } from './maps/map3d/map3d.component';
 import { MapTreeComponent } from './maps/map-tree/map-tree.component';
+import { IslSettingComponent } from './pop-up-windows/isl-setting/isl-setting.component';
+import { CplSettingComponent } from './pop-up-windows/cpl-setting/cpl-setting.component';
+import { ExportHelpComponent } from './pop-up-windows/export-help/export-help.component';
 
 @NgModule({
   declarations: [
@@ -82,11 +84,13 @@ import { MapTreeComponent } from './maps/map-tree/map-tree.component';
     DeleteProjectComponent,
     UploadTleComponent,
     ViewResultComponent,
-    TestComponent,
     ReportInfoComponent,
     Map2dComponent,
     Map3dComponent,
     MapTreeComponent,
+    IslSettingComponent,
+    CplSettingComponent,
+    ExportHelpComponent,
   ],
   imports: [
     BrowserModule,

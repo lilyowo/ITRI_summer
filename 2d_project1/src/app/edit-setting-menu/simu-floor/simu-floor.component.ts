@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
-
 @Component({
   selector: 'app-simu-floor',
   templateUrl: './simu-floor.component.html',
@@ -11,9 +10,7 @@ export class SimuFloorComponent implements OnInit {
   dataGroup: any[] = [];
   @Input() projectId!: number;
   @Input() readOnly!: boolean;
-
   constructor(private projectService: ProjectService) {}
-
   ngOnInit(): void {
     this.projectService.getSimuItemsByProjectId(this.projectId).subscribe(
       (simuItems) => {

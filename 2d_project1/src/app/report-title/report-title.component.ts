@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChartService } from '../services/chart.service';
 import { ExportService } from '../services/export.service';
+import { ReportService } from '../services/report.service';
 import * as saveAs from 'file-saver';
 
 @Component({
@@ -19,8 +20,10 @@ export class ReportTitleComponent implements OnInit {
     private route: ActivatedRoute,
     private chartService: ChartService,
     private exportService: ExportService,
+    private reportService: ReportService,
   ) {}
   showExportMenu: boolean = false;
+  showHelpModal = false;
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -59,5 +62,26 @@ export class ReportTitleComponent implements OnInit {
           saveAs(blob, `${fileName}.csv`);
         });
     }
+  }
+
+  exportSettingsAsCsv(): void {
+    const projectId = 7; // 設定預設的 projectId
+
+    // 更新 constellationSettings
+    this.reportService
+      .updateConstellationSettings(projectId, this.reportId)
+      .subscribe(() => {
+        // 下載 CSV 檔案
+        this.reportService
+          .exportConstellationSettingsAsCsv(this.reportId)
+          .subscribe((blob) => {
+            const fileName = `ConstellationSettings_${this.reportId}.csv`;
+            saveAs(blob, fileName);
+          });
+      });
+  }
+
+  toggleHelpModal() {
+    this.showHelpModal = !this.showHelpModal;
   }
 }

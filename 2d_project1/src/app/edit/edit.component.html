@@ -4,10 +4,18 @@
       #centralCanvas
       [view]="currentView"
       [projectId]="projectId"
+      (uploadStart)="onUploadStart()"
+      (uploadEnd)="onUploadEnd()"
     ></app-central-canvas>
   </div>
   <div class="progress-bar-container" *ngIf="!hideProgressBar">
-    <app-progress-bar class="progress-bar"></app-progress-bar>
+    <app-progress-bar
+      #progressBar
+      class="progress-bar"
+      [totalTime]="simuTime"
+      [reportId]="reportId"
+      (timeChanged)="onTimeChanged($event)"
+    ></app-progress-bar>
   </div>
 
   <div class="format-tabs">
@@ -15,15 +23,21 @@
   </div>
 
   <div *ngIf="!hideLeft" class="left-tools">
-    <app-left-tools></app-left-tools>
+    <app-left-tools [projectId]="projectId"></app-left-tools>
   </div>
 
   <div *ngIf="!hideRight" class="right-settings">
     <app-right-settings
-      (startSimulation)="startSimulation()"
+      (startSimulation)="startSimulation($event)"
+      (endSimulation)="endSimulation($event)"
       (toggleRightSettings)="toggleRightSettings()"
       [projectId]="projectId"
+      (uploadStart)="onUploadStart()"
+      (uploadEnd)="onUploadEndWithoutReload()"
       (dataUpdated)="handleDataUpdated()"
     ></app-right-settings>
   </div>
+</div>
+<div *ngIf="loading" class="loading-overlay">
+  <div class="loading-spinner"></div>
 </div>

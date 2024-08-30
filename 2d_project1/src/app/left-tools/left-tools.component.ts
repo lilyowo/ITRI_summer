@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+// import { Location } from '@angular/common'; // Import Location service
 @Component({
   selector: 'app-left-tools',
   templateUrl: './left-tools.component.html',
   styleUrls: ['./left-tools.component.css'],
 })
 export class LeftToolsComponent implements OnInit {
+  @Input() projectId!: number;
   showModal = false;
+  showIslModal = false;
+  showCplModal = false;
+  loading = false;
   constructor() {}
 
   ngOnInit(): void {}
@@ -15,6 +20,19 @@ export class LeftToolsComponent implements OnInit {
   }
   toggleModal() {
     this.showModal = !this.showModal;
+  }
+  onUploadStart() {
+    this.loading = true;
+  }
+  onUploadEnd() {
+    this.loading = false;
+    window.location.reload();
+  }
+  toggleIslModal() {
+    this.showIslModal = !this.showIslModal;
+  }
+  toggleCplModal() {
+    this.showCplModal = !this.showCplModal;
   }
   onUTDragStart(event: DragEvent) {
     event.dataTransfer?.setData('text/plain', 'UT');

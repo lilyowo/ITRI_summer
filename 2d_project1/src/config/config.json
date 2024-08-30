@@ -1,6 +1,0 @@
-{
-  "serverIp": "192.168.239.1",
-  "serverPort": 3000,
-  "frontendHost": "172.20.10.6",
-  "frontendPort": 4200
-}

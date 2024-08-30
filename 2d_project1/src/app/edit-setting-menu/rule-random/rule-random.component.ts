@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
-
 @Component({
   selector: 'app-rule-random',
   templateUrl: './rule-random.component.html',
@@ -11,9 +10,7 @@ export class RuleRandomComponent implements OnInit {
   ruleRandoms: any[] = [];
   @Input() projectId!: number;
   @Input() readOnly!: boolean;
-
   constructor(private projectService: ProjectService) {}
-
   ngOnInit(): void {
     this.projectService.getSimuSettingsByProjectId(this.projectId).subscribe(
       (simuSettings) => {

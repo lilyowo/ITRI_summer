@@ -11,7 +11,6 @@ export class SimuSwitchComponent implements OnInit {
   dataGroup: any[] = [];
   @Input() projectId!: number;
   @Input() readOnly!: boolean;
-
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {

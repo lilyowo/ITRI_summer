@@ -14,7 +14,7 @@ export class AuthService {
     private configService: ConfigService,
   ) {
     this.configService.loadConfig().subscribe((config) => {
-      this.apiUrl = `http://${config.serverIp}:${config.serverPort}/auth/login`;
+      this.apiUrl = `http://${config.backendIp}:${config.backendPort}/auth/login`;
     });
   }
   login(email: string, password: string): Observable<any> {

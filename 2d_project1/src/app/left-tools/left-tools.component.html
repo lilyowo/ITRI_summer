@@ -2,14 +2,18 @@
   <button class="tool-button" (click)="toggleModal()">
     <img src="assets/tool1.png" alt="Tool 1" />
   </button>
-  <button class="tool-button" (click)="handleButtonClick('軌道')">
+
+  <!-- <button class="tool-button" (click)="handleButtonClick('軌道')">
     <img src="assets/tool2.png" alt="Tool 2" />
   </button>
   <button class="tool-button" (click)="handleButtonClick('衛星')">
     <img src="assets/tool3.png" alt="Tool 3" />
-  </button>
-  <button class="tool-button" (click)="handleButtonClick('ISL')">
+  </button> -->
+  <button class="tool-button" (click)="toggleIslModal()">
     <img src="assets/tool4.png" alt="Tool 4" />
+  </button>
+  <button class="tool-button" (click)="toggleCplModal()">
+    <img src="assets/tool7.png" alt="Tool 7" />
   </button>
   <button
     class="tool-button"
@@ -26,4 +30,27 @@
     <img src="assets/tool6.png" alt="Tool 6" />
   </button>
 </div>
-<app-upload-tle *ngIf="showModal" (close)="toggleModal()"></app-upload-tle>
+<app-upload-tle
+  *ngIf="showModal"
+  (close)="toggleModal()"
+  [projectId]="projectId"
+  (uploadStart)="onUploadStart()"
+  (uploadEnd)="onUploadEnd()"
+></app-upload-tle>
+<app-isl-setting
+  *ngIf="showIslModal"
+  (close)="toggleIslModal()"
+  [projectId]="projectId"
+  (uploadStart)="onUploadStart()"
+  (uploadEnd)="onUploadEnd()"
+></app-isl-setting>
+<app-cpl-setting
+  *ngIf="showCplModal"
+  (close)="toggleCplModal()"
+  [projectId]="projectId"
+  (uploadStart)="onUploadStart()"
+  (uploadEnd)="onUploadEnd()"
+></app-cpl-setting>
+<div *ngIf="loading" class="loading-overlay">
+  <div class="loading-spinner"></div>
+</div>

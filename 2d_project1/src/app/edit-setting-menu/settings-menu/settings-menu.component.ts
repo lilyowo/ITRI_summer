@@ -8,6 +8,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class SettingsMenuComponent implements OnInit {
   @Input() projectId!: number;
   @Input() readOnly!: boolean;
+  @Output() uploadStart = new EventEmitter<void>();
+  @Output() uploadEnd = new EventEmitter<void>();
   @Output() dataUpdated = new EventEmitter<void>(); // 新增 EventEmitter
 
   isOpen: { [key: string]: boolean } = {
@@ -36,5 +38,11 @@ export class SettingsMenuComponent implements OnInit {
   }
   handleDataUpdated(): void {
     this.dataUpdated.emit(); // 發出事件
+  }
+  onUploadStart() {
+    this.uploadStart.emit();
+  }
+  onUploadEnd() {
+    this.uploadEnd.emit();
   }
 }

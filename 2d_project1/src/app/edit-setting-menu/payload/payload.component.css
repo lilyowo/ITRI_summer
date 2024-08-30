@@ -1,43 +1,47 @@
 .payload-container {
-    background-color: white;
-    color: black;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-    
+
 .payload-item {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-    
+
 .payload-item h3 {
-    margin: 0 0 10px 0;
+  margin: 0 0 10px 0;
 }
 
 .item-field {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .item-field label {
-    flex: 1;
-  }
-  
-  .item-field input {
-    flex: 2;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .readonly {
-    background-color: #f0f0f0;  
-  }
-  
-  hr {
-    border: 0;
-    border-top: 1px solid black;
-    margin: 20px 0;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.item-field label {
+  flex: 1;
+}
+
+.item-field input {
+  flex: 2;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.readonly {
+  background-color: #f0f0f0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid black;
+  margin: 20px 0;
+}
+.dashed-line {
+  border: none;
+  border-top: 1px dashed lightgray;
+  margin: 10px 0;
+}

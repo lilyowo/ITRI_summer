@@ -8,6 +8,10 @@ const {
   ImageRun,
   AlignmentType,
   TextRun,
+  Table,
+  TableRow,
+  TableCell,
+  WidthType,
 } = require("docx");
 const sizeOf = require("image-size");
 const { Parser } = require("json2csv");
@@ -124,6 +128,15 @@ const createWord = async (charts, fileName) => {
   const children = [];
 
   for (const chart of charts) {
+    // 添加標題
+    children.push(
+      new Paragraph({
+        children: [
+          new TextRun({ text: chart.dataTitle, bold: true, size: 24 }),
+        ],
+      })
+    );
+
     // 添加描述
     if (chart.description) {
       children.push(
@@ -135,6 +148,48 @@ const createWord = async (charts, fileName) => {
       children.push(new Paragraph({ children: [new TextRun("")] }));
     }
 
+    // 添加一個空行
+    children.push(new Paragraph({ children: [new TextRun("")] }));
+    // 處理表格
+    if (chart.data && chart.data.header && chart.data.content) {
+      const table = new Table({
+        width: {
+          size: 100,
+          type: WidthType.PERCENTAGE,
+        },
+        rows: [
+          new TableRow({
+            children: chart.data.header.map(
+              (header) =>
+                new TableCell({
+                  children: [
+                    new Paragraph({
+                      children: [new TextRun({ text: header, bold: true })],
+                    }),
+                  ],
+                })
+            ),
+          }),
+          ...chart.data.content.map(
+            (row) =>
+              new TableRow({
+                children: row.map(
+                  (cell) =>
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          children: [new TextRun(cell.toString())],
+                        }),
+                      ],
+                    })
+                ),
+              })
+          ),
+        ],
+      });
+      children.push(table);
+    }
+    // 添加一個空行
     children.push(new Paragraph({ children: [new TextRun("")] }));
 
     processImage(chart, tempDir, children);
@@ -171,16 +226,88 @@ const createWord = async (charts, fileName) => {
   });
 };
 
+// const createCsv = async (charts, fileName) => {
+//   const fields = Object.keys(charts[0]).filter((field) => field !== "image");
+//   const json2csvParser = new Parser({
+//     fields,
+//     // 添加 BOM 標記以確保 Excel 正確識別 UTF-8 編碼
+//     withBOM: true,
+//     // 設置分隔符為製表符，可以更好地處理包含逗號的中文文本
+//     delimiter: "\t",
+//   });
+//   const csv = json2csvParser.parse(charts);
+//   // 添加 UTF-8 BOM
+//   const bom = "\uFEFF";
+//   const csvWithBom = bom + csv;
+
+//   const filePath = path.join(__dirname, "../temp", `MyCSVFile.csv`);
+
+//   // 使用 UTF-8 編碼寫入文件
+//   fs.writeFileSync(filePath, csvWithBom, { encoding: "utf8" });
+//   clearTempDirectory();
+//   return filePath;
+// };
 const createCsv = async (charts, fileName) => {
-  const fields = Object.keys(charts[0]).filter((field) => field !== "image");
-  const json2csvParser = new Parser({ fields });
-  const csv = json2csvParser.parse(charts);
-  const filePath = path.join(__dirname, "../temp", `MyCSVFile.csv`);
-  fs.writeFileSync(filePath, csv);
+  // 處理每個 chart 對象，展平 data 字段
+  const processedCharts = charts.map((chart) => {
+    const flatChart = { ...chart };
+    delete flatChart.image; // 移除 image 字段
+
+    if (flatChart.data) {
+      const data =
+        typeof flatChart.data === "string"
+          ? JSON.parse(flatChart.data)
+          : flatChart.data;
+
+      // 添加 header 列
+      if (data.header) {
+        data.header.forEach((header, index) => {
+          flatChart[`header_${index + 1}`] = header;
+        });
+      }
+
+      // 添加 content 行
+      if (data.content) {
+        data.content.forEach((row, rowIndex) => {
+          row.forEach((cell, cellIndex) => {
+            flatChart[`content_row${rowIndex + 1}_col${cellIndex + 1}`] = cell;
+          });
+        });
+      }
+
+      delete flatChart.data; // 移除原始的 data 字段
+    }
+
+    return flatChart;
+  });
+
+  // 獲取所有可能的字段
+  const allFields = new Set();
+  processedCharts.forEach((chart) => {
+    Object.keys(chart).forEach((key) => allFields.add(key));
+  });
+
+  const fields = Array.from(allFields);
+
+  const json2csvParser = new Parser({
+    fields,
+    withBOM: true,
+    delimiter: ",", // 使用逗號作為分隔符
+    quote: '"', // 使用雙引號包裹字段
+    escapeQuote: '"', // 雙引號內的雙引號用兩個雙引號轉義
+    excelStrings: true, // 確保Excel能正確解析包含逗號的字符串
+  });
+
+  const csv = json2csvParser.parse(processedCharts);
+  const bom = "\uFEFF";
+  const csvWithBom = bom + csv;
+
+  const filePath = path.join(__dirname, "../temp", `${fileName}.csv`);
+
+  fs.writeFileSync(filePath, csvWithBom, { encoding: "utf8" });
   clearTempDirectory();
   return filePath;
 };
-
 module.exports = {
   createPdf,
   createWord,

@@ -1,25 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
+import { SimulationService } from '../services/simulation.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css'],
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, OnDestroy {
+  private subscription!: Subscription;
   pageTitle: string = '';
   userId: number = -1;
   recentReport: any = null;
+  startedSimulation: boolean = false;
   constructor(
     private router: Router,
     private userService: UserService,
     private messageService: MessageService,
+    private simulationService: SimulationService,
   ) {}
 
   ngOnInit(): void {
+    this.subscription = this.userService.updateNavBar$.subscribe(() => {
+      this.updatePageTitle(this.router.url);
+      if (this.userId !== -1) {
+        this.loadRecentReport(this.userId);
+      }
+    });
     this.userId = this.userService.getUserId();
+    this.startedSimulation = this.simulationService.getStartedSimulation();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updatePageTitle(this.router.url);
@@ -35,14 +47,20 @@ export class NavBarComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   updatePageTitle(url: string): void {
-    const started_simulation = false; // 這個值應該根據你的應用邏輯來動態設置
+    this.startedSimulation = this.simulationService.getStartedSimulation();
     if (url.includes('/login')) {
       this.pageTitle = '登入頁面';
     } else if (url.includes('/projectlist')) {
       this.pageTitle = '星網專案管理';
     } else if (url.includes('/edit')) {
-      this.pageTitle = started_simulation ? '星網模擬' : '編輯星網';
+      this.pageTitle = this.startedSimulation ? '星網模擬' : '編輯星網';
     } else if (url.includes('/report')) {
       this.pageTitle = '分析報告';
     } else {

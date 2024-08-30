@@ -18,14 +18,14 @@ export class ProjectService {
     private configService: ConfigService,
   ) {
     this.configService.loadConfig().subscribe((config) => {
-      this.apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+      this.apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
     });
   }
   //from project controller
   getProjectsByUserId(userId: number): Observable<Project[]> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any[]>(`${apiUrl}/user/${userId}`);
       }),
       map((response) =>
@@ -42,7 +42,7 @@ export class ProjectService {
   addProject(userId: number, projectName: string): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.post<any>(apiUrl, { userId, projectName });
       }),
     );
@@ -50,7 +50,7 @@ export class ProjectService {
   deleteProject(projectId: number): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.delete<any>(`${apiUrl}/delete/${projectId}`);
       }),
     );
@@ -59,7 +59,7 @@ export class ProjectService {
   searchProjects(userId: number, query: string): Observable<Project[]> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project/search/user/${userId}`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project/search/user/${userId}`;
         return this.http.get<any[]>(`${apiUrl}?query=${query}`);
       }),
       map((response) =>
@@ -74,11 +74,20 @@ export class ProjectService {
     );
   }
 
+  updateLastEditTime(projectId: number): Observable<any> {
+    return this.configService.loadConfig().pipe(
+      switchMap((config) => {
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
+        return this.http.put<any>(`${apiUrl}/updateLastEdit/${projectId}`, {});
+      }),
+    );
+  }
+
   //from project REPORT controller
   getReportsByProjectId(projectId: number): Observable<Simulation[]> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any[]>(`${apiUrl}/report/${projectId}`);
       }),
       map((response) =>
@@ -99,7 +108,7 @@ export class ProjectService {
   ): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any>(
           `${apiUrl}/groundStations/${projectId}/${type}`,
         );
@@ -149,7 +158,7 @@ export class ProjectService {
   ): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.put<any>(
           `${apiUrl}/groundStation/${gsId}/${type}`,
           groundStationData,
@@ -165,11 +174,21 @@ export class ProjectService {
   ): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         const groundStationData = { projectId, longitude, latitude, type };
         return this.http.post<any>(
           `${apiUrl}/groundStation`,
           groundStationData,
+        );
+      }),
+    );
+  }
+  deleteGroundStation(gsId: number, type: number): Observable<any> {
+    return this.configService.loadConfig().pipe(
+      switchMap((config) => {
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
+        return this.http.delete<any>(
+          `${apiUrl}/groundStations/${gsId}/${type}`,
         );
       }),
     );
@@ -179,7 +198,7 @@ export class ProjectService {
   getPlanesByProjectId(projectId: number): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any>(`${apiUrl}/planes/${projectId}`);
       }),
     );
@@ -188,7 +207,7 @@ export class ProjectService {
   getSatellitesByProjectId(projectId: number): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any>(`${apiUrl}/satellites/${projectId}`);
       }),
     );
@@ -197,7 +216,7 @@ export class ProjectService {
   getIslByProjectId(projectId: number): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any>(`${apiUrl}/isls/${projectId}`);
       }),
     );
@@ -206,7 +225,7 @@ export class ProjectService {
   getCplByProjectId(projectId: number): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any>(`${apiUrl}/cpls/${projectId}`);
       }),
     );
@@ -229,25 +248,125 @@ export class ProjectService {
             properties: {
               satelliteId: satellite.satelliteId,
               planeId: satellite.planeId,
+              serverPlaneId: satellite.serverPlaneId,
               satName: satellite.satName,
               latitude: satellite.latitude,
               longitude: satellite.longitude,
               altitude: satellite.altitude,
+              serverSatId: satellite.serverSatId,
             },
           })),
         });
-  
+
         return formatSatellites(satellites);
-      })
+      }),
     );
   }
-  
+  getFormattedSatelliteswithSatId(
+    projectId: number,
+    satId: number,
+  ): Observable<any> {
+    return this.getSatellitesByProjectId(projectId).pipe(
+      map((satellites) => {
+        const satellite = satellites.find(
+          (sat: any) => sat.serverSatId === satId,
+        );
+        return {
+          satelliteId: satellite.satelliteId,
+          serverSatId: satellite.serverSatId,
+          serverPlaneId: satellite.serverPlaneId,
+          planeId: satellite.planeId,
+          satName: satellite.satName,
+        };
+      }),
+    );
+  }
+  updateIslSettings(projectId: number, islSettings: any): Observable<any> {
+    return this.configService.loadConfig().pipe(
+      switchMap((config) => {
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
+        return this.http.put<any>(`${apiUrl}/islSettings/${projectId}`, {
+          islSettings,
+        });
+      }),
+      catchError((error) => {
+        console.error('Error updating ISL settings:', error);
+        throw error;
+      }),
+    );
+  }
+  getFormattedIsls(projectId: number): Observable<any> {
+    return this.getIslByProjectId(projectId).pipe(
+      map((isls) => {
+        const formatIsls = (isls: any[], satellites: any[]) => {
+          return isls
+            .map((isl) => {
+              const satelliteA = satellites.find(
+                (s) => s.satelliteId === isl.satelliteId,
+              );
+              const connectedIsl = isls.find(
+                (i) => i.islId === isl.connectIslId,
+              );
+              console.log('connectedIsl:', connectedIsl);
+              const satelliteB = connectedIsl
+                ? satellites.find(
+                    (s) => s.satelliteId === connectedIsl.satelliteId,
+                  )
+                : null;
+
+              if (satelliteA && satelliteB) {
+                return {
+                  type: 'Feature',
+                  geometry: {
+                    type: 'LineString',
+                    coordinates: [
+                      [satelliteA.latitude, satelliteA.longitude],
+                      [satelliteB.latitude, satelliteB.longitude],
+                    ],
+                  },
+                  properties: {
+                    islId: isl.islId,
+                    satelliteIdA: satelliteA.satelliteId,
+                    satelliteIdB: satelliteB.satelliteId,
+                  },
+                };
+              }
+              return null;
+            })
+            .filter((line) => line !== null);
+        };
+        return this.getSatellitesByProjectId(projectId).pipe(
+          map((satellites) => {
+            return {
+              type: 'FeatureCollection',
+              features: formatIsls(isls, satellites),
+            };
+          }),
+        );
+      }),
+      switchMap((formattedIsls) => formattedIsls),
+    );
+  }
+  updateCplSettings(projectId: number, cplSettings: any): Observable<any> {
+    return this.configService.loadConfig().pipe(
+      switchMap((config) => {
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
+        return this.http.put<any>(`${apiUrl}/cplSettings/${projectId}`, {
+          cplSettings,
+        });
+      }),
+      catchError((error) => {
+        console.error('Error updating CPL settings:', error);
+        throw error;
+      }),
+    );
+  }
 
   //from project SIMU CONF controller
   getSimuSettingsByProjectId(projectId: number): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any>(`${apiUrl}/simuSettings/${projectId}`);
       }),
     );
@@ -256,7 +375,7 @@ export class ProjectService {
   getSimuItemsByProjectId(projectId: number): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.get<any>(`${apiUrl}/simuItems/${projectId}`);
       }),
     );
@@ -268,7 +387,7 @@ export class ProjectService {
   ): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.put<any>(`${apiUrl}/simuSettings/${projectId}`, {
           simuSettings,
         });
@@ -282,7 +401,7 @@ export class ProjectService {
   ): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.put<any>(`${apiUrl}/simuItems/${projectId}`, {
           simuItems,
         });
@@ -293,7 +412,7 @@ export class ProjectService {
   initializeSimulationConf(projectId: number): Observable<any> {
     return this.configService.loadConfig().pipe(
       switchMap((config) => {
-        const apiUrl = `http://${config.serverIp}:${config.serverPort}/project`;
+        const apiUrl = `http://${config.backendIp}:${config.backendPort}/project`;
         return this.http.post<any>(
           `${apiUrl}/initializeSimulationConf/${projectId}`,
           {

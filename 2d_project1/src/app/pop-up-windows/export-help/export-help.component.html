@@ -1,0 +1,13 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close-button" (click)="closeModal()">&times;</span>
+    <h2 class="modal-title">Export Help</h2>
+    <hr class="title-divider" />
+    <p class="modal-text">
+      1. 下載時chrome會自動檔下不安全的下載內容<br />
+      去下載紀錄按保留即可下載<br />2. 下載pdf格式採用直接下載此畫面的方式<br />3.
+      下載excel格式會得到一份.csv檔，<br />若遇到中文格式亂碼問題，請用記事本開啟後<br />另存新檔，再修改附檔名為.csv即可
+    </p>
+    <button class="got-it-button" (click)="closeModal()">Got it!</button>
+  </div>
+</div>
